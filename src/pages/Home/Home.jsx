@@ -7,14 +7,17 @@ import { NavLink, useNavigate } from 'react-router-dom'
 
 export default function Home() {
     const navigate = useNavigate();
+    const [userID, setUserID] = useState(null);
 
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 const uid = user.uid;
+                setUserID(uid);
                 // ...
                 console.log("uid", uid)
-            } else {
+            }
+            else {
                 console.log("user isn't logged out")
                 navigate('/login');
             }
@@ -22,9 +25,16 @@ export default function Home() {
 
     }, [])
 
+
     return (
         <div>
             <h1>Welcome to Revitionary!</h1>
+
+            <div>
+                <Link to={`users/${userID}/profile`}><button>Profile</button></Link>
+
+                <Link to='/game/browse'><button>Browse Revitions</button></Link>
+            </div>
         </div>
     )
 }

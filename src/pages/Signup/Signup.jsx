@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
 import { auth, firestore } from '../../api/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { collection, addDoc } from "firebase/firestore";
 import { NavLink, useNavigate } from 'react-router-dom'
+import { getDatabase, ref, set } from "firebase/database";
+
 
 export default function Signup() {
     const navigate = useNavigate();
@@ -38,6 +41,38 @@ export default function Signup() {
             });
     }
 
+    const writeUserData = async (email, uid) => {
+        const userData = {
+            email: email,
+            uid: uid,
+            username: "vanilla",
+            profilePicture: null,
+            isOnline: true,
+            registeredAt: new Date(),
+            lastSeen: new Date(),
+            friends: [],
+            friendRequests: [],
+            friendRequestsSent: [],
+            revitionsCreated: [],
+            revitionsPlayed: [],
+            winStreak: 0,
+            secodnsPlayed: 0,
+            gamesPlayed: 0,
+            gamesWon: 0,
+        }
+
+        try {
+            const db = firestore;
+
+            const docRef = await addDoc(collection(db, "users"), userData);
+            console.log('Done!');
+        }
+        catch (e) {
+            console.log(e);
+        }
+
+    }
+
     const signupHandeler = async (e) => {
         e.preventDefault();
 
@@ -53,8 +88,8 @@ export default function Signup() {
                 console.log(user);
                 // ...
 
-                createUserData(email, user.uid);
-
+                // createUserData(email, user.uid);
+                writeUserData(email, user.uid);
                 navigate('/');
             })
             .catch((error) => {
