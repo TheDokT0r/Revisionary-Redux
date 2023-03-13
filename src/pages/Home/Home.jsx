@@ -33,7 +33,7 @@ export default function Home() {
             <div>
                 <Link to={`users/${userID}/profile`}><button>Profile</button></Link>
 
-                <Link to='/game/browse'><button>Browse Revitions</button></Link>
+                <Link to='/rev/browse'><button>Browse Revitions</button></Link>
             </div>
         </div>
     )
