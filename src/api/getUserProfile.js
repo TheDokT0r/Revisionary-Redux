@@ -1,17 +1,22 @@
 import app from './firebase'
 import 'firebase/firestore';
+import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
+import { firestore } from './firebase';
 
 const getUserData = async (uid) => {
-  const snapshot = await app.firestore().collection('users').where('uid', '==', uid).get();
+  console.log('Fetching user data...');
+  
+  const querySnapshot = await getDocs(query(collection(firestore, "users"), where("uid", "==", uid)));
+  if (querySnapshot.docs.length > 0) {
+    const userDoc = querySnapshot.docs[0];
+    const userData = userDoc.data();
 
-  if (snapshot.empty) {
+    console.log(userData);
+    return userData;
+  } else {
     console.log('No matching documents.');
-    return;
+    return null;
   }
-
-  const userData = snapshot.docs[0].data();
-
-  return userData;
 };
 
 export default getUserData;

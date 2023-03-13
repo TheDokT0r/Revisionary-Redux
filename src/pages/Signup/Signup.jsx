@@ -10,6 +10,7 @@ export default function Signup() {
     const navigate = useNavigate();
 
     const [email, setEmail] = useState('')
+    const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
 
@@ -45,7 +46,7 @@ export default function Signup() {
         const userData = {
             email: email,
             uid: uid,
-            username: "vanilla",
+            username: username,
             profilePicture: null,
             isOnline: true,
             registeredAt: new Date(),
@@ -106,6 +107,9 @@ export default function Signup() {
                 <h1>Signup</h1>
 
                 <form>
+                    <div>
+                        <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
+                    </div>
                     <div>
                         <input type="email" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
                     </div>

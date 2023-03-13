@@ -1,8 +1,11 @@
 import React from 'react'
 import Browse from './Browse'
+import ReactLoading from 'react-loading';
 
-export default function index() {
+export default function LoadingScreen() {
+
+
   return (
-    <div>index</div>
+    < Browse />
   )
 }

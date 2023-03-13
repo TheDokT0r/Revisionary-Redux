@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    /* add this line to stack the elements vertically */
+    justify-content: center;
+    align-items: center;
+}
+
+.container div {
+    margin-top: 20px;
+    /* add this line to create space between the elements */
+}
