@@ -16,9 +16,9 @@ function App() {
         <Route path='/login' element={<Login />} />
         <Route path='/signup' element={<Signup />} />
         <Route path="/users/:uid/profile" element={<UserProfile />} />
-        <Route path='rev/browse' element={<Browse />} />
-        <Route path='rev/:revId/play' element={<Revition />} />
-        <Route path='rev/:revId/info' element={<RevitionData />} />
+        <Route path='/rev/browse' element={<Browse />} />
+        <Route path='/rev/:revId/play' element={<Revition />} />
+        <Route path='/rev/:revId/info' element={<RevitionData />} />
       </Routes>
     </BrowserRouter>
   );

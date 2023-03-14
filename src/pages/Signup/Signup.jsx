@@ -4,6 +4,8 @@ import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc } from "firebase/firestore";
 import { NavLink, useNavigate } from 'react-router-dom'
 import { getDatabase, ref, set } from "firebase/database";
+import genPfp from '../../api/genPfp';
+import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 
 
 export default function Signup() {
@@ -13,6 +15,8 @@ export default function Signup() {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('')
     const [passwordConfirm, setPasswordConfirm] = useState('')
+
+    const [isLoading, setIsLoading] = useState(false);
 
     const createUserData = (email, uid) => {
         const data = {
@@ -77,6 +81,8 @@ export default function Signup() {
     const signupHandeler = async (e) => {
         e.preventDefault();
 
+        setIsLoading(true);
+
         if (password !== passwordConfirm) {
             alert("Passwords don't match");
             return;
@@ -91,6 +97,9 @@ export default function Signup() {
 
                 // createUserData(email, user.uid);
                 writeUserData(email, user.uid);
+                
+                genPfp(username);
+
                 navigate('/');
             })
             .catch((error) => {
@@ -99,6 +108,13 @@ export default function Signup() {
                 console.log(errorCode, errorMessage);
                 // ..
             });
+
+        setIsLoading(false);
+    }
+
+
+    if(isLoading) {
+        return <LoadingScreen text={'Creating account...'}/>
     }
 
     return (

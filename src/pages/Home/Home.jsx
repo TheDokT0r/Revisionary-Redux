@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../api/firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
+import getUid from '../../api/getUid';
 
 
 export default function Home() {
@@ -10,19 +11,28 @@ export default function Home() {
     const [userID, setUserID] = useState(null);
 
     useEffect(() => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                const uid = user.uid;
+        // onAuthStateChanged(auth, (user) => {
+        //     if (user) {
+        //         const uid = user.uid;
+        //         setUserID(uid);
+        //         // ...
+        //         console.log("uid", uid)
+        //     }
+        //     else {
+        //         console.log("user isn't logged out")
+        //         navigate('/login');
+        //     }
+        // });
+
+        const fetchUid = async () => {
+            const uid = await getUid();
+            if (uid) {
                 setUserID(uid);
-                // ...
-                console.log("uid", uid)
-            }
-            else {
-                console.log("user isn't logged out")
+            } else {
                 navigate('/login');
             }
-        });
-
+        };
+        fetchUid();
     }, [])
 
 

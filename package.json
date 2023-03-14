@@ -3,9 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@dicebear/collection": "^5.3.4",
+    "@dicebear/core": "^5.3.4",
+    "@resvg/resvg-js": "^2.0.0",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "exiftool-vendored": "^16.3.0",
     "firebase": "^9.17.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -13,6 +17,7 @@
     "react-router-dom": "^6.8.2",
     "react-scripts": "5.0.1",
     "sass": "^1.59.2",
+    "sharp": "^0.30.4",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -38,5 +43,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@faker-js/faker": "^7.6.0"
   }
 }

@@ -1,22 +1,14 @@
 import { useEffect, useState } from 'react';
-import { onAuthStateChanged } from "firebase/auth";
-import { auth, firestore } from '../../api/firebase';
-import { collection, doc, getDoc } from "firebase/firestore";
-import { NavLink, useNavigate, useParams } from 'react-router-dom';
 import getUserData from '../../api/getUserProfile';
 import LoadingScreen from '../../components/LoadingScreen';
 import { Link } from 'react-router-dom';
 import styles from './UserProfile.module.scss';
+import getUid from '../../api/getUid';
 
 // Profile Components
 import FriendsList from './profileComps/FriendsList/FriendsList';
 import OnlineStatus from './profileComps/OnlineStatus/OnlineStatus';
 
-
-// Notice that we're using the compat syntax to import Firebase modules
-import firebase from 'firebase/compat/app';
-import 'firebase/compat/firestore';
-import 'firebase/compat/auth';
 
 
 export default function UserProfile(props) {
@@ -24,6 +16,7 @@ export default function UserProfile(props) {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadingMsg, setLoadingMsg] = useState('Loading...');
+    const [isYourProfile, setIsYourProfile] = useState(false);
 
     // Get the user profile by his uid
     useEffect(() => {
@@ -39,10 +32,21 @@ export default function UserProfile(props) {
             setUserData(data);
             setIsLoading('Rendering user profile')
             setIsLoading(false);
+
+            chekcingProfileOwnership();
         });
 
+        
     }, []);
 
+    const chekcingProfileOwnership = async () => {
+        setLoadingMsg('Checking profile ownership...');
+
+        const connectedUid = await getUid();
+        if(connectedUid === props.uid) {
+            setIsYourProfile(true);
+        }
+    }
 
     if (isLoading) {
         return (
@@ -53,7 +57,7 @@ export default function UserProfile(props) {
     return (
         <div className={styles.center}>
             <h1>{userData.username}'s Profile</h1>
-            
+
             <OnlineStatus isOnline={userData.isOnline} />
             <div className={styles.warp}>
                 <FriendsList list={userData.friends} />
@@ -72,6 +76,8 @@ export default function UserProfile(props) {
                 <p>Revitions Created: {userData.revitionsCreated}</p>
                 <p>Revitions Played: {userData.revitionsPlayed}</p>
             </div>
+
+            <label>Is your pf: {isYourProfile.toString()}</label>
 
             <Link to='/'><button>Back</button></Link>
         </div>
