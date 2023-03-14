@@ -7,9 +7,15 @@
     height: 100vh;
 }
 
+.title {
+    font-size: 50px;
+}
+
 //Center the login form vertically
 .signup {
     border: 2px solid #000;
+    border-radius: 5%;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
 }
 
 //Change the size of input fields
@@ -29,6 +35,8 @@ $fontSize: 25px;
 .submit_btn {
     font-size: $fontSize;
     text-align: center;
+    border: 2px solid #000;
+    border-radius: 5%;
 
     //center the button
     display: flex;
@@ -56,4 +64,9 @@ $fontSize: 25px;
     a {
         color: #3700ff;
     }
+}
+
+.other_footer {
+    margin-top: 2%;
+    font-size: 15px;
 }

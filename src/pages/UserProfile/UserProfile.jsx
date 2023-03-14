@@ -37,6 +37,7 @@ export default function UserProfile(props) {
         };
 
         fetchData();
+        chekcingProfileOwnership();
 
         return () => {
             // Reset userData when uid changes

@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 import { auth, firestore } from '../../api/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc } from "firebase/firestore";
-import { NavLink, useNavigate } from 'react-router-dom'
-import { getDatabase, ref, set } from "firebase/database";
+import { useNavigate } from 'react-router-dom'
 import genPfp from '../../api/genPfp';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import { randomUserData } from './randomUserData';
 import styles from './Signup.module.scss'
+import { Button, ButtonGroup } from '@mui/material';
+
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
-
 
 export default function Signup() {
     const navigate = useNavigate();
@@ -27,7 +27,7 @@ export default function Signup() {
             email: email,
             uid: uid,
             username: username,
-            profilePicture: genPfp(username),
+            profilePicture: await genPfp(username),
             bio: "I'm a new user!",
             isOnline: true,
             registeredAt: new Date(),
@@ -107,10 +107,13 @@ export default function Signup() {
     return (
         <div>
             <div className={styles.page}>
-                <h1>Signup</h1>
+                <h1
+                    className={styles.title}>
+                    Signup</h1>
 
                 <form className={cx(styles.signup, styles.input)}>
                     <div>
+
                         <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
                     </div>
                     <div>
@@ -138,6 +141,12 @@ export default function Signup() {
                         href='/login'>
                         Login!</a>
                 </label>
+
+                <footer
+                    className={styles.other_footer}>
+                    We try to keep our users data as secure as possible.
+                    Please do not make your username or password something that can be easily guessed.
+                </footer>
             </div>
 
             <button onClick={debug_handeler}>DEBUG</button>
