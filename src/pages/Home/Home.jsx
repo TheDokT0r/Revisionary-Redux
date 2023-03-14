@@ -59,10 +59,14 @@ export default function Home() {
                     aria-label="outlined primary button group"
                     orientation='vertical'>
                     <Button
+                        onClick={() => navigate('/rev/browse')}
                         className={cx(styles.revise_btn,
                             styles.btn)}>
                         Start Revising!</Button>
-                    <Button className={styles.profile_btn}>Profile</Button>
+                    <Button
+                        onClick={() => navigate(`users/${userID}/profile`)}
+                        className={styles.profile_btn}>
+                        Profile</Button>
                 </ButtonGroup>
             </div>
         </div >

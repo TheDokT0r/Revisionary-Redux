@@ -24,7 +24,7 @@ export default function FriendsList({ list }) {
         <UserWidget
           key={index}
           uid={friend}
-          state={'minimized'}
+          state={"minimized"}
         />
       </div>
     )
