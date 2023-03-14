@@ -29,6 +29,7 @@ export default function UserWidget({ uid, state }) {
         console.log('Clicked');
 
         navigate('/users/' + uid + '/profile');
+        window.location.reload();
     }
 
     if (isLoading) {
