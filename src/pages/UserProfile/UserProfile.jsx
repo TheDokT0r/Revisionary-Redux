@@ -3,7 +3,7 @@ import getUserData from '../../api/getUserProfile';
 import LoadingScreen from '../../components/LoadingScreen';
 import { Link } from 'react-router-dom';
 import styles from './UserProfile.module.scss';
-import getUid from '../../api/getUid';
+import getUid from '../../api/UserMannagement/getUid';
 
 // Profile Components
 import FriendsList from './profileComps/FriendsList/FriendsList';

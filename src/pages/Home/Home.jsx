@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { onAuthStateChanged } from "firebase/auth";
 import { auth } from '../../api/firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
-import getUid from '../../api/getUid';
+import getUid from '../../api/UserMannagement/getUid';
 import styles from './Home.module.scss';
 import classNames from 'classnames';
 import Navbar from '../../components/Navbar';

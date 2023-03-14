@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Navbar.module.scss'
-import getUid from '../../api/getUid'
+import getUid from '../../api/UserMannagement/getUid'
 
 export default function Navbar() {
     const [uid, setUid] = useState(null);

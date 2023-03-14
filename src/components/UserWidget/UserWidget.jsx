@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import getUserData from '../../api/getUserProfile'
 import styles from './UserWidget.module.scss'
 import { getUserPfpURL } from '../../api/UserMannagement/getUserPfpURL'
+import getUserPfp from '../../api/UserMannagement/getUserPfp';
 import { Avatar } from '@mui/material';
 
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
@@ -19,9 +20,15 @@ export default function UserWidget({ uid, state }) {
     useEffect(() => {
         setIsLoading(true);
 
-        getUserPfpURL(uid).then((url) => {
-            setPfp(url);
-            console.log({ url });
+        // getUserPfpURL(uid).then((url) => {
+        //     setPfp(url);
+        //     console.log({ url });
+        //     setIsLoading(false);
+        // })
+
+        getUserPfp(uid).then((pfp) => {
+            setPfp(pfp);
+            console.log({ pfp });
             setIsLoading(false);
         })
     }, [])
@@ -42,16 +49,16 @@ export default function UserWidget({ uid, state }) {
     }
 
     if (state === "minimized") {
-        <div className={styles.main_div} onClick={widgetClickedHandeler}>
-            {/* <img src={pfp} alt="profile picture" /> */}
-            <Avatar src={pfp} alt='profile picture' />
-        </div>
+        return (
+            <div className={styles.main_div} onClick={widgetClickedHandeler}>
+                <Avatar src={pfp} alt='profile picture' />
+            </div>
+        )
     }
 
     return (
         <div className={styles.main_div} onClick={widgetClickedHandeler}>
             <div>
-                {/* <img src={pfp} alt="profile picture" /> */}
                 <Avatar src={pfp} alt='profile picture' />
             </div>
 

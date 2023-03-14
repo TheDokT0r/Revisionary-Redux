@@ -3,7 +3,7 @@ import { auth, firestore } from '../../api/firebase';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom'
-import genPfp from '../../api/genPfp';
+import genPfp from '../../api/UserMannagement/genPfp';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import { randomUserData } from './randomUserData';
 import styles from './Signup.module.scss'
