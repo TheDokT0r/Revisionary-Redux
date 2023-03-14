@@ -9,6 +9,7 @@ import LoadingScreen from '../LoadingScreen/LoadingScreen';
 export default function UserWidget({ uid, state }) {
     const navigate = useNavigate();
     const [isLoading, setIsLoading] = useState(true);
+    const [pfp, setPfp] = useState(null);
 
     const userData = getUserData(uid);
 
@@ -18,7 +19,8 @@ export default function UserWidget({ uid, state }) {
         setIsLoading(true);
 
         getUserPfpURL(uid).then((url) => {
-            userData.profilePicture = url;
+            setPfp(url);
+            console.log({url});
             setIsLoading(false);
         })
     }, [])
@@ -40,14 +42,14 @@ export default function UserWidget({ uid, state }) {
 
     if (state === "minimized") {
         <div className={styles.main_div} onClick={widgetClickedHandeler}>
-            <img src={userData.profilePicture} alt="profile picture" />
+            <img src={pfp} alt="profile picture" />
         </div>
     }
 
     return (
         <div className={styles.main_div} onClick={widgetClickedHandeler}>
             <div>
-                <img src={userData.profilePicture} alt="profile picture" />
+                <img src={pfp} alt="profile picture" />
             </div>
 
             <div>
