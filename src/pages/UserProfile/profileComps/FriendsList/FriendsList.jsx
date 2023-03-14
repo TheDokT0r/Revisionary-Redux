@@ -1,7 +1,11 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './FriendsList.module.scss';
+import UserWidget from '../../../../components/UserWidget/UserWidget';
 
 export default function FriendsList({ list }) {
+
+    useEffect(() => {
+    }, [])
 
     // The user has no friends... le sad :(
     if (list.length < 1) {
@@ -14,21 +18,21 @@ export default function FriendsList({ list }) {
         )
     }
 
+
+    const friendsWidgets = list.map((friend, index) => {
+        return (
+            <UserWidget key={index} uid={friend} state={'minimized'} />
+        )
+    });
+
     // The user has friends :D
     return (
         <div>
             <h2>Friends List</h2>
-            <ul>
 
-                {/* TODO: Change so it would return a list of links to their profiles */}
-                {list.map((friend) => {
-                    return (
-                        <li key={friend.uid}>
-                            <p>{friend.username}</p>
-                        </li>
-                    )
-                })}
-            </ul>
+            <div>
+                {friendsWidgets}
+            </div>
         </div>
     )
 }

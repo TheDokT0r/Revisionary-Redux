@@ -11,10 +11,8 @@ const getUserData = async (uid) => {
     const userDoc = querySnapshot.docs[0];
     const userData = userDoc.data();
 
-    console.log(userData);
     return userData;
   } else {
-    console.log('No matching documents.');
     return null;
   }
 };

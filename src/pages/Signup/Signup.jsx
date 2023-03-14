@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { getDatabase, ref, set } from "firebase/database";
 import genPfp from '../../api/genPfp';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
+import { randomUserData } from './randomUserData';
 
 
 export default function Signup() {
@@ -18,40 +19,13 @@ export default function Signup() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const createUserData = (email, uid) => {
-        const data = {
-            uid: uid,
-            username: "vanilla",
-            profilePicture: null,
-            isOnline: true,
-            registeredAt: new Date(),
-            lastSeen: new Date(),
-            friends: [],
-            friendRequests: [],
-            friendRequestsSent: [],
-            revitionsCreated: [],
-            revitionsPlayed: [],
-            winStreak: 0,
-            secodnsPlayed: 0,
-            gamesPlayed: 0,
-            gamesWon: 0,
-        }
-
-        firestore.collection('users').doc(email).set(data)
-            .then(() => {
-                console.log('User data created successfully!');
-            })
-            .catch((error) => {
-                console.error('Error creating user data: ', error);
-            });
-    }
-
     const writeUserData = async (email, uid) => {
         const userData = {
             email: email,
             uid: uid,
             username: username,
-            profilePicture: null,
+            profilePicture: genPfp(username),
+            bio: "I'm a new user!",
             isOnline: true,
             registeredAt: new Date(),
             lastSeen: new Date(),
@@ -113,6 +87,16 @@ export default function Signup() {
     }
 
 
+    const debug_handeler = () => {
+        const fakeUser = randomUserData();
+
+        setEmail(fakeUser.email);
+        setUsername(fakeUser.username);
+        setPassword(fakeUser.password);
+        setPasswordConfirm(fakeUser.password);
+    }
+
+
     if(isLoading) {
         return <LoadingScreen text={'Creating account...'}/>
     }
@@ -141,6 +125,8 @@ export default function Signup() {
                 </form>
             </div>
             <button onClick={signupHandeler} type="submit">Signup</button>
+
+            <button onClick={debug_handeler}>DEBUG</button>
         </div >
     )
 }

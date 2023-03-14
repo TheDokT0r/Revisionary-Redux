@@ -7,10 +7,8 @@ const getUid = () => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const uid = user.uid;
-        console.log("uid", uid);
         resolve(uid);
       } else {
-        console.log("user isn't logged out");
         resolve(false);
       }
     });
