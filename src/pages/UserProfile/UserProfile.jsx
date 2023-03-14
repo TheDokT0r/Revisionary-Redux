@@ -20,30 +20,36 @@ export default function UserProfile(props) {
 
     // Get the user profile by his uid
     useEffect(() => {
-        const uid = props.uid;
         setIsLoading(true);
         setLoadingMsg('Fetching user profile');
-        if (!uid) {
-            console.log('uid not found');
-            return;
-        }
 
-        getUserData(uid).then((data) => {
-            setUserData(data);
-            setIsLoading('Rendering user profile')
-            setIsLoading(false);
+        const fetchData = async () => {
+            try {
+                const data = await getUserData(props.uid);
+                setUserData(data);
+                setIsLoading(false);
+                setLoadingMsg('');
+            } catch (error) {
+                console.error(error);
+                setIsLoading(false);
+                setLoadingMsg('Error fetching user profile');
+            }
+        };
 
-            chekcingProfileOwnership();
-        });
+        fetchData();
 
-        
-    }, []);
+        return () => {
+            // Reset userData when uid changes
+            setUserData(null);
+        };
+    }, [props.uid]);
+
 
     const chekcingProfileOwnership = async () => {
         setLoadingMsg('Checking profile ownership...');
 
         const connectedUid = await getUid();
-        if(connectedUid === props.uid) {
+        if (connectedUid === props.uid) {
             setIsYourProfile(true);
         }
     }
