@@ -1,0 +1,27 @@
+$backColor: white;
+$fontColor: black;
+
+$btnFontSize: 20px;
+
+//center horizontally
+.page {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.btn {
+    transition-duration: 1s;
+    // transform: scale(1);
+}
+
+
+.revise_btn {
+    font-size: $btnFontSize * 1.2;
+}
+
+.profile_btn {
+    font-size: $btnFontSize;
+}

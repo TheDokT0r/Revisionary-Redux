@@ -7,6 +7,9 @@ import { getDatabase, ref, set } from "firebase/database";
 import genPfp from '../../api/genPfp';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import { randomUserData } from './randomUserData';
+import styles from './Signup.module.scss'
+import classNames from 'classnames/bind';
+const cx = classNames.bind(styles);
 
 
 export default function Signup() {
@@ -71,7 +74,7 @@ export default function Signup() {
 
                 // createUserData(email, user.uid);
                 writeUserData(email, user.uid);
-                
+
                 genPfp(username);
 
                 navigate('/');
@@ -97,16 +100,16 @@ export default function Signup() {
     }
 
 
-    if(isLoading) {
-        return <LoadingScreen text={'Creating account...'}/>
+    if (isLoading) {
+        return <LoadingScreen text={'Creating account...'} />
     }
 
     return (
         <div>
-            <div>
+            <div className={styles.page}>
                 <h1>Signup</h1>
 
-                <form>
+                <form className={cx(styles.signup, styles.input)}>
                     <div>
                         <input type="text" placeholder="Username" value={username} onChange={e => setUsername(e.target.value)} />
                     </div>
@@ -123,8 +126,19 @@ export default function Signup() {
                     </div>
 
                 </form>
+                <button
+                    className={styles.submit_btn}
+                    onClick={signupHandeler}
+                    type="submit">
+                    Signup</button>
+
+                <label
+                    className={styles.footer}>
+                    Already have an account? <a
+                        href='/login'>
+                        Login!</a>
+                </label>
             </div>
-            <button onClick={signupHandeler} type="submit">Signup</button>
 
             <button onClick={debug_handeler}>DEBUG</button>
         </div >
