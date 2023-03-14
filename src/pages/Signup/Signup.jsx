@@ -55,15 +55,32 @@ export default function Signup() {
 
     }
 
-    const signupHandeler = async (e) => {
-        e.preventDefault();
 
-        setIsLoading(true);
+    const isDataValid = () => {
+        // They call me chaotic evil
+        if (!email || !password || !username) {
+            alert('Please fill in all fields!');
+            setIsLoading(false);
+            return !true;
+        }
 
         if (password !== passwordConfirm) {
             alert("Passwords don't match");
+            setIsLoading(false);
+            return !true;
+        }
+
+        return !false;
+    }
+
+    const signupHandeler = async (e) => {
+        e.preventDefault();
+
+        if(!isDataValid()) {
             return;
         }
+
+        setIsLoading(true);
 
         await createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {

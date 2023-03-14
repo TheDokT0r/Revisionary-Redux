@@ -6,6 +6,7 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import getUid from '../../api/getUid';
 import styles from './Home.module.scss';
 import classNames from 'classnames';
+import Navbar from '../../components/Navbar';
 
 //mui stuff
 import { ButtonGroup, Button } from '@mui/material';
@@ -43,32 +44,35 @@ export default function Home() {
 
 
     return (
-        <div className={styles.page}>
-            <h1>Welcome to Revitionary!</h1>
+        <>
+            <Navbar uid={userID} />
+            <div className={styles.page}>
+                <h1>Welcome to Revitionary!</h1>
 
-            {/* <div>
+                {/* <div>
                     <Link to={`users/${userID}/profile`}><button>Profile</button></Link>
-
+                    
                     <Link to='/rev/browse'><button>Browse Revitions</button></Link>
                 </div> */}
 
-            <div>
-                <ButtonGroup
-                    color='primary'
-                    variant="contained"
-                    aria-label="outlined primary button group"
-                    orientation='vertical'>
-                    <Button
-                        onClick={() => navigate('/rev/browse')}
-                        className={cx(styles.revise_btn,
-                            styles.btn)}>
-                        Start Revising!</Button>
-                    <Button
-                        onClick={() => navigate(`users/${userID}/profile`)}
-                        className={styles.profile_btn}>
-                        Profile</Button>
-                </ButtonGroup>
-            </div>
-        </div >
+                <div>
+                    <ButtonGroup
+                        color='primary'
+                        variant="contained"
+                        aria-label="outlined primary button group"
+                        orientation='vertical'>
+                        <Button
+                            onClick={() => navigate('/rev/browse')}
+                            className={cx(styles.revise_btn,
+                                styles.btn)}>
+                            Start Revising!</Button>
+                        <Button
+                            onClick={() => navigate(`users/${userID}/profile`)}
+                            className={styles.profile_btn}>
+                            Profile</Button>
+                    </ButtonGroup>
+                </div>
+            </div >
+        </>
     )
 }

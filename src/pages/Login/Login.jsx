@@ -14,6 +14,11 @@ export default function Login() {
 
     const loginHandler = (e) => {
         e.preventDefault();
+
+        if (!email || !password) {
+            return alert('Please fill in all fields!');
+        }
+
         auth.signInWithEmailAndPassword(email, password)
             .then((userCredential) => {
                 // Signed in
@@ -48,11 +53,16 @@ export default function Login() {
                 type="submit">
                 Login</button>
 
+            <Link to='/'>
+                <button
+                    className={styles.back_btn}>
+                    Back</button>
+            </Link>
+
             <label
                 className={styles.footer}>
                 Don't have an account? <a href='/signup'>Create one today!</a></label>
 
-            
         </div>
     )
 }

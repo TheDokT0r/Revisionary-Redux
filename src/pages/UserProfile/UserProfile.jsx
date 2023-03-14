@@ -8,6 +8,7 @@ import getUid from '../../api/getUid';
 // Profile Components
 import FriendsList from './profileComps/FriendsList/FriendsList';
 import OnlineStatus from './profileComps/OnlineStatus/OnlineStatus';
+import Navbar from '../../components/Navbar';
 
 
 
@@ -62,32 +63,35 @@ export default function UserProfile(props) {
     }
 
     return (
-        <div className={styles.center}>
-            <h1>{userData.username}'s Profile</h1>
+        <>
+            <Navbar />
+            <div className={styles.center}>
+                <h1>{userData.username}'s Profile</h1>
 
-            <OnlineStatus isOnline={userData.isOnline} />
-            <div className={styles.warp}>
-                <FriendsList list={userData.friends} />
+                <OnlineStatus isOnline={userData.isOnline} />
+                <div className={styles.warp}>
+                    <FriendsList list={userData.friends} />
+                </div>
+
+                <div>
+                    <h2>Stats:</h2>
+                    <p>Games Played: {userData.gamesPlayed}</p>
+                    <p>Games Won: {userData.gamesWon}</p>
+                    <p>Time Played (s): {userData.secodnsPlayed}</p>
+                    <p>Win Streak: {userData.winStreak}</p>
+                </div>
+
+                <div>
+                    <h2>Revitions Stats:</h2>
+                    <p>Revitions Created: {userData.revitionsCreated}</p>
+                    <p>Revitions Played: {userData.revitionsPlayed}</p>
+                </div>
+
+                <label>Is your pf: {isYourProfile.toString()}</label>
+
+                <Link to='/'><button>Back</button></Link>
             </div>
-
-            <div>
-                <h2>Stats:</h2>
-                <p>Games Played: {userData.gamesPlayed}</p>
-                <p>Games Won: {userData.gamesWon}</p>
-                <p>Time Played (s): {userData.secodnsPlayed}</p>
-                <p>Win Streak: {userData.winStreak}</p>
-            </div>
-
-            <div>
-                <h2>Revitions Stats:</h2>
-                <p>Revitions Created: {userData.revitionsCreated}</p>
-                <p>Revitions Played: {userData.revitionsPlayed}</p>
-            </div>
-
-            <label>Is your pf: {isYourProfile.toString()}</label>
-
-            <Link to='/'><button>Back</button></Link>
-        </div>
+        </>
     );
 
 }
