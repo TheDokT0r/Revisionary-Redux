@@ -18,11 +18,12 @@ export default function Navbar() {
         // User is not logged in
         if (!uid) {
             setProfileBtnLink('/login');
-            return;
+        }
+        else {
+            // User is logged in
+            setProfileBtnLink(`/users/${uid}/profile`);
         }
 
-        // User is logged in
-        setProfileBtnLink(`/users/${uid}/profile`);
     }, [])
 
     return (
@@ -32,9 +33,10 @@ export default function Navbar() {
                 <li><a href="/rev/create">Create</a></li>
                 <li><a href="/rev/browse">Browse</a></li>
 
-                {/* <li><a href={profileBtnLink}>Profile</a></li> */}
-                <li><a href={profileBtnLink}>
-                    <AccountCircleIcon fontSize='large'/> </a></li>
+                <div className={styles.profileBtn}>
+                    <li><a href={profileBtnLink}>
+                        <AccountCircleIcon fontSize='large' /> </a></li>
+                </div>
             </ul>
         </div>
     )
