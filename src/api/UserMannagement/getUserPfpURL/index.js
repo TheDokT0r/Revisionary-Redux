@@ -1,5 +1,5 @@
 import { getStorage, ref, getDownloadURL } from 'firebase/storage';
-import getUserData from '../../getUserProfile';
+import getUserData from '../../UserMannagement/getUserProfile'
 
 // const getUserPfpURL = async (uid) => {
 //     try {

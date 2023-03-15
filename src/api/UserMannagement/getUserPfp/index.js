@@ -1,4 +1,4 @@
-import getUserData from "../../getUserProfile"
+import getUserData from "../../UserMannagement/getUserProfile"
 
 // Gets the user profile picture in svg format
 const getUserPfp = async (uid) => {

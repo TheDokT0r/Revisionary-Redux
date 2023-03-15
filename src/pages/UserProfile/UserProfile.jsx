@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import getUserData from '../../api/getUserProfile';
+import getUserData from '../../api/UserMannagement/getUserProfile'
 import LoadingScreen from '../../components/LoadingScreen';
 import { Link } from 'react-router-dom';
 import styles from './UserProfile.module.scss';

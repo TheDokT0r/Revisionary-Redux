@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import getUserData from '../../api/getUserProfile'
+import getUserData from '../../api/UserMannagement/getUserProfile'
 import styles from './UserWidget.module.scss'
 import { getUserPfpURL } from '../../api/UserMannagement/getUserPfpURL'
 import getUserPfp from '../../api/UserMannagement/getUserPfp';
