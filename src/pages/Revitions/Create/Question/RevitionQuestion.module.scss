@@ -1,0 +1,24 @@
+//Put element in bottom left corner
+.addQuestionButton {
+    // position: absolute;
+    // bottom: 10%;
+    // right: 0;
+}
+
+.question_container {
+    // Canter horizontally
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+.question {
+    text-align: center;
+    font-size: 40px;
+    margin-bottom: 100px;
+    
+    border: 2px solid black;
+    border-radius: 5px;
+
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+}
