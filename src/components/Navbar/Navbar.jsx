@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Navbar.module.scss'
 import getUid from '../../api/UserMannagement/getUid'
+import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Navbar() {
     const [uid, setUid] = useState(null);
+    const [profileBtnLink, setProfileBtnLink] = useState(`/users/${uid}/profile`);
 
     useEffect(() => {
         const fetchUid = async () => {
@@ -12,6 +14,15 @@ export default function Navbar() {
         };
 
         fetchUid();
+
+        // User is not logged in
+        if (!uid) {
+            setProfileBtnLink('/login');
+            return;
+        }
+
+        // User is logged in
+        setProfileBtnLink(`/users/${uid}/profile`);
     }, [])
 
     return (
@@ -21,7 +32,9 @@ export default function Navbar() {
                 <li><a href="/rev/create">Create</a></li>
                 <li><a href="/rev/browse">Browse</a></li>
 
-                <li><a href={`/users/${uid}/profile`}>Profile</a></li>
+                {/* <li><a href={profileBtnLink}>Profile</a></li> */}
+                <li><a href={profileBtnLink}>
+                    <AccountCircleIcon fontSize='large'/> </a></li>
             </ul>
         </div>
     )

@@ -34,11 +34,15 @@ li {
 a {
   text-decoration: none;
   color: #333;
-  transition: color 0.2s;
+  transition-duration: 0.4s;
 }
 
 a:hover {
   color: #008080;
+  font-size: large;
+
+  /* Added styles to underline the link */
+  text-decoration: underline;
 }
 
 .active {
