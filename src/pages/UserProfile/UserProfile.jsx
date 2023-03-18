@@ -62,14 +62,11 @@ export default function UserProfile(props) {
         )
     }
 
-    console.log(userData.profilePicture);
-
     return (
         <>
             <Navbar />
             <div className={styles.center}>
                 <h1>{userData.username}'s Profile</h1>
-                <img src={`data:image/svg+xml;base64,${btoa(userData.profilePicture)}`} alt="Profile Picture" />
 
                 <OnlineStatus isOnline={userData.isOnline} />
                 <div className={styles.warp}>
