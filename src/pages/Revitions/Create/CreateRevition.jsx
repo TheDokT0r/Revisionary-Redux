@@ -12,6 +12,7 @@ export default function CreateRevition() {
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [isPublic, setIsPublic] = useState(false)
+  const [questions, setQuestions] = useState([]);
 
   const setBasicData = (data) => {
     setTitle(data.title)
@@ -19,6 +20,26 @@ export default function CreateRevition() {
     setIsPublic(data.isPublic)
 
     setEditingPhase(1);
+  }
+
+
+  const triggerNextQuesiton = (options, index) => {
+    if (index <= questions.length - 1) {
+      const deapCopy = [...questions];
+      deapCopy[index] = options;
+      setQuestions([...deapCopy]);
+
+      return;
+    }
+
+    setQuestions([...questions, options]);
+  }
+
+
+  const triggerPrevQuestion = (options, index) => {
+    const deapCopy = [...questions];
+    deapCopy[index] = options;
+    setQuestions([...deapCopy]);
   }
 
   switch (editingPhase) {
@@ -36,7 +57,10 @@ export default function CreateRevition() {
     case 1: return (
       <>
         <Navbar />
-        <Question />
+        <Question
+          triggerNextQuesiton={triggerNextQuesiton}
+          triggerPrevQuestion = {triggerPrevQuestion}
+          amountOfCurrentQuestions={questions.length} />
       </>
     );
   }

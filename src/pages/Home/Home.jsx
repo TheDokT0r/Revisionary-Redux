@@ -47,8 +47,10 @@ export default function Home() {
         <>
             <Navbar uid={userID} />
             <div className={styles.page}>
-                <h1>Welcome to Revitionary!</h1>
-
+                <div className={styles.center}>
+                    <h1>Welcome to Revitionary!</h1>
+                    <footer className={styles.version_name}>Version 0.1 - Hootka</footer>
+                </div>
                 {/* <div>
                     <Link to={`users/${userID}/profile`}><button>Profile</button></Link>
                     

@@ -1,8 +1,11 @@
 import React from 'react'
 import RevitionQuestion from './RevitionQuestion'
 
-export default function index() {
+export default function index({ triggerNextQuesiton, amountOfCurrentQuestions, triggerPrevQuestion }) {
     return (
-        <RevitionQuestion />
+        <RevitionQuestion
+            triggerNextQuesiton={triggerNextQuesiton}
+            amountOfCurrentQuestions={amountOfCurrentQuestions}
+            triggerPrevQuestion={triggerPrevQuestion}/>
     )
 }

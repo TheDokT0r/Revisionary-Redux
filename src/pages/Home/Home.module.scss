@@ -25,3 +25,19 @@ $btnFontSize: 20px;
 .profile_btn {
     font-size: $btnFontSize;
 }
+
+.center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.version_name {
+    font-size: 15px;
+    color: $fontColor;
+    text-align: center;
+
+    margin-top: -20px;
+    margin-bottom: 20px;
+}
