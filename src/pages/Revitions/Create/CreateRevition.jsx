@@ -23,16 +23,32 @@ export default function CreateRevition() {
   }
 
 
-  const triggerNextQuesiton = (options, index) => {
+  const providePrevQuestionData = (index) => {
+    return questions[index];
+  }
+
+
+  const triggerNextQuesiton = (question, options, index) => {
+    // if (index <= questions.length - 1) {
+    //   const deapCopy = [...questions];
+    //   deapCopy[index] = options;
+    //   setQuestions([...deapCopy]);
+
+    //   console.log(questions);
+
+    //   return;
+    // }
+
+    // setQuestions([...questions, options]);
+
     if (index <= questions.length - 1) {
       const deapCopy = [...questions];
-      deapCopy[index] = options;
-      setQuestions([...deapCopy]);
+      const newQuestion = { question, options };
+      deapCopy[index] = newQuestion;
 
-      return;
     }
 
-    setQuestions([...questions, options]);
+    setQuestions([...questions, { question, options }]);
   }
 
 
@@ -59,8 +75,9 @@ export default function CreateRevition() {
         <Navbar />
         <Question
           triggerNextQuesiton={triggerNextQuesiton}
-          triggerPrevQuestion = {triggerPrevQuestion}
-          amountOfCurrentQuestions={questions.length} />
+          triggerPrevQuestion={triggerPrevQuestion}
+          amountOfCurrentQuestions={questions.length}
+          fetchPrevQuestionData={providePrevQuestionData} />
       </>
     );
   }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import TextField from '@mui/material/TextField';
 import CheckIcon from '@mui/icons-material/Check';
 import ClearIcon from '@mui/icons-material/Clear';
@@ -7,7 +7,8 @@ import Fab from '@mui/material/Fab';
 import Box from '@mui/material/Box';
 import DeleteIcon from '@mui/icons-material/Delete';
 
-export default function Option({ index, removeOption, setOptionText, setOptionCorrect }) {
+// This is the worst... But it works!
+export default function Option({ index, removeOption, setOptionText, setOptionCorrect, optionData }) {
     const [isCorrect, setIsCorrect] = useState(false);
 
     const icon = isCorrect ? <CheckIcon /> : <ClearIcon />;
@@ -28,6 +29,10 @@ export default function Option({ index, removeOption, setOptionText, setOptionCo
         setOptionCorrect(!isCorrect, index)
     }
 
+    useEffect(() => {
+        setIsCorrect(optionData.isCorrect)
+    })
+
     return (
         <div>
             <Box sx={{ '& > :not(style)': { m: 0.8 } }}>
@@ -35,7 +40,9 @@ export default function Option({ index, removeOption, setOptionText, setOptionCo
                     id="outlined-basic"
                     label={`Option #${index + 1}`}
                     variant="outlined"
-                    placeholder='Write here lol' />
+                    placeholder='Write here lol'
+                    onChange={onTextChange}
+                    value={optionData.answer} />
 
                 <Fab
                     color={color}

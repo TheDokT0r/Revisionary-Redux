@@ -11,10 +11,21 @@ import { Button, ButtonGroup } from '@mui/material';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import NavigateBeforeIcon from '@mui/icons-material/NavigateBefore';
 import CallMadeIcon from '@mui/icons-material/CallMade';
+import checkQuestionIntegrity from './checkQuestionIntegrity';
 
 const cx = classNames.bind(styles);
 
-export default function RevitionQuestion({ triggerNextQuesiton, triggerPrevQuestion, amountOfCurrentQuestions }) {
+// This is by far, the worst component I have ever written
+// In my entire miserable life. I am ashamed of myself.
+// I am a disgrace to my family, my friends, and my country.
+// Burn it. Burn it all. Burn it to the ground.
+export default function RevitionQuestion(props) {
+  const { triggerNextQuesiton,
+    triggerPrevQuestion,
+    amountOfCurrentQuestions,
+    fetchPrevQuestionData,
+  } = props;
+
   const [options, setOptions] = useState([{
     answer: "",
     isCorrect: false
@@ -22,9 +33,14 @@ export default function RevitionQuestion({ triggerNextQuesiton, triggerPrevQuest
   const [question, setQuestion] = useState('');
   const [questionIndex, setQuestionIndex] = useState(0);
 
+  const clearData = () => {
+    setOptions([{ answer: "", isCorrect: false }]);
+    setQuestion('');
+  }
+
   const add_option_handler = () => {
     setOptions([...options, {
-      asnwer: "",
+      answer: "",
       isCorrect: false
     }])
   }
@@ -43,7 +59,6 @@ export default function RevitionQuestion({ triggerNextQuesiton, triggerPrevQuest
   }
 
   const remove_option_handler = (index) => {
-    console.log('teigger');
     const deapCopy = [...options];
     deapCopy.splice(index, 1); // remove 1 element from index
     setOptions([...deapCopy]);
@@ -57,7 +72,8 @@ export default function RevitionQuestion({ triggerNextQuesiton, triggerPrevQuest
           removeOption={remove_option_handler}
           key={index}
           setOptionText={setOptionText}
-          setOptionCorrect={setOptionCorrect} />
+          setOptionCorrect={setOptionCorrect}
+          optionData={options[index]} />
       )
     })
   }
@@ -66,10 +82,27 @@ export default function RevitionQuestion({ triggerNextQuesiton, triggerPrevQuest
   const goToPrevQuestion = () => {
     if (questionIndex <= 0) return;
 
+    clearData();
+
+    setOptions(fetchPrevQuestionData(questionIndex - 1).options);
+    setQuestion(fetchPrevQuestionData(questionIndex - 1).question);
     triggerPrevQuestion(options, questionIndex);
-    setQuestionIndex(questionIndex - 1)
+    setQuestionIndex(questionIndex - 1);
   }
 
+
+  const goToNextQuestion = () => {
+    const errors = checkQuestionIntegrity(question, options);
+    if (errors.length > 0) {
+      alert(errors.join(' '));
+      return;
+    }
+
+
+    triggerNextQuesiton(question, options, questionIndex);
+    setQuestionIndex(questionIndex + 1)
+    clearData();
+  }
 
   useEffect(() => {
 
@@ -84,6 +117,7 @@ export default function RevitionQuestion({ triggerNextQuesiton, triggerPrevQuest
         <input
           className={styles.question}
           type='text'
+          value={question}
           placeholder='Question'
           onChange={(e) => setQuestion(e.target.value)} />
       </div>
@@ -117,10 +151,7 @@ export default function RevitionQuestion({ triggerNextQuesiton, triggerPrevQuest
             variant="extended"
             color="primary"
             aria-label="next"
-            onClick={() => {
-              triggerNextQuesiton(options, questionIndex);
-              setQuestionIndex(questionIndex + 1)
-            }}>
+            onClick={goToNextQuestion}>
             <NavigateNextIcon />
           </Fab>
         </div>
