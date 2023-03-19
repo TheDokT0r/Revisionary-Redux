@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import Navbar from '../../../components/Navbar'
 import BasicData from './BasicData'
 import Question from './Question'
+import SubmitData from './SubmitData'
 import styles from './CreateRevition.module.scss'
 import classNames from 'classnames'
 const cx = classNames.bind(styles);
@@ -28,24 +29,15 @@ export default function CreateRevition() {
   }
 
 
-  const triggerNextQuesiton = (question, options, index) => {
-    // if (index <= questions.length - 1) {
-    //   const deapCopy = [...questions];
-    //   deapCopy[index] = options;
-    //   setQuestions([...deapCopy]);
-
-    //   console.log(questions);
-
-    //   return;
-    // }
-
-    // setQuestions([...questions, options]);
-
+  const triggerNextQuesiton = (question, options, index, isDone) => {
     if (index <= questions.length - 1) {
       const deapCopy = [...questions];
       const newQuestion = { question, options };
       deapCopy[index] = newQuestion;
 
+      if (isDone) {
+        setEditingPhase(2);
+      }
     }
 
     setQuestions([...questions, { question, options }]);
@@ -78,6 +70,13 @@ export default function CreateRevition() {
           triggerPrevQuestion={triggerPrevQuestion}
           amountOfCurrentQuestions={questions.length}
           fetchPrevQuestionData={providePrevQuestionData} />
+      </>
+    );
+
+    case 2: return (
+      <>
+        <Navbar />
+        <SubmitData data={{ title, description, isPublic, questions }} />
       </>
     );
   }

@@ -99,7 +99,7 @@ export default function RevitionQuestion(props) {
     }
 
 
-    triggerNextQuesiton(question, options, questionIndex);
+    triggerNextQuesiton(question, options, questionIndex, false);
     setQuestionIndex(questionIndex + 1)
     clearData();
   }
@@ -107,6 +107,17 @@ export default function RevitionQuestion(props) {
   useEffect(() => {
 
   }, [])
+
+
+  const doneHandler = () => {
+    const errors = checkQuestionIntegrity(question, options);
+    if (errors.length > 0) {
+      alert(errors.join(' '));
+      return;
+    }
+
+    triggerNextQuesiton(question, options, questionIndex, true);
+  }
 
   return (
     <div>
@@ -157,7 +168,11 @@ export default function RevitionQuestion(props) {
         </div>
 
         <div className={cx(styles.center, styles.done_btn)}>
-          <Fab variant='extended' color="secondary" aria-label='done'>
+          <Fab
+            variant='extended'
+            color="secondary"
+            aria-label='done'
+            onClick={doneHandler}>
             Done
             <CallMadeIcon />
           </Fab>

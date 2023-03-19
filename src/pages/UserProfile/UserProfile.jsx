@@ -19,6 +19,7 @@ export default function UserProfile(props) {
     const [loadingMsg, setLoadingMsg] = useState('Loading...');
     const [isYourProfile, setIsYourProfile] = useState(false);
 
+    
     // Get the user profile by his uid
     useEffect(() => {
         setIsLoading(true);

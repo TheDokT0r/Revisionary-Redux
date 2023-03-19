@@ -1,5 +1,9 @@
 import getUserData from "../../UserMannagement/getUserProfile"
 
+const decode = () => {
+    
+}
+
 // Gets the user profile picture in svg format
 const getUserPfp = async (uid) => {
     return await getUserData(uid).then((userData) => {
