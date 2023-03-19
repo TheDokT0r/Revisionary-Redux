@@ -9,20 +9,19 @@ export default function Navbar() {
     const [profileBtnLink, setProfileBtnLink] = useState(`/users/${uid}/profile`);
 
     useEffect(() => {
+
         const fetchUid = async () => {
             setUid(await getUid());
+            // User is not logged in
+            if (!uid) {
+                setProfileBtnLink('/login');
+                return;
+            }
+
+            setProfileBtnLink(`/users/${uid}/profile`);
         };
 
         fetchUid();
-
-        // User is not logged in
-        if (!uid) {
-            setProfileBtnLink('/login');
-            return;
-        }
-
-        // User is logged in
-        setProfileBtnLink(`/users/${uid}/profile`);
     }, [])
 
     return (
@@ -34,7 +33,7 @@ export default function Navbar() {
 
                 {/* <li><a href={profileBtnLink}>Profile</a></li> */}
                 <li><a href={profileBtnLink}>
-                    <AccountCircleIcon fontSize='large'/> </a></li>
+                    <AccountCircleIcon fontSize='large' /> </a></li>
             </ul>
         </div>
     )
