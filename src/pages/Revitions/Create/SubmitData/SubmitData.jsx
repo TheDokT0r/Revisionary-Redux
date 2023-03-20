@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import QuestionComp from './QuestionComp';
 import createRevition from '../../../../api/RevitionsMannagement/CreateRevition';
+import LoadingScreen from '../../../../components/LoadingScreen';
+import { useNavigate } from 'react-router-dom';
 
 export default function SubmitData({ data }) {
   const { title, description, isPublic, questions } = data;
+  const [isLoading, setIsLoading] = useState(false);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log({ data });
@@ -11,7 +16,23 @@ export default function SubmitData({ data }) {
 
 
   const sendDataToServer = async () => {
-    await createRevition(data);
+    console.log("Sending data to server")
+    setIsLoading(true);
+    await createRevition(data).then(res => {
+      console.log(res);
+      setIsLoading(false);
+      navigate('/');
+    }).catch(err => {
+      console.log(err);
+      setIsLoading(false);
+    });
+  }
+
+
+  if (isLoading) {
+    return (
+      <LoadingScreen text={"Submiting revition to server"} />
+    );
   }
 
   return (

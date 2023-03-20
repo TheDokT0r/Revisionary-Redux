@@ -18,6 +18,7 @@ export default function Home() {
     const [userID, setUserID] = useState(null);
 
     useEffect(() => {
+        //TODO: Delete later if you want or something idk.
         // onAuthStateChanged(auth, (user) => {
         //     if (user) {
         //         const uid = user.uid;
@@ -31,6 +32,7 @@ export default function Home() {
         //     }
         // });
 
+        //Not that's way better
         const fetchUid = async () => {
             const uid = await getUid();
             if (uid) {
