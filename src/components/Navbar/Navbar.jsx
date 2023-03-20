@@ -9,17 +9,17 @@ export default function Navbar() {
     const [profileBtnLink, setProfileBtnLink] = useState(`/users/${uid}/profile`);
 
     useEffect(() => {
-
         const fetchUid = async () => {
-            setUid(await getUid());
-            // User is not logged in
-            if (!uid) {
-                setProfileBtnLink('/login');
-                return;
+            await getUid().then((uid) => {
+                if (uid) {
+                    setUid(uid);
+                    setProfileBtnLink(`/users/${uid}/profile`);
+                } else {
+                    setProfileBtnLink('/login');
+                }
             }
-
-            setProfileBtnLink(`/users/${uid}/profile`);
-        };
+            );
+        }
 
         fetchUid();
     }, [])
