@@ -69,16 +69,19 @@ export default function UserProfile(props) {
         <>
             <Navbar />
             <div className={styles.center}>
-                <h1>{userData.username}'s Profile</h1>
+                <h1>{userData.username}</h1>
 
-                <div className={styles.profile_pic}>
-                    <ProfilePicture
-                        svgString={userData.profilePicture}
-                        width={150}
-                        height={150} />
+                <div>
+                    <div className={styles.profile_pic}>
+                        <ProfilePicture
+                            svgString={userData.profilePicture}
+                            width={150}
+                            height={150} />
+                    </div>
+
+                    <OnlineStatus isOnline={userData.isOnline} />
                 </div>
 
-                <OnlineStatus isOnline={userData.isOnline} />
                 <div className={styles.warp}>
                     <FriendsList list={userData.friends} />
                 </div>

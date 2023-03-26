@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { auth } from '../../api/firebase'
+import firebase from 'firebase/app'
+import { signInWithEmailAndPassword } from 'firebase/auth'
 import { useNavigate, NavLink } from 'react-router-dom'
 import Navbar from '../../components/Navbar/Navbar'
 import styles from './Login.module.scss'
@@ -20,54 +22,51 @@ export default function Login() {
         if (!email || !password) {
             return alert('Please fill in all fields!');
         }
-
-        auth.signInWithEmailAndPassword(email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                // Do something with user object
-
-                navigate('/');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                // Handle login error
-            });
+        
+        // Sign in with email and pass.
+        signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            console.log(userCredential);
+            navigate('/');
+        }).catch((error) => {
+            const errorCode = error.code;
+            const errorMessage = error.message;
+            console.log(errorCode, errorMessage);
+        });
     }
 
-    return (
-        <>
-            <Navbar />
-            <div className={styles.page}>
-                <h1>Login</h1>
 
-                <form className={cx(styles.login_form, styles.input)}>
-                    <div>
-                        <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
-                    </div>
-                    <div>
-                        <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
-                    </div>
+        return (
+            <>
+                <Navbar />
+                <div className={styles.page}>
+                    <h1>Login</h1>
 
-                </form>
-                <button
-                    className={styles.submit_btn}
-                    onClick={loginHandler}
-                    type="submit">
-                    Login</button>
+                    <form className={cx(styles.login_form, styles.input)}>
+                        <div>
+                            <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+                        </div>
+                        <div>
+                            <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+                        </div>
 
-                <Link to='/'>
+                    </form>
                     <button
-                        className={styles.back_btn}>
-                        Back</button>
-                </Link>
+                        className={styles.submit_btn}
+                        onClick={loginHandler}
+                        type="submit">
+                        Login</button>
 
-                <label
-                    className={styles.footer}>
-                    Don't have an account? <a href='/signup'>Create one today!</a></label>
+                    <Link to='/'>
+                        <button
+                            className={styles.back_btn}>
+                            Back</button>
+                    </Link>
 
-            </div>
-        </>
-    )
-}
+                    <label
+                        className={styles.footer}>
+                        Don't have an account? <a href='/signup'>Create one today!</a></label>
+
+                </div>
+            </>
+        )
+    }
