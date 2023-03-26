@@ -1,11 +1,17 @@
 import React from 'react';
+import styles from './ProfilePicture.module.sass';
 
-function ProfilePicture({ svgString }) {
+function ProfilePicture({ svgString, width=100, height=100 }) {
   return (
-    <div
-      style={{ width: "100px", height: "100px" }}
-      dangerouslySetInnerHTML={{ __html: svgString }}
-    />
+    <div>
+      <div
+        style={{
+            width: `${width}px`,
+            height: `${height}px`,
+        }}
+        dangerouslySetInnerHTML={{ __html: svgString }}
+      />
+    </div>
   );
 }
 
