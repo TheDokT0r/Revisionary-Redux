@@ -10,9 +10,9 @@ const genPfp = async (username) => {
         // ... other options
     });
 
-    const svg = avatar.toString();
-    console.log({svg});
-    return svg;
+    const j = await avatar.toString();
+
+    return j;
 }
 
 export default genPfp;

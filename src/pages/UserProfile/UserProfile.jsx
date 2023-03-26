@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import getUserData from '../../api/UserMannagement/getUserProfile'
 import LoadingScreen from '../../components/LoadingScreen';
 import { Link } from 'react-router-dom';
@@ -9,6 +9,7 @@ import getUid from '../../api/UserMannagement/getUid';
 import FriendsList from './profileComps/FriendsList/FriendsList';
 import OnlineStatus from './profileComps/OnlineStatus/OnlineStatus';
 import Navbar from '../../components/Navbar';
+import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
 
 
 
@@ -19,7 +20,6 @@ export default function UserProfile(props) {
     const [loadingMsg, setLoadingMsg] = useState('Loading...');
     const [isYourProfile, setIsYourProfile] = useState(false);
 
-    
     // Get the user profile by his uid
     useEffect(() => {
         setIsLoading(true);
@@ -57,17 +57,20 @@ export default function UserProfile(props) {
         }
     }
 
+    
     if (isLoading) {
         return (
             <LoadingScreen text={loadingMsg} />
         )
     }
 
+
     return (
         <>
             <Navbar />
             <div className={styles.center}>
                 <h1>{userData.username}'s Profile</h1>
+                <ProfilePicture svgString={userData.profilePicture} />
 
                 <OnlineStatus isOnline={userData.isOnline} />
                 <div className={styles.warp}>
