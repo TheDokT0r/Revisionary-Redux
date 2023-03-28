@@ -6,7 +6,6 @@ export default function Index() {
     const { uid } = useParams();
 
 
-
     return (
         <UserProfile uid={uid} />
     );

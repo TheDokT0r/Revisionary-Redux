@@ -18,21 +18,7 @@ export default function Home() {
     const [userID, setUserID] = useState(null);
 
     useEffect(() => {
-        //TODO: Delete later if you want or something idk.
-        // onAuthStateChanged(auth, (user) => {
-        //     if (user) {
-        //         const uid = user.uid;
-        //         setUserID(uid);
-        //         // ...
-        //         console.log("uid", uid)
-        //     }
-        //     else {
-        //         console.log("user isn't logged out")
-        //         navigate('/login');
-        //     }
-        // });
-
-        //Not that's way better
+        //Now that's way better
         const fetchUid = async () => {
             const uid = await getUid();
             if (uid) {

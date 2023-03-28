@@ -1,8 +1,3 @@
-import React from 'react'
-import Login from './Login'
+import Login from './Login';
 
-export default function index() {
-  return (
-    <Login />
-    )
-}
+export default Login;

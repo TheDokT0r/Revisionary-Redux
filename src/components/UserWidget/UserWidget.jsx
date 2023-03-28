@@ -2,36 +2,18 @@ import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import getUserData from '../../api/UserMannagement/getUserProfile'
 import styles from './UserWidget.module.scss'
-import { getUserPfpURL } from '../../api/UserMannagement/getUserPfpURL'
 import getUserPfp from '../../api/UserMannagement/getUserPfp';
 import { Avatar } from '@mui/material';
+import profilePictore from '../ProfilePicture';
 
 import LoadingScreen from '../LoadingScreen/LoadingScreen';
+import ProfilePicture from '../ProfilePicture';
 
 export default function UserWidget({ uid, state }) {
     const navigate = useNavigate();
-    const [isLoading, setIsLoading] = useState(true);
     const [pfp, setPfp] = useState(null);
 
     const userData = getUserData(uid);
-
-
-    //Set profile picture url
-    useEffect(() => {
-        setIsLoading(true);
-
-        // getUserPfpURL(uid).then((url) => {
-        //     setPfp(url);
-        //     console.log({ url });
-        //     setIsLoading(false);
-        // })
-
-        getUserPfp(uid).then((pfp) => {
-            setPfp(pfp);
-            console.log({ pfp });
-            setIsLoading(false);
-        })
-    }, [])
 
 
     //Go to user profile page
@@ -42,16 +24,11 @@ export default function UserWidget({ uid, state }) {
         // window.location.reload();
     }
 
-    if (isLoading) {
-        return (
-            <LoadingScreen text={""} />
-        )
-    }
-
     if (state === "minimized") {
         return (
             <div className={styles.main_div} onClick={widgetClickedHandeler}>
-                <Avatar src={pfp} alt='profile picture' />
+                {/* <Avatar src={pfp} alt='profile picture' /> */}
+                <ProfilePicture uid={uid} width={20} height={20}/>
             </div>
         )
     }

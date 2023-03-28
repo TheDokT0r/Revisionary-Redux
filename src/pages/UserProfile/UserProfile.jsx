@@ -108,21 +108,3 @@ export default function UserProfile(props) {
     );
 
 }
-
-/*
-email "orkv0099@gmail.com"
-friendRequests
-friendRequestsSent
-friends
-gamesPlayed 0
-gamesWon 0
-isOnline true
-lastSeen March 13, 2023 at 4:30:55 PM UTC+2
-profilePicture null
-registeredAt March 13, 2023 at 4:30:55 PM UTC+2
-revitionsCreated
-revitionsPlayed
-secodnsPlayed 0
-uid "g0XzEsGnmUOOCfnx74OWQLYDeKQ2"
-username "Orche"
-winStreak 0 */
