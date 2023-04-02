@@ -1,30 +1,16 @@
-import app from '../../firebase';
-import 'firebase/firestore';
-import { collection, addDoc, getDocs, query, where } from "firebase/firestore";
-import { firestore } from '../../firebase';
+import axios from 'axios';
 
-const userDataCache = new Map();
+const SERVER_URL = process.env.SERVER_URL || 'http://localhost:4000';
 
-const getUserData = async (uid) => {
-  console.log('Fetching user data...');
+const getUserProfile = async (uid) => {
+  const res = axios.get(`${SERVER_URL}/user/profile/${uid}`).then((res) => {
+    return res.data;
+  })
+    .catch((err) => {
+      return err;
+    });
 
-  if (userDataCache.has(uid)) {
-    console.log('Returning cached user data...');
-    return userDataCache.get(uid);
-  }
-  
-  const querySnapshot = await getDocs(query(collection(firestore, "users"), where("uid", "==", uid)));
-  if (querySnapshot.docs.length > 0) {
-    const userDoc = querySnapshot.docs[0];
-    const userData = userDoc.data();
-    
-    console.log('Caching user data...');
-    userDataCache.set(uid, userData);
+    return res;
+}
 
-    return userData;
-  } else {
-    return null;
-  }
-};
-
-export default getUserData;
+export default getUserProfile;

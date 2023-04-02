@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import { auth, firestore } from '../../api/firebase';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
 import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom'
 import genPfp from '../../api/UserMannagement/genPfp';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import { randomUserData } from './randomUserData';
-import { Button, ButtonGroup } from '@mui/material';
 import Navbar from '../../components/Navbar';
 import styles from './Signup.module.scss'
+
+import createUser from '../../api/UserMannagement/createUser';
 
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
@@ -77,33 +77,41 @@ export default function Signup() {
     const signupHandeler = async (e) => {
         e.preventDefault();
 
-        if (!isDataValid()) {
-            return;
-        }
+        // if (!isDataValid()) {
+        //     return;
+        // }
+
+        // setIsLoading(true);
+
+        // await createUserWithEmailAndPassword(auth, email, password)
+        //     .then((userCredential) => {
+        //         // Signed in
+        //         const user = userCredential.user;
+        //         console.log(user);
+        //         // ...
+
+        //         // createUserData(email, user.uid);
+        //         writeUserData(email, user.uid);
+
+        //         genPfp(username);
+
+        //         navigate('/');
+        //     })
+        //     .catch((error) => {
+        //         const errorCode = error.code;
+        //         const errorMessage = error.message;
+        //         console.log(errorCode, errorMessage);
+        //         // ..
+        //     });
+
+        // setIsLoading(false);
 
         setIsLoading(true);
-
-        await createUserWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                // Signed in
-                const user = userCredential.user;
-                console.log(user);
-                // ...
-
-                // createUserData(email, user.uid);
-                writeUserData(email, user.uid);
-
-                genPfp(username);
-
-                navigate('/');
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-                console.log(errorCode, errorMessage);
-                // ..
-            });
-
+        createUser(username, email, password).then(() => {
+            navigate('/');
+        }).catch((e) => {
+            console.log(e);
+        });
         setIsLoading(false);
     }
 

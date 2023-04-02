@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef } from 'react';
-import getUserData from '../../api/UserMannagement/getUserProfile'
+import getUserProfile from '../../api/UserMannagement/getUserProfile';
 import LoadingScreen from '../../components/LoadingScreen';
 import { Link } from 'react-router-dom';
 import styles from './UserProfile.module.scss';
 import getUid from '../../api/UserMannagement/getUid';
+import { ReactSVG  } from 'react-svg';
 
 // Profile Components
 import FriendsList from './profileComps/FriendsList/FriendsList';
@@ -26,20 +27,18 @@ export default function UserProfile(props) {
         setLoadingMsg('Fetching user profile');
 
         const fetchData = async () => {
-            try {
-                const data = await getUserData(props.uid);
+            getUserProfile(props.uid).then((data) => {
                 setUserData(data);
-                setIsLoading(false);
-                setLoadingMsg('');
-            } catch (error) {
-                console.error(error);
-                setIsLoading(false);
-                setLoadingMsg('Error fetching user profile');
+            }).catch((err) => {
+                console.error(err);
             }
+            );
         };
 
-        fetchData();
-        chekcingProfileOwnership();
+        fetchData().then(() => {
+            setIsLoading(false);
+        });
+        // chekcingProfileOwnership();
 
         return () => {
             // Reset userData when uid changes
@@ -47,6 +46,7 @@ export default function UserProfile(props) {
         };
     }, [props.uid]);
 
+    console.log(userData);
 
     const chekcingProfileOwnership = async () => {
         setLoadingMsg('Checking profile ownership...');
@@ -58,7 +58,7 @@ export default function UserProfile(props) {
     }
 
 
-    if (isLoading) {
+    if (isLoading || !userData) {
         return (
             <LoadingScreen text={loadingMsg} />
         )
@@ -73,10 +73,18 @@ export default function UserProfile(props) {
 
                 <div>
                     <div className={styles.profile_pic}>
-                        <ProfilePicture
+                        {/* <ProfilePicture
                             svgString={userData.profilePicture}
                             width={150}
-                            height={150} />
+                            height={150} /> */}
+
+                        {/* Placeholder */}
+                        <ReactSVG 
+                            src={userData.profilePicture}
+                            width='200'
+                            height='200'
+                        />
+
                     </div>
 
                     <OnlineStatus isOnline={userData.isOnline} />

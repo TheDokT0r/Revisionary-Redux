@@ -18,12 +18,13 @@ const Browse = lazy(() => import('./pages/Revitions/Browse'));
 const Revition = lazy(() => import('./pages/Revitions/Revition'));
 const RevitionData = lazy(() => import('./pages/Revitions/RevitionData'));
 const Create = lazy(() => import('./pages/Revitions/Create'));
+const Debug = lazy(() => import('./pages/Debug'));
 
 
 function App() {
   return (
     <BrowserRouter>
-      <Suspense fallback={<LoadingScreen text={'Loading page'}/>}>
+      <Suspense fallback={<LoadingScreen text={'Loading page'} />}>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path='/login' element={<Login />} />
@@ -33,6 +34,7 @@ function App() {
           <Route path='/rev/create' element={<Create />} />
           <Route path='/rev/:revId/play' element={<Revition />} />
           <Route path='/rev/:revId/info' element={<RevitionData />} />
+          <Route path='/debug/:uid' element={<Debug />} />
         </Routes>
       </Suspense>
     </BrowserRouter>
