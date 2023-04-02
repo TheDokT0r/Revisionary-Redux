@@ -40,7 +40,7 @@ export default function UserProfile() {
         fetchData().then(() => {
             setIsLoading(false);
         });
-        // chekcingProfileOwnership();
+        chekcingProfileOwnership();
 
         return () => {
             // Reset userData when uid changes
