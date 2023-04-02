@@ -1,12 +1,17 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy } from 'react'
 import Navbar from '../../../components/Navbar'
 import BasicData from './BasicData'
-import Question from './Question'
-import SubmitData from './SubmitData'
+// import Question from './Question'
+// import SubmitData from './SubmitData'
 import styles from './CreateRevition.module.scss'
 import classNames from 'classnames'
 const cx = classNames.bind(styles);
 
+const Question = lazy(() => import('./Question'));
+const SubmitData = lazy(() => import('./SubmitData'));
+
+
+//FYI: This component fucking sucks gigantic dick. But it works so I guess it's fine?
 export default function CreateRevition() {
   const [editingPhase, setEditingPhase] = useState(0);
 

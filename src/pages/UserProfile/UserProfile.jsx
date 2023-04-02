@@ -1,7 +1,7 @@
 import { useEffect, useState, useRef } from 'react';
 import getUserProfile from '../../api/UserMannagement/getUserProfile';
 import LoadingScreen from '../../components/LoadingScreen';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import styles from './UserProfile.module.scss';
 import getUid from '../../api/UserMannagement/getUid';
 import { ReactSVG  } from 'react-svg';
@@ -14,7 +14,9 @@ import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
 
 
 
-export default function UserProfile(props) {
+export default function UserProfile() {
+    const { uid } = useParams();
+
     const [userData, setUserData] = useState(null);
 
     const [isLoading, setIsLoading] = useState(true);
@@ -27,7 +29,7 @@ export default function UserProfile(props) {
         setLoadingMsg('Fetching user profile');
 
         const fetchData = async () => {
-            getUserProfile(props.uid).then((data) => {
+            getUserProfile(uid).then((data) => {
                 setUserData(data);
             }).catch((err) => {
                 console.error(err);
@@ -44,7 +46,7 @@ export default function UserProfile(props) {
             // Reset userData when uid changes
             setUserData(null);
         };
-    }, [props.uid]);
+    }, [uid]);
 
     console.log(userData);
 
@@ -52,7 +54,7 @@ export default function UserProfile(props) {
         setLoadingMsg('Checking profile ownership...');
 
         const connectedUid = await getUid();
-        if (connectedUid === props.uid) {
+        if (connectedUid === uid) {
             setIsYourProfile(true);
         }
     }

@@ -15,20 +15,26 @@ export default function Home() {
     const navigate = useNavigate();
     const [userID, setUserID] = useState(null);
 
-    useEffect(() => {
-        const fetchUid = async () => {
-            const uid = await getUid();
+    const fetchUid = async () => {
+        const uid = await getUid();
 
-            if (!uid) {
-                console.log('no uid')
-                navigate('/login');
-            }
-
-            setUserID(uid);
+        if (!uid) {
+            console.log('no uid')
+            navigate('/login');
         }
 
+        setUserID(uid);
+    }
+
+    useEffect(() => {
         fetchUid();
     }, [])
+
+
+    //In a rare case where the uid fetching fails and returns null, even though the session token is valid
+    if (!userID) {
+        fetchUid();
+    }
 
 
     return (
