@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { onAuthStateChanged } from "firebase/auth";
-import { auth } from '../../api/firebase';
 import { NavLink, useNavigate } from 'react-router-dom'
-import getUid from '../../api/UserMannagement/getUid';
 import styles from './Home.module.scss';
 import classNames from 'classnames';
 import Navbar from '../../components/Navbar';
+import verifyConnection from '../../api/UserMannagement/verifyConnection';
+import getUid from '../../api/UserMannagement/getUid';
 
 //mui stuff
 import { ButtonGroup, Button } from '@mui/material';
@@ -18,15 +16,17 @@ export default function Home() {
     const [userID, setUserID] = useState(null);
 
     useEffect(() => {
-        //Now that's way better
         const fetchUid = async () => {
             const uid = await getUid();
-            if (uid) {
-                setUserID(uid);
-            } else {
+
+            if (!uid) {
+                console.log('no uid')
                 navigate('/login');
             }
-        };
+
+            setUserID(uid);
+        }
+
         fetchUid();
     }, [])
 
