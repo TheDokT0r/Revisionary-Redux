@@ -30,11 +30,13 @@
     "react-svg": "^16.1.7",
     "sass": "^1.59.2",
     "sharp": "^0.30.4",
+    "source-map-explorer": "^2.5.3",
     "typescript": "^5.0.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
+    "analyze": "source-map-explorer 'build/static/js/*.js'",
     "build": "react-scripts build",
     "build_OUTDATED": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",

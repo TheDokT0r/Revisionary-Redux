@@ -1,12 +1,10 @@
-import {faker} from '@faker-js/faker';
+import axios from 'axios';
 
 //Generates random user data
-export const randomUserData = () => {
-    const userData = {
-        username: faker.internet.userName(),
-        email: faker.internet.email(),
-        password: faker.internet.password(),
-        bio: faker.lorem.sentence(),
-    }
-    return userData;
+export const randomUserData = async () => {
+    const URL = process.env.SERVER_URL || 'localhost:4000';
+
+    return await axios.get(`${URL}/user/fake`)
+        .then(res => res.data)
+        .catch(err => console.log(err));
 }
