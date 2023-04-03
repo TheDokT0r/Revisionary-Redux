@@ -3,6 +3,10 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import Cookies from 'js-cookie'
 
+
+// ! Can delete whenever lol
+// ? Idk just do whatever, future me, I'm not your dad
+
 export default function Debug() {
     const { uid } = useParams()
     const [userData, setUserData] = useState(null)
@@ -17,7 +21,7 @@ export default function Debug() {
     }, [])
 
     // console.table(userData);
-    console.log( userData );
+    console.log(userData);
     // console.log(Cookies.get('userId'));
 
     return (

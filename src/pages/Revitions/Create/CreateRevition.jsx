@@ -12,6 +12,16 @@ const SubmitData = lazy(() => import('./SubmitData'));
 
 
 //FYI: This component fucking sucks gigantic dick. But it works so I guess it's fine?
+
+/* 
+* Hey, it's me from the future! Just wanted to note that this is one of the worst peices of code
+* I have ever written. I'm truly ashamed to even be slighly connected to this garbage that I somehow
+* refrain to as a "component". So yeah, this code sucks, but it works and it's a minor component so I don't
+* really give to many fucks about it lol.
+* So yeah, good luck future me trying to understand this trash!
+* PS: The subcomponents aren't great either
+*/
+
 export default function CreateRevition() {
   const [editingPhase, setEditingPhase] = useState(0);
 
@@ -81,7 +91,7 @@ export default function CreateRevition() {
     case 2: return (
       <>
         <Navbar />
-        <SubmitData data={{ title, description, isPublic, questions }} />
+        <SubmitData data={{ title, description, isPublic, questions, }} />
       </>
     );
   }

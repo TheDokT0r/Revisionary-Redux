@@ -1,0 +1,38 @@
+$fontSize: 1.5rem;
+
+.container {
+    border: 1px solid black;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 5%;
+
+    // Make the div custom size
+    width: 30%;
+    height: 10%;
+    display: flex;
+    flex-direction: column;
+
+    user-select: none;
+}
+
+.title {
+    font-size: $fontSize;
+    font-weight: bold;
+    // text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.description {
+    font-size: $fontSize / 1.2;
+    // text-align: center;
+    margin: 0;
+    padding: 0;
+    font-style: italic;
+}
+
+.subContainer {
+    // Make them in a row
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

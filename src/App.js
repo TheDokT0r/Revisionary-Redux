@@ -1,6 +1,6 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import Home from './pages/Home';
+// import Home from './pages/Home';
 // import Login from './pages/Login';
 // import Signup from './pages/Signup';
 // import UserProfile from './pages/UserProfile';
@@ -11,6 +11,7 @@ import Home from './pages/Home';
 
 import LoadingScreen from './components/LoadingScreen';
 
+const Home = lazy(() => import('./pages/Home'));
 const UserProfile = lazy(() => import('./pages/UserProfile'));
 const Signup = lazy(() => import('./pages/Signup'));
 const Login = lazy(() => import('./pages/Login'));
@@ -19,6 +20,7 @@ const Revition = lazy(() => import('./pages/Revitions/Revition'));
 const RevitionData = lazy(() => import('./pages/Revitions/RevitionData'));
 const Create = lazy(() => import('./pages/Revitions/Create'));
 const Debug = lazy(() => import('./pages/Debug'));
+const About = lazy(() => import('./pages/About'));
 
 
 function App() {
@@ -35,6 +37,7 @@ function App() {
           <Route path='/rev/:revId/play' element={<Revition />} />
           <Route path='/rev/:revId/info' element={<RevitionData />} />
           <Route path='/debug/:uid' element={<Debug />} />
+          <Route path='/about' element={<About />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

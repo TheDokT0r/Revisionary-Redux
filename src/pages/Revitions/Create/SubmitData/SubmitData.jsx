@@ -3,6 +3,7 @@ import QuestionComp from './QuestionComp';
 import createRevition from '../../../../api/RevitionsMannagement/CreateRevition';
 import LoadingScreen from '../../../../components/LoadingScreen';
 import { useNavigate } from 'react-router-dom';
+import getUid from '../../../../api/UserMannagement/getUid';
 
 export default function SubmitData({ data }) {
   const { title, description, isPublic, questions } = data;
@@ -16,6 +17,8 @@ export default function SubmitData({ data }) {
 
 
   const sendDataToServer = async () => {
+    data.authorID = await getUid();
+
     console.log("Sending data to server")
     setIsLoading(true);
     await createRevition(data).then(res => {

@@ -30,6 +30,7 @@ export default function Navbar() {
                 <li><a href="/">Home</a></li>
                 <li><a href="/rev/create">Create</a></li>
                 <li><a href="/rev/browse">Browse</a></li>
+                <li><a href="/about">About</a></li>
 
                 {/* <li><a href={profileBtnLink}>Profile</a></li> */}
                 <li><a href={profileBtnLink}>

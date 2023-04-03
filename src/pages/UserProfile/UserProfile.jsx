@@ -13,7 +13,7 @@ import Navbar from '../../components/Navbar';
 import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
 
 
-
+// TODO: Get some css in here for fuck sake
 export default function UserProfile() {
     const { uid } = useParams();
 

@@ -1,15 +1,15 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 import TextField from '@mui/material/TextField';
 import Fab from '@mui/material/Fab';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import PublicIcon from '@mui/icons-material/Public';
 import PublicOffIcon from '@mui/icons-material/PublicOff';
 import Switch from '@mui/material/Switch';
-import FormGroup from '@mui/material/FormGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Icon } from '@mui/material';
 import Alert from '@mui/material/Alert'; //NOT IN USE ATM
-import styles from './CreateRevition.module.scss'
+import Tags from './Tags';
+import styles from '../CreateRevition.module.scss'
 import classNames from 'classnames'
 const cx = classNames.bind(styles);
 
@@ -93,6 +93,11 @@ export default function BasicData({ setData }) {
                             onChange={() => setIsPublic(!isPublic)} />}
                 />
                 <Icon component={sliderIcon} />
+            </div>
+
+
+            <div className={styles.tags_container}>
+                <Tags />
             </div>
 
 
