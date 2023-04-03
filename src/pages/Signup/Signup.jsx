@@ -1,8 +1,5 @@
 import React, { useState } from 'react';
-import { auth, firestore } from '../../api/firebase';
-import { collection, addDoc } from "firebase/firestore";
 import { useNavigate } from 'react-router-dom'
-import genPfp from '../../api/UserMannagement/genPfp';
 import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
 import { randomUserData } from './randomUserData';
 import Navbar from '../../components/Navbar';
@@ -23,88 +20,8 @@ export default function Signup() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const writeUserData = async (email, uid) => {
-        const userData = {
-            email: email,
-            uid: uid,
-            username: username,
-            profilePicture: await genPfp(username),
-            bio: "I'm a new user!",
-            isOnline: true,
-            registeredAt: new Date(),
-            lastSeen: new Date(),
-            friends: [],
-            friendRequests: [],
-            friendRequestsSent: [],
-            revitionsCreated: [],
-            revitionsPlayed: [],
-            winStreak: 0,
-            secodnsPlayed: 0,
-            gamesPlayed: 0,
-            gamesWon: 0,
-        }
-
-        try {
-            const db = firestore;
-
-            const docRef = await addDoc(collection(db, "users"), userData);
-            console.log('Done!');
-        }
-        catch (e) {
-            console.log(e);
-        }
-
-    }
-
-
-    const isDataValid = () => {
-        // They call me chaotic evil
-        if (!email || !password || !username) {
-            alert('Please fill in all fields!');
-            setIsLoading(false);
-            return !true;
-        }
-
-        if (password !== passwordConfirm) {
-            alert("Passwords don't match");
-            setIsLoading(false);
-            return !true;
-        }
-
-        return !false;
-    }
-
     const signupHandeler = async (e) => {
         e.preventDefault();
-
-        // if (!isDataValid()) {
-        //     return;
-        // }
-
-        // setIsLoading(true);
-
-        // await createUserWithEmailAndPassword(auth, email, password)
-        //     .then((userCredential) => {
-        //         // Signed in
-        //         const user = userCredential.user;
-        //         console.log(user);
-        //         // ...
-
-        //         // createUserData(email, user.uid);
-        //         writeUserData(email, user.uid);
-
-        //         genPfp(username);
-
-        //         navigate('/');
-        //     })
-        //     .catch((error) => {
-        //         const errorCode = error.code;
-        //         const errorMessage = error.message;
-        //         console.log(errorCode, errorMessage);
-        //         // ..
-        //     });
-
-        // setIsLoading(false);
 
         setIsLoading(true);
         createUser(username, email, password).then(() => {
