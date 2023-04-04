@@ -26,6 +26,7 @@ export default function CreateRevition() {
   const [editingPhase, setEditingPhase] = useState(0);
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
+  const [tags, setTags] = useState([]);
   const [isPublic, setIsPublic] = useState(false)
   const [questions, setQuestions] = useState([]);
 
@@ -33,6 +34,7 @@ export default function CreateRevition() {
     setTitle(data.title)
     setDescription(data.description)
     setIsPublic(data.isPublic)
+    setTags(data.tags);
 
     setEditingPhase(1);
   }
@@ -90,7 +92,7 @@ export default function CreateRevition() {
     case 2: return (
       <>
         <Navbar />
-        <SubmitData data={{ title, description, isPublic, questions, }} />
+        <SubmitData data={{ title, description, isPublic, questions, tags}} />
       </>
     );
   }

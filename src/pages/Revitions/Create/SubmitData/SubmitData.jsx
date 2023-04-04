@@ -6,8 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import getUid from '../../../../api/UserMannagement/getUid';
 
 export default function SubmitData({ data }) {
-  const { title, description, isPublic, questions } = data;
+  const { title, description, isPublic, questions, tags } = data;
   const [isLoading, setIsLoading] = useState(false);
+
+  console.log(tags);
 
   const navigate = useNavigate();
 
@@ -50,6 +52,13 @@ export default function SubmitData({ data }) {
             <QuestionComp question={question} index={index} />
           </div>
         ))}
+
+        <h2>Tags</h2>
+        <ul>
+          {tags.map((tag, index) => (
+            <li key={index}>{tag.text}</li>
+          ))}
+        </ul>
       </div>
 
       <button onClick={sendDataToServer}>Done</button>

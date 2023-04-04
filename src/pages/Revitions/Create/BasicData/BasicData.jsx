@@ -8,7 +8,7 @@ import Switch from '@mui/material/Switch';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { Icon } from '@mui/material';
 import Alert from '@mui/material/Alert'; //NOT IN USE ATM
-import Tags from './Tags';
+import { WithContext as ReactTags } from 'react-tag-input';
 import styles from '../CreateRevition.module.scss'
 import classNames from 'classnames'
 const cx = classNames.bind(styles);
@@ -17,6 +17,7 @@ export default function BasicData({ setData }) {
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [isPublic, setIsPublic] = useState(false);
+    const [tags, setTags] = useState([]);
 
     const [showAlert, setShowAlert] = useState(false);
     const [alertMessage, setAlertMessage] = useState('');
@@ -33,6 +34,12 @@ export default function BasicData({ setData }) {
             if (description.length < 5) return {
                 error: true,
                 message: 'Description must be at least 5 characters long'
+            }
+
+
+            if (tags.length < 1) return {
+                error: true,
+                message: 'You must add at least 1 tag'
             }
 
             return {
@@ -53,7 +60,7 @@ export default function BasicData({ setData }) {
         setShowAlert(false); //No errors, hide alert
 
 
-        setData({ title, description, isPublic });
+        setData({ title, description, isPublic, tags });
     }
 
     return (
@@ -97,7 +104,24 @@ export default function BasicData({ setData }) {
 
 
             <div className={styles.tags_container}>
-                <Tags />
+                <ReactTags
+                    tags={tags}
+                    handleDelete={(i) => {
+                        const newTags = [...tags];
+                        newTags.splice(i, 1);
+                        setTags(newTags);
+                    }}
+                    handleAddition={(tag) => setTags([...tags, tag])}
+                    handleDrag={(tag, currPos, newPos) => {
+                        const newTags = tags.slice();
+                        newTags.splice(currPos, 1);
+                        newTags.splice(newPos, 0, tag);
+                        setTags(newTags);
+                    }}
+
+                    delimiters={[188, 13, 9]}
+                    placeholder='Tags'
+                />
             </div>
 
 
