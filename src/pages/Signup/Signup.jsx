@@ -33,9 +33,9 @@ export default function Signup() {
     }
 
 
-    const debug_handeler = () => {
-        const fakeUser = randomUserData();
-
+    const debug_handeler = async () => {
+        const fakeUser = await randomUserData();
+        console.log({fakeUser});
         setEmail(fakeUser.email);
         setUsername(fakeUser.username);
         setPassword(fakeUser.password);
