@@ -24,7 +24,6 @@ const SubmitData = lazy(() => import('./SubmitData'));
 
 export default function CreateRevition() {
   const [editingPhase, setEditingPhase] = useState(0);
-
   const [title, setTitle] = useState('')
   const [description, setDescription] = useState('')
   const [isPublic, setIsPublic] = useState(false)

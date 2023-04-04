@@ -17,8 +17,6 @@ export default function SubmitData({ data }) {
 
 
   const sendDataToServer = async () => {
-    data.authorID = await getUid();
-
     console.log("Sending data to server")
     setIsLoading(true);
     await createRevition(data).then(res => {

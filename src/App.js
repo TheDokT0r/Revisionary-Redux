@@ -21,6 +21,7 @@ const RevitionData = lazy(() => import('./pages/Revitions/RevitionData'));
 const Create = lazy(() => import('./pages/Revitions/Create'));
 const Debug = lazy(() => import('./pages/Debug'));
 const About = lazy(() => import('./pages/About'));
+const RevitionPreview = lazy(() => import('./pages/Revitions/RevitionPreview'));
 
 
 function App() {
@@ -36,6 +37,7 @@ function App() {
           <Route path='/rev/create' element={<Create />} />
           <Route path='/rev/:revId/play' element={<Revition />} />
           <Route path='/rev/:revId/info' element={<RevitionData />} />
+          <Route path='/rev/:revId/prev' element={<RevitionPreview />} />
           <Route path='/debug/:uid' element={<Debug />} />
           <Route path='/about' element={<About />} />
         </Routes>

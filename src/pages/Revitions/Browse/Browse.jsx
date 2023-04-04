@@ -3,8 +3,11 @@ import Navbar from '../../../components/Navbar/Navbar';
 import fetchRevitions from '../../../api/RevitionsMannagement/fetchRevitions';
 import RevitionData from '../../../components/RevitionData';
 import LoadingScreen from '../../../components/LoadingScreen';
+import { useNavigate } from 'react-router-dom';
 
 export default function Browse() {
+  const navigate = useNavigate();
+
   const [revitions, setRevitions] = useState([]);
   const [loadingSearch, setLoadingSearch] = useState(false);
 
@@ -32,11 +35,18 @@ export default function Browse() {
   }, []);
 
 
+  const navigateToRevition = (revitionId) => {
+    navigate(`/rev/${revitionId}/prev`);
+  }
+
   const displayRevitions = () => {
     if (revitions.length === 0) return (<p>No Revitions Found</p>);
 
     return revitions.map(revition => {
-      return <RevitionData revition={revition} />
+      return <RevitionData
+        revition={revition}
+        onClick={() => navigateToRevition(revition._id)}
+      />
     })
   }
 
@@ -56,7 +66,7 @@ export default function Browse() {
             }} />
           <button onClick={searchHandeler}>Search</button>
         </form>
-        {loadingSearch ? <LoadingScreen text={'Fetching revitions'}/> : displayRevitions()}
+        {loadingSearch ? <LoadingScreen text={'Fetching revitions'} /> : displayRevitions()}
       </div>
     </>
   )
