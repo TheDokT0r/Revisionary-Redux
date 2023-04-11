@@ -44,6 +44,7 @@ export default function Browse() {
 
     return revitions.map(revition => {
       return <RevitionData
+        key={revition._id}
         revition={revition}
         onClick={() => navigateToRevition(revition._id)}
       />

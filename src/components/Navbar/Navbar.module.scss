@@ -7,6 +7,12 @@
   background-color: #fff;
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
 
+  // Don't allow the user to select the text
+
+  ul {
+    user-select: none;
+  }
+
   /* Added styles to spread and center the links */
   & > ul {
     display: flex;
@@ -42,7 +48,7 @@ a:hover {
   font-size: large;
 
   /* Added styles to underline the link */
-  text-decoration: underline;
+  // text-decoration: underline;
 }
 
 .active {

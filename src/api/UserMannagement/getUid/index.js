@@ -8,7 +8,7 @@ const getUid = () => {
   }
 
   const uid = axios.get("http://localhost:4000/user/uid", config).then((res) => {
-    console.log(res.data);
+    // console.log(res.data);
 
     if(res.status !== 200) {
       console.log("Error while getting uid")

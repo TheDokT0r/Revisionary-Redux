@@ -4,13 +4,14 @@ import LoadingScreen from '../../components/LoadingScreen';
 import { Link, useParams } from 'react-router-dom';
 import styles from './UserProfile.module.scss';
 import getUid from '../../api/UserMannagement/getUid';
-import { ReactSVG  } from 'react-svg';
+import { ReactSVG } from 'react-svg';
 
 // Profile Components
 import FriendsList from './profileComps/FriendsList/FriendsList';
 import OnlineStatus from './profileComps/OnlineStatus/OnlineStatus';
 import Navbar from '../../components/Navbar';
 import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
+import sendFriendRequest from '../../api/UserMannagement/sendFriendRequest';
 
 
 // TODO: Get some css in here for fuck sake
@@ -81,11 +82,19 @@ export default function UserProfile() {
                             height={150} /> */}
 
                         {/* Placeholder */}
-                        <ReactSVG 
+                        <ReactSVG
                             src={userData.profilePicture}
                             width='200'
                             height='200'
                         />
+
+                        {
+                            isYourProfile ?
+                                <button>Edit Profile</button> :
+                                <button
+                                    onClick={() => { sendFriendRequest(uid) }}
+                                >Send Freind Req</button>
+                        }
 
                     </div>
 
