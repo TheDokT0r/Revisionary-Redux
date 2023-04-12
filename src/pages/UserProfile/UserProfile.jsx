@@ -11,8 +11,7 @@ import FriendsList from './profileComps/FriendsList/FriendsList';
 import OnlineStatus from './profileComps/OnlineStatus/OnlineStatus';
 import Navbar from '../../components/Navbar';
 import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
-import sendFriendRequest from '../../api/UserMannagement/sendFriendRequest';
-
+import FriendRequestButton from './FriendRequestButton/index.jsx';
 
 // TODO: Get some css in here for fuck sake
 export default function UserProfile() {
@@ -48,8 +47,6 @@ export default function UserProfile() {
             setUserData(null);
         };
     }, [uid]);
-
-    console.log(userData);
 
     const chekcingProfileOwnership = async () => {
         setLoadingMsg('Checking profile ownership...');
@@ -91,9 +88,7 @@ export default function UserProfile() {
                         {
                             isYourProfile ?
                                 <button>Edit Profile</button> :
-                                <button
-                                    onClick={() => { sendFriendRequest(uid) }}
-                                >Send Freind Req</button>
+                                <FriendRequestButton uid={uid}/>
                         }
 
                     </div>
