@@ -1,14 +1,5 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-// import Home from './pages/Home';
-// import Login from './pages/Login';
-// import Signup from './pages/Signup';
-// import UserProfile from './pages/UserProfile';
-// import Browse from './pages/Revitions/Browse';
-// import Revition from './pages/Revitions/Revition';
-// import RevitionData from './pages/Revitions/RevitionData';
-// import Create from './pages/Revitions/Create';
-
 import LoadingScreen from './components/LoadingScreen';
 
 const Home = lazy(() => import('./pages/Home'));
@@ -25,6 +16,8 @@ const RevitionPreview = lazy(() => import('./pages/Revitions/RevitionPreview'));
 
 
 function App() {
+  console.log(process.env.REACT_APP_TEST);
+
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingScreen text={'Loading page'} />}>

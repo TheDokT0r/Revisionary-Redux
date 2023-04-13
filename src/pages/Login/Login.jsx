@@ -14,6 +14,7 @@ export default function Login() {
 
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [rememberMe, setRememberMe] = useState(false);
 
     const loginHandler = (e) => {
         e.preventDefault();
@@ -24,7 +25,7 @@ export default function Login() {
             return alert('Please fill in all fields!');
         }
 
-        login(email, password).then((res) => {
+        login(email, password, rememberMe).then((res) => {
             if (res.status === 200) {
                 navigate('/');
             }
@@ -32,13 +33,6 @@ export default function Login() {
             console.log(err)
             alert('Invalid credentials')
         });
-
-        axios.get(`http://localhost:4000/user/owns/6426997800af4d2146b3d167`)
-            .then(res => {
-                console.log(res.data)
-            }).catch(err => {
-                console.log(err)
-            });
     }
 
 
@@ -55,8 +49,13 @@ export default function Login() {
                     <div>
                         <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                     </div>
-
                 </form>
+
+                <div className={styles.remember_me}>
+                    <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(!rememberMe)} />
+                    <label>Remember me for 60 days</label>
+                </div>
+
                 <button
                     className={styles.submit_btn}
                     onClick={loginHandler}
