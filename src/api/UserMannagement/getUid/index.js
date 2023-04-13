@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:4000";
+
 const getUid = () => {
   const config = {
     headers: {
@@ -7,10 +9,10 @@ const getUid = () => {
     }
   }
 
-  const uid = axios.get("http://localhost:4000/user/uid", config).then((res) => {
+  const uid = axios.get(`${SERVER_URL}/user/uid`, config).then((res) => {
     // console.log(res.data);
 
-    if(res.status !== 200) {
+    if (res.status !== 200) {
       console.log("Error while getting uid")
       return false;
     }

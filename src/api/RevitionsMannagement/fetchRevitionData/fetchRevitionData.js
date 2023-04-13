@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const fetchRevitionData = async (revitionID) => {
-    const url = process.env.SERVER_URL || 'http://localhost:4000';
+    const url = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
 
     const revition = await axios.get(`${url}/revitions/fetch/${revitionID}`).then(
         (response) => {

@@ -5,7 +5,7 @@ import axios from 'axios';
 
 // This function is used to verify the user token and return true if the token is valid
 const verifyConnection = () => {
-    const url = process.env.SERVER_URL || 'http://localhost:4000';
+    const url = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
 
     const config = {
         headers: {

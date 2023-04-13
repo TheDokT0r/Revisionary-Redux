@@ -13,7 +13,7 @@ export default function Navbar() {
             await getUid().then((uid) => {
                 if (uid) {
                     setUid(uid);
-                    setProfileBtnLink(`/users/${uid}/profile`);
+                    setProfileBtnLink(`/u/${uid}/profile`);
                 } else {
                     setProfileBtnLink('/login');
                 }

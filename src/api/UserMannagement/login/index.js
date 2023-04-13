@@ -1,7 +1,7 @@
 import axios from 'axios';
 import Cookies from 'js-cookie';
 
-const url = 'http://localhost:4000';
+const url = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
 
 const login = async (email, password, rememberMe) => {
     const response = await axios.post(`${url}/user/login`, { email, password, rememberMe });

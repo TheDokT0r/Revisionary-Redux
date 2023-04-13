@@ -63,7 +63,7 @@ export default function Home() {
                                 styles.btn)}>
                             Start Revising!</Button>
                         <Button
-                            onClick={() => navigate(`users/${userID}/profile`)}
+                            onClick={() => navigate(`u/${userID}/profile`)}
                             className={styles.profile_btn}>
                             Profile</Button>
                     </ButtonGroup>

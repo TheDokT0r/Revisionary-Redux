@@ -13,10 +13,11 @@ const Create = lazy(() => import('./pages/Revitions/Create'));
 const Debug = lazy(() => import('./pages/Debug'));
 const About = lazy(() => import('./pages/About'));
 const RevitionPreview = lazy(() => import('./pages/Revitions/RevitionPreview'));
+const FriendsList = lazy(() => import('./pages/FriendsList'));
 
 
 function App() {
-  console.log(process.env.REACT_APP_TEST);
+  console.log(process.env.REACT_APP_SERVER_URL);
 
   return (
     <BrowserRouter>
@@ -25,7 +26,9 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path='/login' element={<Login />} />
           <Route path='/signup' element={<Signup />} />
-          <Route path="/users/:uid/profile" element={<UserProfile />} />
+          {/* <Route path="/users/:uid/profile" element={<UserProfile />} />  */}
+          <Route path='/u/:uid/profile' element={<UserProfile />} />  {/*New user routing system*/}
+          <Route path='/u/:uid/friends' element={<FriendsList />} />
           <Route path='/rev/browse' element={<Browse />} />
           <Route path='/rev/create' element={<Create />} />
           <Route path='/rev/:revId/play' element={<Revition />} />
