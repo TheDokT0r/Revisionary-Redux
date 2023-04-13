@@ -1,8 +1,10 @@
 import axios from 'axios';
 
-const SERVER_URL = process.env.SERVER_URL || 'http://localhost:4000';
+// const SERVER_URL = process.env.SERVER_URL || 'http://localhost:4000';
 
 const getUserProfile = async (uid) => {
+  const SERVER_URL = process.env.SERVER_URL || 'http://localhost:4000';
+
   const res = axios.get(`${SERVER_URL}/user/profile/${uid}`).then((res) => {
     return res.data;
   })
@@ -10,7 +12,7 @@ const getUserProfile = async (uid) => {
       return err;
     });
 
-    return res;
+  return res;
 }
 
 export default getUserProfile;

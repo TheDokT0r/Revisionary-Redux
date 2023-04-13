@@ -35,7 +35,7 @@ export default function Signup() {
 
     const debug_handeler = async () => {
         const fakeUser = await randomUserData();
-        console.log({fakeUser});
+        console.log({ fakeUser });
         setEmail(fakeUser.email);
         setUsername(fakeUser.username);
         setPassword(fakeUser.password);
@@ -94,7 +94,10 @@ export default function Signup() {
                     </footer>
                 </div>
 
-                <button onClick={debug_handeler}>DEBUG</button>
+                {process.env.NODE_ENV === 'development' &&
+                    <button onClick={debug_handeler}>DEBUG</button>}
+
+
             </div >
         </>
     )

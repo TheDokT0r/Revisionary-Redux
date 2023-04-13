@@ -39,6 +39,7 @@
     "start": "react-scripts start",
     "analyze": "source-map-explorer 'build/static/js/*.js'",
     "build": "set \"GENERATE_SOURCEMAP=false\" && react-scripts build",
+    "serve": "serve build",
     "build_OUTDATED": "GENERATE_SOURCEMAP=false react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -63,5 +64,8 @@
   },
   "devDependencies": {
     "@faker-js/faker": "^7.6.0"
+  },
+  "react-dotenv": {
+    "SERVER_URL": "http://localhost:4000"
   }
 }
