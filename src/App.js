@@ -17,8 +17,6 @@ const FriendsList = lazy(() => import('./pages/FriendsList'));
 
 
 function App() {
-  console.log(process.env.REACT_APP_SERVER_URL);
-
   return (
     <BrowserRouter>
       <Suspense fallback={<LoadingScreen text={'Loading page'} />}>

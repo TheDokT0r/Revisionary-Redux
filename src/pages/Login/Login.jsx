@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom'
 import { useNavigate, NavLink } from 'react-router-dom'
 import login from '../../api/UserMannagement/login'
 import Navbar from '../../components/Navbar/Navbar'
+import Alert from '@mui/material/Alert';
 import styles from './Login.module.scss'
 import classNames from 'classnames/bind';
-import axios from 'axios'
 const cx = classNames.bind(styles);
 
 
@@ -15,6 +15,9 @@ export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [rememberMe, setRememberMe] = useState(false);
+    const [error, setError] = useState(
+        { is: false, message: '' }
+    )
 
     const loginHandler = (e) => {
         e.preventDefault();
@@ -22,7 +25,8 @@ export default function Login() {
         console.log(`Email: ${email} Password: ${password}`);
 
         if (!email || !password) {
-            return alert('Please fill in all fields!');
+            setError({ is: true, message: 'Please fill in all fields!' });
+            return;
         }
 
         login(email, password, rememberMe).then((res) => {
@@ -31,7 +35,7 @@ export default function Login() {
             }
         }).catch((err) => {
             console.log(err)
-            alert('Invalid credentials')
+            setError({ is: true, message: 'Invalid credentials' });
         });
     }
 
@@ -44,12 +48,25 @@ export default function Login() {
 
                 <form className={cx(styles.login_form, styles.input)}>
                     <div>
-                        <input type="email" onChange={(e) => setEmail(e.target.value)} placeholder="Email" />
+                        <input type="email" onChange={
+                            (e) => {
+                                setEmail(e.target.value)
+                                setError({ is: false, message: '' })
+                            }
+                        } placeholder="Email" />
                     </div>
                     <div>
-                        <input type="password" onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
+                        <input type="password" onChange={(e) => {
+                            setPassword(e.target.value)
+                            setError({ is: false, message: '' })
+                        }}
+                            placeholder="Password" />
                     </div>
                 </form>
+
+                <div className={styles.alert}>
+                    <Alert severity="error" style={{ display: error.is ? 'flex' : 'none' }}>{error.message}</Alert>
+                </div>
 
                 <div className={styles.remember_me}>
                     <input type="checkbox" checked={rememberMe} onChange={(e) => setRememberMe(!rememberMe)} />
@@ -71,7 +88,6 @@ export default function Login() {
                 <label
                     className={styles.footer}>
                     Don't have an account? <a href='/signup'>Create one today!</a></label>
-
             </div>
         </>
     )
