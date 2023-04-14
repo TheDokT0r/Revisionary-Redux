@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactLoading from 'react-loading';
 import styles from './LoadingScreen.module.scss'
+import CircularProgress from '@mui/material/CircularProgress';
 
 export default function Loading({ type, color, text }) {
   return (
@@ -13,4 +14,11 @@ export default function Loading({ type, color, text }) {
     </div>
 
   )
+}
+
+
+export function LoadingWidget() {
+  return (
+    <CircularProgress />
+  );
 }

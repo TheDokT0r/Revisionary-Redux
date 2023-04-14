@@ -1,8 +1,10 @@
 import React from 'react'
-import LoadingScreen from './LoadingScreen'
+import LoadingScreen, { LoadingWidget } from './LoadingScreen'
 
-export default function index({text}) {
+export default function index({ text }) {
     return (
-        <LoadingScreen type={'bars'} color={'#000000'} text={text}/>
+        <LoadingScreen type={'bars'} color={'#000000'} text={text} />
     )
 }
+
+export { LoadingWidget };
