@@ -1,6 +1,7 @@
 import React, { Suspense, lazy } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoadingScreen from './components/LoadingScreen';
+import Navbar from './components/Navbar';
 
 const Home = lazy(() => import('./pages/Home'));
 const UserProfile = lazy(() => import('./pages/UserProfile'));
@@ -18,25 +19,28 @@ const FriendsList = lazy(() => import('./pages/FriendsList'));
 
 function App() {
   return (
-    <BrowserRouter>
-      <Suspense fallback={<LoadingScreen text={'Loading page'} />}>
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/signup' element={<Signup />} />
-          {/* <Route path="/users/:uid/profile" element={<UserProfile />} />  */}
-          <Route path='/u/:uid/profile' element={<UserProfile />} />  {/*New user routing system*/}
-          <Route path='/u/:uid/friends' element={<FriendsList />} />
-          <Route path='/rev/browse' element={<Browse />} />
-          <Route path='/rev/create' element={<Create />} />
-          <Route path='/rev/:revId/play' element={<Revition />} />
-          <Route path='/rev/:revId/info' element={<RevitionData />} />
-          <Route path='/rev/:revId/prev' element={<RevitionPreview />} />
-          <Route path='/debug/:uid' element={<Debug />} />
-          <Route path='/about' element={<About />} />
-        </Routes>
-      </Suspense>
-    </BrowserRouter>
+    <>
+      <Navbar />
+      <BrowserRouter>
+        <Suspense fallback={<LoadingScreen text={'Loading page'} />}>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/signup' element={<Signup />} />
+            {/* <Route path="/users/:uid/profile" element={<UserProfile />} />  */}
+            <Route path='/u/:uid/profile' element={<UserProfile />} />  {/*New user routing system*/}
+            <Route path='/u/:uid/friends' element={<FriendsList />} />
+            <Route path='/rev/browse' element={<Browse />} />
+            <Route path='/rev/create' element={<Create />} />
+            <Route path='/rev/:revId/play' element={<Revition />} />
+            <Route path='/rev/:revId/info' element={<RevitionData />} />
+            <Route path='/rev/:revId/prev' element={<RevitionPreview />} />
+            <Route path='/debug/:uid' element={<Debug />} />
+            <Route path='/about' element={<About />} />
+          </Routes>
+        </Suspense>
+      </BrowserRouter>
+    </>
   );
 }
 

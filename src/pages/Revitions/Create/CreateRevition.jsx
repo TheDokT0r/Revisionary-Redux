@@ -1,5 +1,4 @@
 import React, { useState, useEffect, lazy } from 'react'
-import Navbar from '../../../components/Navbar'
 import BasicData from './BasicData'
 // import Question from './Question'
 // import SubmitData from './SubmitData'
@@ -69,41 +68,28 @@ export default function CreateRevition() {
   switch (editingPhase) {
     case 0:
       return (
-        <>
-          <Navbar />
 
-          <div>
-            <BasicData setData={setBasicData} />
-          </div>
-        </>
+        <div>
+          <BasicData setData={setBasicData} />
+        </div>
       );
 
     case 1: return (
-      <>
-        <Navbar />
-        <Question
-          triggerNextQuesiton={triggerNextQuesiton}
-          triggerPrevQuestion={triggerPrevQuestion}
-          amountOfCurrentQuestions={questions.length}
-          fetchPrevQuestionData={providePrevQuestionData} />
-      </>
+      <Question
+        triggerNextQuesiton={triggerNextQuesiton}
+        triggerPrevQuestion={triggerPrevQuestion}
+        amountOfCurrentQuestions={questions.length}
+        fetchPrevQuestionData={providePrevQuestionData} />
     );
 
     case 2: return (
-      <>
-        <Navbar />
-        <SubmitData data={{ title, description, isPublic, questions, tags}} />
-      </>
+      <SubmitData data={{ title, description, isPublic, questions, tags }} />
     );
   }
 
   return (
-    <>
-      <Navbar />
-
-      <div>
-        <BasicData setData={setBasicData} />
-      </div>
-    </>
+    <div>
+      <BasicData setData={setBasicData} />
+    </div>
   )
 }

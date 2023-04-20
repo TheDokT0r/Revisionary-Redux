@@ -9,7 +9,6 @@ import { ReactSVG } from 'react-svg';
 // Profile Components
 import FriendsList from './profileComps/FriendsList/FriendsList';
 import OnlineStatus from './profileComps/OnlineStatus/OnlineStatus';
-import Navbar from '../../components/Navbar';
 import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
 import FriendRequestButton from './FriendRequestButton/index.jsx';
 
@@ -66,59 +65,60 @@ export default function UserProfile() {
 
 
     return (
-        <>
-            <Navbar />
-            <div className={styles.center}>
-                <h1>{userData.username}</h1>
+        <div className={styles.center}>
+            <h1>{userData.username}</h1>
 
-                <div>
-                    <div className={styles.profile_pic}>
-                        {/* <ProfilePicture
+            <div>
+                <div className={styles.profile_pic}>
+                    {/* <ProfilePicture
                             svgString={userData.profilePicture}
                             width={150}
                             height={150} /> */}
 
-                        {/* Placeholder */}
-                        <ReactSVG
-                            src={userData.profilePicture}
-                            width='200'
-                            height='200'
-                        />
+                    {/* Placeholder */}
+                    <ReactSVG
+                        src={userData.profilePicture}
+                        width='200'
+                        height='200'
+                    />
 
-                        {
-                            isYourProfile ?
-                                <button>Edit Profile</button> :
-                                <FriendRequestButton uid={uid}/>
-                        }
+                    {
+                        isYourProfile ?
+                            <button>Edit Profile</button> :
+                            <FriendRequestButton uid={uid} />
+                    }
 
-                    </div>
-
-                    <OnlineStatus isOnline={userData.isOnline} />
                 </div>
 
-                <div className={styles.warp}>
-                    <FriendsList list={userData.friends} />
-                </div>
-
-                <div>
-                    <h2>Stats:</h2>
-                    <p>Games Played: {userData.gamesPlayed}</p>
-                    <p>Games Won: {userData.gamesWon}</p>
-                    <p>Time Played (s): {userData.secodnsPlayed}</p>
-                    <p>Win Streak: {userData.winStreak}</p>
-                </div>
-
-                <div>
-                    <h2>Revitions Stats:</h2>
-                    <p>Revitions Created: {userData.revitionsCreated}</p>
-                    <p>Revitions Played: {userData.revitionsPlayed}</p>
-                </div>
-
-                <label>Is your pf: {isYourProfile.toString()}</label>
-
-                <Link to='/'><button>Back</button></Link>
+                <OnlineStatus isOnline={userData.isOnline} />
             </div>
-        </>
+
+            <div className={styles.user_bio}>
+                <p>"{userData.bio}"</p>
+            </div>
+
+            <div className={styles.warp}>
+                <FriendsList list={userData.friends} />
+            </div>
+
+            <div>
+                <h2>Stats:</h2>
+                <p>Games Played: {userData.gamesPlayed}</p>
+                <p>Games Won: {userData.gamesWon}</p>
+                <p>Time Played (s): {userData.secodnsPlayed}</p>
+                <p>Win Streak: {userData.winStreak}</p>
+            </div>
+
+            <div>
+                <h2>Revitions Stats:</h2>
+                <p>Revitions Created: {userData.revitionsCreated}</p>
+                <p>Revitions Played: {userData.revitionsPlayed}</p>
+            </div>
+
+            <label>Is your pf: {isYourProfile.toString()}</label>
+
+            <Link to='/'><button>Back</button></Link>
+        </div>
     );
 
 }

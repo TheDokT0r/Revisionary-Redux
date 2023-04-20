@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from 'react'
-import Navbar from '../../../components/Navbar/Navbar';
 import fetchRevitions from '../../../api/RevitionsMannagement/fetchRevitions';
 import RevitionData from '../../../components/RevitionData';
 import LoadingScreen from '../../../components/LoadingScreen';
@@ -53,8 +52,6 @@ export default function Browse() {
 
 
   return (
-    <>
-      <Navbar />
       <div>
         <h1>Browse</h1>
 
@@ -69,6 +66,5 @@ export default function Browse() {
         </form>
         {loadingSearch ? <LoadingScreen text={'Fetching revitions'} /> : displayRevitions()}
       </div>
-    </>
   )
 }

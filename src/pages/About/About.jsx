@@ -1,5 +1,4 @@
 import React from 'react'
-import Navbar from '../../components/Navbar/Navbar'
 import styles from './About.module.scss'
 
 export default function About() {
@@ -20,13 +19,9 @@ export default function About() {
     }
 
     return (
-        <>
-            <Navbar />
-
             <div>
                 <h1>About This App</h1>
                 <p>{txt}</p>
             </div>
-        </>
     )
 }

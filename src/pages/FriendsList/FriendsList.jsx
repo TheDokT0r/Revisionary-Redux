@@ -3,7 +3,6 @@ import { useParams } from 'react-router-dom'
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import Navbar from '../../components/Navbar';
 import LoadingScreen from '../../components/LoadingScreen';
 import getFriendsList from '../../api/UserMannagement/getFriendsList';
 import getUid from '../../api/UserMannagement/getUid';
@@ -57,25 +56,22 @@ export default function FriendsList() {
   }
 
   return (
-    <>
-      <Navbar />
-      <div>
-        <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
-          <TabList>
-            <Tab>Friends</Tab>
-            <Tab>Pending</Tab>
-          </TabList>
+    <div>
+      <Tabs selectedIndex={tabIndex} onSelect={(index) => setTabIndex(index)}>
+        <TabList>
+          <Tab>Friends</Tab>
+          <Tab>Pending</Tab>
+        </TabList>
 
-          <TabPanel>
-            <Friends friends={friendsList} />
-          </TabPanel>
+        <TabPanel>
+          <Friends friends={friendsList} />
+        </TabPanel>
 
-          <TabPanel>
-            <FriendRequests requests={pendingList} />
-          </TabPanel>
-        </Tabs>
-      </div>
-    </>
+        <TabPanel>
+          <FriendRequests requests={pendingList} />
+        </TabPanel>
+      </Tabs>
+    </div>
   );
 }
 

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
-import Navbar from '../../../components/Navbar/Navbar'
 import fetchRevitionData from '../../../api/RevitionsMannagement/fetchRevitionData/fetchRevitionData';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import styles from './RevitionPreview.module.sass';
@@ -64,8 +63,6 @@ export default function RevitionPreview() {
   // );
 
   return (
-    <>
-      <Navbar />
       <div className={styles.container}>
         <h1>Revition Preview</h1>
 
@@ -101,6 +98,5 @@ export default function RevitionPreview() {
           </button>
         </div>
       </div>
-    </>
   )
 }
