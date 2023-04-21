@@ -31,7 +31,7 @@
     "react-svg": "^16.1.7",
     "react-tabs": "^6.0.0",
     "react-tag-input": "^6.8.1",
-    "sass": "^1.59.2",
+    "sass": "^1.62.0",
     "sharp": "^0.30.4",
     "source-map-explorer": "^2.5.3",
     "typescript": "^5.0.4",

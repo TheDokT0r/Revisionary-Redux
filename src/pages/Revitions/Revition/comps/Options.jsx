@@ -1,8 +1,10 @@
 import React from 'react'
 import styles from './Question.module.scss';
 
-export default function Answer({ options }) {
-  console.log({ options });
+export default function Answer({ options, choseOptionHandler }) {
+  const clickHandler = (optionIndex) => {
+    choseOptionHandler(options[optionIndex].isCorrect);
+  }
 
   return (
     <div>
@@ -10,6 +12,7 @@ export default function Answer({ options }) {
         return (
           <div key={index} className={styles.option}>
             <button
+              onClick={() => clickHandler(index)}
             >{option.answer}</button>
           </div>
         )

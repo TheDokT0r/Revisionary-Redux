@@ -12,6 +12,7 @@ const sendFriendRequest = (uid) => {
         console.log(res);
     }).catch((err) => {
         console.log(err);
+        alert("Insaficient permissions");
     });
 }
 
