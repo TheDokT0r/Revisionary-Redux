@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import fetchRevitionData from '../../../api/RevitionsMannagement/fetchRevitionData/fetchRevitionData';
 import VisibilityIcon from '@mui/icons-material/Visibility';
-import styles from './RevitionPreview.module.sass';
+import styles from './RevitionPreview.module.scss';
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
 import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import PersonIcon from '@mui/icons-material/Person';
