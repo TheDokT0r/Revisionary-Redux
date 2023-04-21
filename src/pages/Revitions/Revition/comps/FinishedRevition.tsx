@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react'
 import addView from '../../../../api/RevitionsMannagement/addView';
+import styles from './FinishedRevition.module.scss';
 
 interface Props {
     asnwerdCorrectly: number;

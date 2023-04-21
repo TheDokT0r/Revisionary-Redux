@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { FormEvent, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useNavigate, NavLink } from 'react-router-dom'
 import login from '../../api/UserMannagement/login'
@@ -18,7 +18,7 @@ export default function Login() {
         { is: false, message: '' }
     )
 
-    const loginHandler = (e) => {
+    const loginHandler = (e: any) => { //TODO: Replace any with the correct FormEvent
         e.preventDefault();
 
         console.log(`Email: ${email} Password: ${password}`);

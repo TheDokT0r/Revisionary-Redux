@@ -13,7 +13,7 @@ const cx = classNames.bind(styles);
 
 export default function Home() {
     const navigate = useNavigate();
-    const [userID, setUserID] = useState(null);
+    const [userID, setUserID] = useState<string>('');
 
     const fetchUid = async () => {
         const uid = await getUid();

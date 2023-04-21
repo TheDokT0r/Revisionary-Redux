@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import LoadingScreen from '../../components/LoadingScreen/LoadingScreen';
+import LoadingScreen from '../../components/LoadingScreen';
 import { randomUserData } from './randomUserData';
 import styles from './Signup.module.scss'
 
@@ -19,7 +19,7 @@ export default function Signup() {
 
     const [isLoading, setIsLoading] = useState(false);
 
-    const signupHandeler = async (e) => {
+    const signupHandeler = async (e: any) => { //FIXME: type
         e.preventDefault();
 
         setIsLoading(true);
