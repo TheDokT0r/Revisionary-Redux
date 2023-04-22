@@ -2,8 +2,13 @@ import React from 'react'
 import styles from './RevitionData.module.scss';
 import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
 
-export default function RevitionData({ revition, onClick }) {
-    const formatDate = (date) => {
+interface Props {
+    revition: RevitionData;
+    onClick: () => void;
+}
+
+export default function RevitionData({ revition, onClick }: Props) {
+    const formatDate = (date:Date) => {
         const dateObject = new Date(date);
         const year = dateObject.getFullYear();
         const month = dateObject.getMonth() + 1;
@@ -32,7 +37,7 @@ export default function RevitionData({ revition, onClick }) {
             </div>
 
             <div className={styles.subContainer}>
-                <p>{`By: ${revition.author}`}</p>
+                <p>{`By: ${revition.authorID}`}</p>
                 <p>{`Views: ${revition.views}`}</p>
 
                 <div className={styles.likesContainer}>

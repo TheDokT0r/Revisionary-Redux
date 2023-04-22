@@ -16,7 +16,7 @@ import FriendRequestButton from './FriendRequestButton/index.jsx';
 export default function UserProfile() {
     const { uid } = useParams();
 
-    const [userData, setUserData] = useState(null);
+    const [userData, setUserData] = useState<PublicUserData>();
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadingMsg, setLoadingMsg] = useState('Loading...');
@@ -43,7 +43,7 @@ export default function UserProfile() {
 
         return () => {
             // Reset userData when uid changes
-            setUserData(null);
+            setUserData(undefined);
         };
     }, [uid]);
 
@@ -105,7 +105,7 @@ export default function UserProfile() {
                 <h2>Stats:</h2>
                 <p>Games Played: {userData.gamesPlayed}</p>
                 <p>Games Won: {userData.gamesWon}</p>
-                <p>Time Played (s): {userData.secodnsPlayed}</p>
+                <p>Time Played (s): {userData.secondsPlayed}</p>
                 <p>Win Streak: {userData.winStreak}</p>
             </div>
 
