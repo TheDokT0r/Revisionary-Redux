@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const fetchRevitions = async (keywords = '') => {
+const fetchRevitions = async (keywords: string = ''): Promise<RevitionData[]> => {
     const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:4000";
 
     try {
