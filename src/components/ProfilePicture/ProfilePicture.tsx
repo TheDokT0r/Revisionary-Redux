@@ -1,7 +1,13 @@
 import React from 'react';
 import styles from './ProfilePicture.module.scss';
 
-function ProfilePicture({ svgString, width=100, height=100 }) {
+interface Props {
+  svg: string;
+  width?: number;
+  height?: number;
+}
+
+function ProfilePicture({ svg, width=100, height=100 }: Props) {
   return (
     <div>
       <div
@@ -9,7 +15,7 @@ function ProfilePicture({ svgString, width=100, height=100 }) {
             width: `${width}px`,
             height: `${height}px`,
         }}
-        dangerouslySetInnerHTML={{ __html: svgString }}
+        dangerouslySetInnerHTML={{ __html: svg }}
       />
     </div>
   );
