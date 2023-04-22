@@ -8,7 +8,7 @@ interface Props {
 }
 
 export default function RevitionData({ revition, onClick }: Props) {
-    const formatDate = (date:Date) => {
+    const formatDate = (date: Date) => {
         const dateObject = new Date(date);
         const year = dateObject.getFullYear();
         const month = dateObject.getMonth() + 1;

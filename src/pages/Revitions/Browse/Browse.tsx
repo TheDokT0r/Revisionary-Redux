@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 export default function Browse() {
   const navigate = useNavigate();
 
-  const [revitions, setRevitions] = useState([]);
+  const [revitions, setRevitions] = useState<RevitionData[]>([]); // provide a default value
   const [loadingSearch, setLoadingSearch] = useState(false);
 
   const searchKeywords = useRef('');
@@ -23,7 +23,7 @@ export default function Browse() {
   }
 
 
-  const searchHandeler = async (e) => {
+  const searchHandeler = async (e:any) => {
     e.preventDefault();
 
     await fetchRevitionsFromDatabase();
@@ -34,7 +34,7 @@ export default function Browse() {
   }, []);
 
 
-  const navigateToRevition = (revitionId) => {
+  const navigateToRevition = (revitionId:string) => {
     navigate(`/rev/${revitionId}/prev`);
   }
 
