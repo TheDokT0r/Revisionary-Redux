@@ -4,7 +4,7 @@ import axios from 'axios';
 
 
 // This function is used to verify the user token and return true if the token is valid
-const verifyConnection = () => {
+const verifyConnection = async (): Promise<boolean> => {
     const url = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
 
     const config = {
@@ -13,19 +13,14 @@ const verifyConnection = () => {
         },
     };
 
-    const response = axios.get(url + '/user/verify', config).then((res) => {
-        console.log(res);
+    try {
+        const response = await axios.get(url + '/user/verify', config);
+        console.log(response);
+        return response.status === 200;
+    } catch (error) {
+        console.log(error);
+        return false;
     }
-    ).catch((err) => {
-        console.log(err);
-    }
-    );
-
-    if (response.status === 200) {
-        return true;
-    }
-
-    return false;
 };
 
 export default verifyConnection;

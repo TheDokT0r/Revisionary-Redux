@@ -16,7 +16,7 @@ export default function Home() {
     const [userID, setUserID] = useState<string>('');
 
     const fetchUid = async () => {
-        const uid = await getUid();
+        const uid = await getUid() as string;
 
         if (!uid) {
             console.log('no uid')

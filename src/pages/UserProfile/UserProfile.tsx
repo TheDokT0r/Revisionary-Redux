@@ -14,7 +14,7 @@ import FriendRequestButton from './FriendRequestButton/index.jsx';
 
 // TODO: Get some css in here for fuck sake
 export default function UserProfile() {
-    const { uid } = useParams();
+    const { uid } = useParams<string>();
 
     const [userData, setUserData] = useState<PublicUserData>();
 
@@ -28,7 +28,7 @@ export default function UserProfile() {
         setLoadingMsg('Fetching user profile');
 
         const fetchData = async () => {
-            getUserProfile(uid).then((data) => {
+            getUserProfile(`${uid}`).then((data) => { //Such a rigged way of doing it... But it works!
                 setUserData(data);
             }).catch((err) => {
                 console.error(err);

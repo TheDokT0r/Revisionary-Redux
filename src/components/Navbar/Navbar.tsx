@@ -5,7 +5,7 @@ import getUid from '../../api/UserMannagement/getUid'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 
 export default function Navbar() {
-    const [uid, setUid] = useState(null);
+    const [uid, setUid] = useState("");
     const [profileBtnLink, setProfileBtnLink] = useState(`/users/${uid}/profile`);
 
     useEffect(() => {

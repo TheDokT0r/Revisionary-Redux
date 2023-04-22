@@ -9,12 +9,12 @@ const getUid = () => {
     }
   }
 
-  const uid = axios.get(`${SERVER_URL}/user/uid`, config).then((res) => {
+  const uid = axios.get(`${SERVER_URL}/user/uid`, config).then((res): string => {
     // console.log(res.data);
 
     if (res.status !== 200) {
       console.log("Error while getting uid")
-      return false;
+      return "";
     }
 
     return res.data.uid

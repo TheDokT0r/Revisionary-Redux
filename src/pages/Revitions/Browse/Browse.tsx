@@ -10,7 +10,7 @@ export default function Browse() {
   const [revitions, setRevitions] = useState<RevitionData[]>([]); // provide a default value
   const [loadingSearch, setLoadingSearch] = useState(false);
 
-  const searchKeywords = useRef('');
+  const searchKeywords = useRef<string>('');
 
 
   const fetchRevitionsFromDatabase = async () => {
@@ -23,7 +23,7 @@ export default function Browse() {
   }
 
 
-  const searchHandeler = async (e:any) => {
+  const searchHandeler = async (e: any) => {
     e.preventDefault();
 
     await fetchRevitionsFromDatabase();
@@ -34,7 +34,7 @@ export default function Browse() {
   }, []);
 
 
-  const navigateToRevition = (revitionId:string) => {
+  const navigateToRevition = (revitionId: string) => {
     navigate(`/rev/${revitionId}/prev`);
   }
 
@@ -52,19 +52,19 @@ export default function Browse() {
 
 
   return (
-      <div>
-        <h1>Browse</h1>
+    <div>
+      <h1>Browse</h1>
 
-        <form>
-          <input
-            type="text"
-            placeholder="Search"
-            onChange={(e) => {
-              searchKeywords.current = e.target.value
-            }} />
-          <button onClick={searchHandeler}>Search</button>
-        </form>
-        {loadingSearch ? <LoadingScreen text={'Fetching revitions'} /> : displayRevitions()}
-      </div>
+      <form>
+        <input
+          type="text"
+          placeholder="Search"
+          onChange={(e) => {
+            searchKeywords.current = e.target.value
+          }} />
+        <button onClick={searchHandeler}>Search</button>
+      </form>
+      {loadingSearch ? <LoadingScreen text={'Fetching revitions'} /> : displayRevitions()}
+    </div>
   )
 }

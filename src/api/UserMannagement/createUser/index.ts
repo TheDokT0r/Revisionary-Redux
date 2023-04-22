@@ -1,9 +1,9 @@
 import axios from 'axios';
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL;
 
-const createUser = async (username, email, password) => {
+const createUser = async (username:string, email:string, password:string) => {
     console.log('Creating user:', { username, email, password });
 
     try {
@@ -18,7 +18,7 @@ const createUser = async (username, email, password) => {
         localStorage.setItem('token', response.data.token);
 
         return response.data;
-    } catch (error) {
+    } catch (error:any) {
         console.error('Signup error:', error);
         throw new Error(error);
     }

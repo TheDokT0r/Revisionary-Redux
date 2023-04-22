@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const sendFriendRequest = (uid) => {
+const sendFriendRequest = (uid:string) => {
     const url = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
     const token = localStorage.getItem('token');
 
