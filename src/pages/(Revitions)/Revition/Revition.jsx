@@ -54,6 +54,7 @@ export default function Revition() {
       asnwerdCorrectly={answeredCorrectly}
       points={totalPoints}
       totalQuestions={revitionData.questions.length}
+      revitionId={revId}
     />
   }
 

@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from 'react'
 
-export default function PostQuestionPage({ choseCorrect, points, nextQuestionHandler }) {
+interface Props {
+    choseCorrect: boolean;
+    points: number;
+    nextQuestionHandler: any
+};
+
+export default function PostQuestionPage({ choseCorrect, points, nextQuestionHandler }: Props) {
     const [header, setHeader] = useState('');
     const [subHeader, setSubHeader] = useState('');
 
@@ -13,7 +19,7 @@ export default function PostQuestionPage({ choseCorrect, points, nextQuestionHan
         }
 
         // Player ran out of time
-        if (isNaN(choseCorrect)) {
+        if (choseCorrect == undefined) {
             setHeader('Time\'s up');
             setSubHeader('You\'ve ran out of time!');
             return;

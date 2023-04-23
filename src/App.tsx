@@ -4,17 +4,17 @@ import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
 
 const Home = lazy(() => import('./pages/Home'));
-const UserProfile = lazy(() => import('./pages/UserProfile'));
-const Signup = lazy(() => import('./pages/Signup'));
-const Login = lazy(() => import('./pages/Login'));
-const Browse = lazy(() => import('./pages/Revitions/Browse'));
-const Revition = lazy(() => import('./pages/Revitions/Revition'));
-const RevitionData = lazy(() => import('./pages/Revitions/RevitionData'));
-const Create = lazy(() => import('./pages/Revitions/Create'));
+const UserProfile = lazy(() => import('./pages/(UserComponents)/UserProfile'));
+const Signup = lazy(() => import('./pages/(UserComponents)/Signup'));
+const Login = lazy(() => import('./pages/(UserComponents)/Login'));
+const Browse = lazy(() => import('./pages/(Revitions)/Browse'));
+const Revition = lazy(() => import('./pages/(Revitions)/Revition'));
+const RevitionData = lazy(() => import('./pages/(Revitions)/RevitionData'));
+const Create = lazy(() => import('./pages/(Revitions)/Create'));
 const Debug = lazy(() => import('./pages/Debug'));
 const About = lazy(() => import('./pages/About'));
-const RevitionPreview = lazy(() => import('./pages/Revitions/RevitionPreview'));
-const FriendsList = lazy(() => import('./pages/FriendsList'));
+const RevitionPreview = lazy(() => import('./pages/(Revitions)/RevitionPreview'));
+const FriendsList = lazy(() => import('./pages/(UserComponents)/FriendsList'));
 
 
 function App() {

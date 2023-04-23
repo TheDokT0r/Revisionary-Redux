@@ -1,9 +1,12 @@
-import React, { useEffect, useState } from 'react'
-import QuestionComp from './QuestionComp';
+import React, { useEffect, useState, lazy } from 'react'
+// import QuestionComp from './QuestionComp';
 import createRevition from '../../../../api/RevitionsMannagement/CreateRevition';
 import LoadingScreen from '../../../../components/LoadingScreen';
 import { useNavigate } from 'react-router-dom';
 import getUid from '../../../../api/UserMannagement/getUid';
+
+const QuestionComp = lazy(() => import('./QuestionComp'));
+// const createRevition = lazy(() => import('../../../../api/RevitionsMannagement/CreateRevition'));
 
 export default function SubmitData({ data }) {
   const { title, description, isPublic, questions, tags } = data;

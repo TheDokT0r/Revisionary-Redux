@@ -1,4 +1,22 @@
-.div {
-    border: 1px solid #000000;
-    border-radius: 50%;
+$primary-color: #007bff;
+
+.styles__container {
+  padding: 1rem;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.styles__button {
+  background-color: $primary-color;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+
+  &:hover {
+    background-color: darken($primary-color, 10%);
+  }
 }

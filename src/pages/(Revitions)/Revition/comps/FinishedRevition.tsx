@@ -6,13 +6,14 @@ interface Props {
     asnwerdCorrectly: number;
     totalQuestions: number;
     points: number;
+    revitionId: string;
 }
 
-export default function FinishedRevition(props: Props) {
+export default function FinishedRevition({asnwerdCorrectly, totalQuestions, points, revitionId}: Props) {
 
     // Add view to revition
     useEffect(() => {
-        addView();
+        addView(revitionId);
     }, [])
 
 
@@ -25,9 +26,9 @@ export default function FinishedRevition(props: Props) {
     return (
         <div>
             <h1>Finished Revition</h1>
-            <p>Questions Answered Correctly: {props.asnwerdCorrectly}</p>
-            <p>Total Questions: {props.totalQuestions}</p>
-            <p>Points: {props.points}</p>
+            <p>Questions Answered Correctly: {asnwerdCorrectly}</p>
+            <p>Total Questions: {totalQuestions}</p>
+            <p>Points: {points}</p>
 
             <div>
                 <div>

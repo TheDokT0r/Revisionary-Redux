@@ -1,0 +1,11 @@
+.friendWidget {
+    &.hover {
+        // Make background a bit darker when hovering
+        background-color: #00000020;
+    }
+
+    &.active {
+        background-color: #fff;
+        color: #000;
+    }
+}

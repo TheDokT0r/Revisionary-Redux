@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './Question.module.scss';
 
+
 export default function Answer({ options, choseOptionHandler }) {
   const clickHandler = (optionIndex) => {
     choseOptionHandler(options[optionIndex].isCorrect);

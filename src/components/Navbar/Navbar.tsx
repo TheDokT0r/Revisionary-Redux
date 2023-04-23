@@ -32,10 +32,19 @@ export default function Navbar() {
                 <li><a href="/rev/browse">Browse</a></li>
                 <li><a href="/about">About</a></li>
 
+                {uid &&
+                    <li onClick={
+                        () => {
+                            localStorage.removeItem('token');
+                        }
+                    }><a href='/login'>
+                            Logout
+                        </a></li>}
+
                 {/* <li><a href={profileBtnLink}>Profile</a></li> */}
                 <li><a href={profileBtnLink}>
                     <AccountCircleIcon fontSize='large' /> </a></li>
             </ul>
-        </div>
+        </div >
     )
 }

@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import sendFriendRequest from '../../../api/UserMannagement/Friends/sendFriendRequest';
+import sendFriendRequest from '../../../../api/UserMannagement/Friends/sendFriendRequest';
 
 
 export default function FriendRequestButton({ uid }) {

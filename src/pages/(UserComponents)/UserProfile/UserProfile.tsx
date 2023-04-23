@@ -1,16 +1,18 @@
 import { useEffect, useState, useRef } from 'react';
-import getUserProfile from '../../api/UserMannagement/getUserProfile';
-import LoadingScreen from '../../components/LoadingScreen';
+import getUserProfile from '../../../api/UserMannagement/getUserProfile';
+import LoadingScreen from '../../../components/LoadingScreen';
 import { Link, useParams } from 'react-router-dom';
 import styles from './UserProfile.module.scss';
-import getUid from '../../api/UserMannagement/getUid';
+import getUid from '../../../api/UserMannagement/getUid';
 import { ReactSVG } from 'react-svg';
 
 // Profile Components
 import FriendsList from './profileComps/FriendsList/FriendsList';
 import OnlineStatus from './profileComps/OnlineStatus/OnlineStatus';
-import ProfilePicture from '../../components/ProfilePicture/ProfilePicture';
+import ProfilePicture from '../../../components/ProfilePicture';
 import FriendRequestButton from './FriendRequestButton/index.jsx';
+
+import isAdmin from '../../../api/UserMannagement/isAdmin';
 
 // TODO: Get some css in here for fuck sake
 export default function UserProfile() {
@@ -20,14 +22,15 @@ export default function UserProfile() {
 
     const [isLoading, setIsLoading] = useState(true);
     const [loadingMsg, setLoadingMsg] = useState('Loading...');
-    const [isYourProfile, setIsYourProfile] = useState(false);
+    const [isYourProfile, setIsYourProfile] = useState<boolean>(false);
+    const [admin, setAdmin] = useState<boolean>(false);
 
     // Get the user profile by his uid
     useEffect(() => {
         setIsLoading(true);
         setLoadingMsg('Fetching user profile');
 
-        const fetchData = async () => {
+        const fetchUid = async () => {
             getUserProfile(`${uid}`).then((data) => { //Such a rigged way of doing it... But it works!
                 setUserData(data);
             }).catch((err) => {
@@ -36,9 +39,22 @@ export default function UserProfile() {
             );
         };
 
-        fetchData().then(() => {
-            setIsLoading(false);
+        const fetchIsAdmin = async () => {
+            setLoadingMsg("Checking admin perms");
+
+            isAdmin().then(res => {
+                setAdmin(res);
+            }).catch(err => {
+                console.log({ err });
+            })
+        }
+
+        fetchUid().then(() => {
+            fetchIsAdmin().then(() => {
+                setIsLoading(false);
+            });
         });
+
         chekcingProfileOwnership();
 
         return () => {
@@ -70,17 +86,11 @@ export default function UserProfile() {
 
             <div>
                 <div className={styles.profile_pic}>
-                    {/* <ProfilePicture
-                            svgString={userData.profilePicture}
-                            width={150}
-                            height={150} /> */}
-
-                    {/* Placeholder */}
-                    <ReactSVG
+                    <ProfilePicture
                         src={userData.profilePicture}
-                        width='200'
-                        height='200'
+                        size={150}
                     />
+
 
                     {
                         isYourProfile ?
@@ -116,6 +126,7 @@ export default function UserProfile() {
             </div>
 
             <label>Is your pf: {isYourProfile.toString()}</label>
+            <label>Is admin: {admin.toString()}</label>
 
             <Link to='/'><button>Back</button></Link>
         </div>

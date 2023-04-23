@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import LoadingScreen from '../../components/LoadingScreen';
+import LoadingScreen from '../../../components/LoadingScreen';
 import { randomUserData } from './randomUserData';
 import styles from './Signup.module.scss'
 
-import createUser from '../../api/UserMannagement/createUser';
+import createUser from '../../../api/UserMannagement/createUser';
 
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);

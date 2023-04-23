@@ -1,24 +1,22 @@
-import React from 'react';
-import styles from './ProfilePicture.module.scss';
+import React from 'react'
 
 interface Props {
-  svg: string;
-  width?: number;
-  height?: number;
+    src: string;
+    size?: number;
 }
 
-function ProfilePicture({ svg, width=100, height=100 }: Props) {
-  return (
-    <div>
-      <div
-        style={{
-            width: `${width}px`,
-            height: `${height}px`,
-        }}
-        dangerouslySetInnerHTML={{ __html: svg }}
-      />
-    </div>
-  );
-}
+export default function ProfilePicture({ src, size=50 }: Props) {
 
-export default ProfilePicture;
+    return (
+        <div>
+            <img
+                src={src}
+                alt="Profile Picture"
+                style={{
+                    width: size,
+                    height: size,
+                }}
+            />
+        </div>
+    )
+}

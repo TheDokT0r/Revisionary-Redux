@@ -1,7 +1,13 @@
 import axios from 'axios';
 
+interface FriendsLists {
+    friends: string[];
+    friendRequests: string[];
+    friendRequestsSent: string[];
+}
+
 // Also includes friend requests and friend requests sent. Only accesable to the user.
-const getFriendsList = async () => {
+const getPersonalFriendsList = async (): Promise<FriendsLists> => {
     const SERVER_URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
 
     const config = {
@@ -10,12 +16,14 @@ const getFriendsList = async () => {
         }
     }
 
-    await axios.get(`${SERVER_URL}/user/friends`, config).then(res => {
+    const res = await axios.get(`${SERVER_URL}/user/friends`, config).then(res => {
         return res.data;
     }).catch(err => {
         console.log(err);
     }
     );
+
+    return res;
 }
 
-export default getFriendsList;
+export default getPersonalFriendsList;

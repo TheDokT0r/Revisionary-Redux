@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import styles from './FriendsList.module.scss';
-import UserWidget from '../../../../components/UserWidget/UserWidget';
+import UserWidget from '../../../../../components/UserWidget/UserWidget';
 
 export default function FriendsList({ list }) {
   useEffect(() => {
