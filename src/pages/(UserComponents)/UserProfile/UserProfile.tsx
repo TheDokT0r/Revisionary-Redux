@@ -88,6 +88,7 @@ export default function UserProfile() {
                 <div className={styles.profile_pic}>
                     <ProfilePicture
                         src={userData.profilePicture}
+                        uid={uid}
                         size={150}
                     />
 
