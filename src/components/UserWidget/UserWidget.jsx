@@ -20,7 +20,7 @@ export default function UserWidget({ uid, state }) {
     const widgetClickedHandeler = () => {
         console.log('Clicked');
 
-        navigate('/users/' + uid + '/profile');
+        navigate('/u/' + uid + '/profile');
         // window.location.reload();
     }
 

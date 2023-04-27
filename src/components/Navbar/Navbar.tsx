@@ -7,6 +7,7 @@ import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 export default function Navbar() {
     const [uid, setUid] = useState("");
     const [profileBtnLink, setProfileBtnLink] = useState(`/users/${uid}/profile`);
+    const [friendsBtnLink, setFriendsBtnLink] = useState(`/users/${uid}/friends`);
 
     useEffect(() => {
         const fetchUid = async () => {
@@ -14,6 +15,7 @@ export default function Navbar() {
                 if (uid) {
                     setUid(uid);
                     setProfileBtnLink(`/u/${uid}/profile`);
+                    setFriendsBtnLink(`/u/${uid}/friends`);
                 } else {
                     setProfileBtnLink('/login');
                 }
@@ -31,6 +33,7 @@ export default function Navbar() {
                 <li><a href="/rev/create">Create</a></li>
                 <li><a href="/rev/browse">Browse</a></li>
                 <li><a href="/about">About</a></li>
+                <li><a href={friendsBtnLink}>Friends</a></li>
 
                 {uid &&
                     <li onClick={

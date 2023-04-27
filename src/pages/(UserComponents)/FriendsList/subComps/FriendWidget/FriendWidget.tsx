@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import styles from './FriendWidget.module.scss';
-import getUserProfile from '../../../../api/UserMannagement/getUserProfile';
-import acceptFriendReq from '../../../../api/UserMannagement/Friends/acceptFriendReq';
+import getUserProfile from '../../../../../api/UserMannagement/getUserProfile';
+import acceptFriendReq from '../../../../../api/UserMannagement/Friends/acceptFriendReq';
 
 
 interface Props {

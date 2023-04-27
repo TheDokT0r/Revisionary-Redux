@@ -10,6 +10,7 @@ import styles from './FriendsList.module.scss';
 import acceptFriendReq from '../../../api/UserMannagement/Friends/acceptFriendReq';
 
 const FriendWidget = lazy(() => import('./subComps/FriendWidget'));
+const AddFriendsPage = lazy(() => import('./subComps/AddFriendsPage'));
 
 
 // Pro tip: Don't write your code while you're not focused.
@@ -79,6 +80,7 @@ export default function FriendsList() {
           <Tab>Friends</Tab>
           <Tab>Pending</Tab>
           <Tab>Sent</Tab>
+          <Tab>Add</Tab>
         </TabList>
 
         <TabPanel>
@@ -91,6 +93,10 @@ export default function FriendsList() {
 
         <TabPanel>
           <FriendRequestsSent list={friendRequestsSent} />
+        </TabPanel>
+
+        <TabPanel>
+          <AddFriendsPage uid={uid} />
         </TabPanel>
       </Tabs>
     </div>
@@ -120,7 +126,7 @@ function Friends({ list }: RequestsProps) {
 
 function FriendRequests({ list }: RequestsProps) {
   const navigate = useNavigate();
-  
+
   if (!list.length) {
     return (
       <div>
