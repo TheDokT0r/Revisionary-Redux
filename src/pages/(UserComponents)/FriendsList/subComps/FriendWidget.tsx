@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styles from './FriendWidget.module.scss';
 import getUserProfile from '../../../../api/UserMannagement/getUserProfile';
+import acceptFriendReq from '../../../../api/UserMannagement/Friends/acceptFriendReq';
+
 
 interface Props {
     uid: string;
@@ -10,11 +12,17 @@ interface Props {
 export default function FriendWidget({ uid, isPnedingFriendRequest }: Props) {
     const [userData, setUserData] = useState<PublicUserData>();
 
-    const acceptFriendRequest = () => {
+
+    const acceptFriendRequestHandeler = () => {
         console.log('Accepting friend request')
+        acceptFriendReq(uid).then((results) => {
+            console.log({ results });
+        }).catch((err) => {
+            console.error(err);
+        });
     }
 
-    const declineFriendRequest = () => {
+    const declineFriendRequestHandeler = () => {
         console.log('Declining friend request')
     }
 
@@ -53,12 +61,12 @@ export default function FriendWidget({ uid, isPnedingFriendRequest }: Props) {
                 >
                     <button
                         className={styles.btn}
-                        onClick={acceptFriendRequest}
+                        onClick={acceptFriendRequestHandeler}
                     >Accept</button>
 
                     <button
                         className={styles.btn}
-                        onCanPlay={declineFriendRequest}
+                        onCanPlay={declineFriendRequestHandeler}
                     >Decline</button>
                 </div>
 

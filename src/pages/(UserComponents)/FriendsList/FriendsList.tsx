@@ -7,6 +7,7 @@ import LoadingScreen from '../../../components/LoadingScreen';
 import getPersonalFriendsList from '../../../api/UserMannagement/getFriendsList';
 import getUid from '../../../api/UserMannagement/getUid';
 import styles from './FriendsList.module.scss';
+import acceptFriendReq from '../../../api/UserMannagement/Friends/acceptFriendReq';
 
 const FriendWidget = lazy(() => import('./subComps/FriendWidget'));
 
@@ -118,6 +119,8 @@ function Friends({ list }: RequestsProps) {
 }
 
 function FriendRequests({ list }: RequestsProps) {
+  const navigate = useNavigate();
+  
   if (!list.length) {
     return (
       <div>
@@ -128,7 +131,18 @@ function FriendRequests({ list }: RequestsProps) {
 
   return (
     <div>
-      Pending Friend Requests
+      {list.map((uid, index) => (
+        <div
+          key={index}
+          className={styles.friendWidget}
+          onClick={() => navigate(`/u/${uid}/profile`)}
+        >
+          <FriendWidget
+            uid={uid}
+            isPnedingFriendRequest={true}
+          />
+        </div>
+      ))}
     </div>
   );
 }
@@ -154,7 +168,7 @@ function FriendRequestsSent({ list }: RequestsProps) {
         >
           <FriendWidget
             uid={uid}
-            isPnedingFriendRequest={true}
+            isPnedingFriendRequest={false}
           />
         </div>
       ))}

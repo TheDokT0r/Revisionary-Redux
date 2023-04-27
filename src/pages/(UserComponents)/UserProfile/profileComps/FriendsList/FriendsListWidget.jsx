@@ -1,11 +1,10 @@
 import React, { useEffect } from 'react';
 import styles from './FriendsList.module.scss';
 import UserWidget from '../../../../../components/UserWidget/UserWidget';
+import { useNavigate } from 'react-router-dom';
 
-export default function FriendsList({ list }) {
-  useEffect(() => {
-    // Any initialization code you want to run goes here
-  }, [])
+export default function FriendsListWidget({ list, uid }) {
+  const navigate = useNavigate();
 
   // The user has no friends... le sad :(
   if (list.length < 1) {
@@ -37,6 +36,12 @@ export default function FriendsList({ list }) {
       <div className={styles.friendsList}>
         {friendsWidgets}
       </div>
+
+      <button
+        onClick={() => {
+          navigate(`/user/${uid}/friends`)
+        }}
+      >View More</button>
     </div>
   )
 }

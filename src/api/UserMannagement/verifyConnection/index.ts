@@ -15,10 +15,8 @@ const verifyConnection = async (): Promise<boolean> => {
 
     try {
         const response = await axios.get(url + '/user/verify', config);
-        console.log(response);
         return response.status === 200;
     } catch (error) {
-        console.log(error);
         return false;
     }
 };

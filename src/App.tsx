@@ -1,7 +1,9 @@
-import React, { Suspense, lazy } from 'react';
+import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
+import { io } from 'socket.io-client';
+import verifyConnection from './api/UserMannagement/verifyConnection';
 
 const Home = lazy(() => import('./pages/Home'));
 const UserProfile = lazy(() => import('./pages/(UserComponents)/UserProfile'));
@@ -18,6 +20,38 @@ const FriendsList = lazy(() => import('./pages/(UserComponents)/FriendsList'));
 
 
 function App() {
+
+  const isLogged = async () => {
+    return await verifyConnection();
+  }
+
+  useEffect(() => {
+    if (!isLogged()) {
+      console.log('Invalid token');
+      return;
+    }
+
+    const socket = io(
+      process.env.REACT_APP_SERVER_URL || 'http://localhost:4000',
+      {
+        query: {
+          token: localStorage.getItem('token')
+        }
+      });
+
+
+    socket.on('connect', () => {
+      console.log('connected');
+    });
+    socket.on('disconnect', () => {
+      console.log('disconnected');
+    });
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
+
   return (
     <>
       <Navbar />

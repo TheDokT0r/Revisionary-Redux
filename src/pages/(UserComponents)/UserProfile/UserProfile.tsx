@@ -7,7 +7,7 @@ import getUid from '../../../api/UserMannagement/getUid';
 import { ReactSVG } from 'react-svg';
 
 // Profile Components
-import FriendsList from './profileComps/FriendsList/FriendsList';
+import FriendsListWidget from './profileComps/FriendsList/FriendsListWidget';
 import OnlineStatus from './profileComps/OnlineStatus/OnlineStatus';
 import ProfilePicture from '../../../components/ProfilePicture';
 import FriendRequestButton from './FriendRequestButton/index.jsx';
@@ -109,7 +109,10 @@ export default function UserProfile() {
             </div>
 
             <div className={styles.warp}>
-                <FriendsList list={userData.friends} />
+                <FriendsListWidget
+                    list={userData.friends}
+                    uid={uid}
+                    />
             </div>
 
             <div>
