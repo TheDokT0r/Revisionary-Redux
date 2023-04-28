@@ -16,7 +16,7 @@ const getPersonalFriendsList = async (): Promise<FriendsLists> => {
         }
     }
 
-    const res = await axios.get(`${SERVER_URL}/user/friends`, config).then(res => {
+    const res = await axios.get(`${SERVER_URL}/user/friend/list`, config).then(res => {
         return res.data;
     }).catch(err => {
         console.log(err);

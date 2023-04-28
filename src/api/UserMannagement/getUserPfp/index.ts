@@ -4,7 +4,7 @@ import axios from 'axios';
 const getUserPfp = async (uid: string): Promise<string> => {
     const URL = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
 
-    const pfp = axios.get(`${URL}/user/pfp/${uid}`).then(
+    const pfp = axios.get(`${URL}/user/profile/getPfp/${uid}`).then(
         (res) => {
             return res.data as string;
         }

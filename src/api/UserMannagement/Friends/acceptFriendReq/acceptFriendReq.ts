@@ -4,7 +4,7 @@ const acceptFriendReq = (senderUid: string) => {
     const url = process.env.REACT_APP_SERVER_URL || 'http://localhost:4000';
     const token = localStorage.getItem('token');
 
-    return axios.post(`${url}/user/friendRequest/accept`, { senderUid }, {
+    return axios.post(`${url}/user/friend/request/accept`, { senderUid }, {
         headers: {
             "Authorization": `Bearer ${token}`
         }
