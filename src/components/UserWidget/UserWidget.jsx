@@ -3,17 +3,27 @@ import { useNavigate } from 'react-router-dom';
 import getUserData from '../../api/UserMannagement/getUserProfile'
 import styles from './UserWidget.module.scss'
 import getUserPfp from '../../api/UserMannagement/getUserPfp';
-import { Avatar } from '@mui/material';
-import profilePictore from '../ProfilePicture';
 
-import LoadingScreen from '../LoadingScreen/LoadingScreen';
+import LoadingScreen, { LoadingWidget } from '../LoadingScreen/LoadingScreen';
 import ProfilePicture from '../ProfilePicture';
 
 export default function UserWidget({ uid, state }) {
     const navigate = useNavigate();
     const [pfp, setPfp] = useState(null);
+    const [userData, setUserData] = useState();
+    const [loading, setLoading] = useState(true);
 
-    const userData = getUserData(uid);
+
+    useEffect(() => {
+        getUserPfp(uid).then((url) => {
+            setPfp(url);
+        })
+
+        getUserData(uid).then((data) => {
+            setUserData(data);
+            setLoading(false);
+        })
+    }, [])
 
 
     //Go to user profile page
@@ -24,11 +34,20 @@ export default function UserWidget({ uid, state }) {
         // window.location.reload();
     }
 
+
+    if (loading) {
+        return (
+            <div>
+                <LoadingWidget />
+            </div>
+        );
+    }
+
     if (state === "minimized") {
         return (
             <div className={styles.main_div} onClick={widgetClickedHandeler}>
                 {/* <Avatar src={pfp} alt='profile picture' /> */}
-                <ProfilePicture uid={uid} width={20} height={20}/>
+                <ProfilePicture uid={uid} width={20} height={20} />
             </div>
         )
     }
@@ -36,7 +55,7 @@ export default function UserWidget({ uid, state }) {
     return (
         <div className={styles.main_div} onClick={widgetClickedHandeler}>
             <div>
-                <Avatar src={pfp} alt='profile picture' />
+                <ProfilePicture uid={uid} src={pfp} width={50} height={50} />
             </div>
 
             <div>

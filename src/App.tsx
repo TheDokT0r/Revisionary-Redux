@@ -17,10 +17,10 @@ const Debug = lazy(() => import('./pages/Debug'));
 const About = lazy(() => import('./pages/About'));
 const RevitionPreview = lazy(() => import('./pages/(Revitions)/RevitionPreview'));
 const FriendsList = lazy(() => import('./pages/(UserComponents)/FriendsList'));
+const EditProfile = lazy(() => import('./pages/(UserComponents)/EditProfile'));
 
 
 function App() {
-
   const isLogged = async () => {
     return await verifyConnection();
   }
@@ -63,6 +63,7 @@ function App() {
             <Route path='/signup' element={<Signup />} />
             {/* <Route path="/users/:uid/profile" element={<UserProfile />} />  */}
             <Route path='/u/:uid/profile' element={<UserProfile />} />  {/*New user routing system*/}
+            <Route path='/u/:uid/edit' element={<EditProfile />} />
             <Route path='/u/:uid/friends' element={<FriendsList />} />
             <Route path='/rev/browse' element={<Browse />} />
             <Route path='/rev/create' element={<Create />} />

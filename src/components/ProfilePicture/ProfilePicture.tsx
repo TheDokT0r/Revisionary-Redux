@@ -8,6 +8,7 @@ interface Props {
     uid?: string;
 }
 
+// Idk why you need to pass both the uid and the src, but at this point, I don't really care
 export default function ProfilePicture({ uid, src, size = 50 }: Props) {
     const navigate = useNavigate();
 

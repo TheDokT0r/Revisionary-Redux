@@ -1,6 +1,7 @@
 import React, { useState, useEffect, lazy } from 'react'
 import styles from './AddFriendsPage.module.scss';
 import searchProfiles from '../../../../../api/UserMannagement/searchProfiles/searchProfiles';
+import UserComponent from './UserComponent';
 
 // This component is quite far away lol
 const UserWidget = lazy(
@@ -14,6 +15,13 @@ interface Props {
 export default function AddFriendsPage({ uid }: Props) {
     const [searchQuery, setSearchQuery] = useState<string>('');
     const [profiles, setPorfiles] = useState<PublicUserData[]>([]);
+
+    useEffect(() => {
+        searchProfiles(searchQuery).then((res) => {
+            setPorfiles(res);
+            console.log(res);
+        });
+    }, [])
 
     const search = (e: any) => {
         e.preventDefault();
@@ -35,16 +43,14 @@ export default function AddFriendsPage({ uid }: Props) {
             </form>
 
             <div>
-                {profiles.map((profile) => {
+                {profiles.map((profile, index) => {
                     return (
-                        <UserWidget
-                            key={profile._id}
-                            uid={profile._id}
-                            state="maximized"
+                        <UserComponent
+                            userData={profile}
+                            key={index}
                         />
                     )
                 })}
-
             </div>
         </div>
     )
