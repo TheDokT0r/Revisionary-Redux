@@ -11,7 +11,7 @@ export default function EditProfile() {
 
     useEffect(() => {
         const fetchData = async () => {
-            if(!uid) {
+            if (!uid) {
                 return;
             }
 
@@ -23,7 +23,7 @@ export default function EditProfile() {
     }, [])
 
 
-    if(!userData) {
+    if (!userData) {
         return (
             <div>
                 <h1>Loading...</h1>
@@ -36,8 +36,12 @@ export default function EditProfile() {
             <h1>Edit Profile</h1>
 
             <div>
-                <ProfilePicture uid={uid} src={userData.profilePicture} />
-                <button></button>
+                <ProfilePicture
+                    src={userData.profilePicture}
+                    size={100}
+                />
+                <button>Upload Image</button>
+                <button>Generate</button>
             </div>
         </div>
     )

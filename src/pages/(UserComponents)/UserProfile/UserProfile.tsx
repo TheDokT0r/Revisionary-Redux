@@ -1,10 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import getUserProfile from '../../../api/UserMannagement/getUserProfile';
 import LoadingScreen from '../../../components/LoadingScreen';
-import { Link, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import styles from './UserProfile.module.scss';
 import getUid from '../../../api/UserMannagement/getUid';
 import { ReactSVG } from 'react-svg';
+import { useNavigate } from 'react-router-dom';
 
 // Profile Components
 import FriendsListWidget from './profileComps/FriendsList/FriendsListWidget';
@@ -17,6 +18,7 @@ import isAdmin from '../../../api/UserMannagement/isAdmin';
 // TODO: Get some css in here for fuck sake
 export default function UserProfile() {
     const { uid } = useParams<string>();
+    const navigate = useNavigate();
 
     const [userData, setUserData] = useState<PublicUserData>();
 
@@ -96,7 +98,11 @@ export default function UserProfile() {
 
                     {
                         isYourProfile ?
-                            <button>Edit Profile</button> :
+                            <button
+                                onClick={() => {
+                                    navigate(`/u/${uid}/edit`);
+                                }}
+                            >Edit Profile</button> :
                             <FriendRequestButton uid={uid} />
                     }
 
@@ -113,7 +119,7 @@ export default function UserProfile() {
                 <FriendsListWidget
                     list={userData.friends}
                     uid={uid}
-                    />
+                />
             </div>
 
             <div>
