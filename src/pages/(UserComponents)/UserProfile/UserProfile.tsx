@@ -88,8 +88,9 @@ export default function UserProfile() {
                 <div className={styles.profile_pic}>
                     <ProfilePicture
                         src={userData.profilePicture}
-                        uid={uid}
+                        uid={`${uid}`} // A stupid workaround. But it works lol
                         size={150}
+                        clickable={false}
                     />
 
 

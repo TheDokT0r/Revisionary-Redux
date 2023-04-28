@@ -1,21 +1,31 @@
 .container {
+
+  // When hovers, make image darker
+  &:hover {
+    .pfp {
+      filter: brightness(0.9);
+    }
+  }
+
+  &:active {
+    .pfp {
+      filter: brightness(0.6);
+    }
+  }
+}
+
+
+.pfp {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
-  border-radius: 10px;
+  border-radius: 25px;
   overflow: hidden;
   background-color: #f5f5f5;
   border: 4px solid #000000;
-  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-
-  &.hover {
-    filter: brightness(0.5);
-  }
-
-  &.active {
-    filter: brightness(0.9);
-  }
+  box-shadow: 0px 0px 5px 0px rgba(0,0,0,0.75);
+  transition: filter 0.1s ease-in-out;
 }

@@ -1,27 +1,60 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import styles from './ProfilePicture.module.scss'
 import { useNavigate } from 'react-router-dom';
+import getUserPfp from '../../api/UserMannagement/getUserPfp';
 
 interface Props {
-    src: string;
+    src?: string;
     size?: number;
     uid?: string;
+    clickable?: boolean;
 }
 
-// Idk why you need to pass both the uid and the src, but at this point, I don't really care
-export default function ProfilePicture({ uid, src, size = 50 }: Props) {
+// Allows to pass the src in order to avoid the api call. Should use this when possible. If not, no big deal.
+export default function ProfilePicture({ uid, src, size = 50, clickable = true }: Props) {
     const navigate = useNavigate();
 
+    const [profilePicture, setProfilePicture] = useState(src);
+
+    useEffect(() => {
+        if (!uid) {
+            return;
+        }
+
+        if (!profilePicture) {
+            getUserPfp(uid).then((res) => {
+                setProfilePicture(res);
+            })
+        }
+    }, [])
+
+    if (!uid && !src) {
+        return (
+            <div>
+                <img
+                    className={styles.container}
+                    src="" // TODO: Add default profile picture
+                    alt="Profile Picture"
+                    style={{
+                        width: size,
+                        height: size,
+                    }}
+                />
+            </div>
+        )
+    }
+
     return (
-        <div>
+        <div
+            className={styles.container}
+        >
             <img
+                className={styles.pfp}
                 onClick={() => {
-                    if (uid) {
+                    if (uid && clickable) {
                         navigate(`/u/${uid}/profile`);
                     }
-                }
-                }
-                className={styles.container}
+                }}
                 src={src}
                 alt="Profile Picture"
                 style={{
