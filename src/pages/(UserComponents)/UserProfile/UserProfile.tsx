@@ -47,7 +47,6 @@ export default function UserProfile() {
             isAdmin().then(res => {
                 setAdmin(res);
             }).catch(err => {
-                console.log({ err });
             })
         }
 
@@ -117,8 +116,8 @@ export default function UserProfile() {
 
             <div className={styles.warp}>
                 <FriendsListWidget
-                    list={userData.friends}
-                    uid={uid}
+                    friendsList={userData.friends}
+                    uid={`${uid}`}
                 />
             </div>
 

@@ -11,7 +11,6 @@ const isAdmin = async () => {
 
     const admin = await axios.get(`${SERVER_URL}/admin`, config).then((res) => {
         if (res.status !== 200) {
-            console.log("Error while getting admin status")
             return false;
         }
 

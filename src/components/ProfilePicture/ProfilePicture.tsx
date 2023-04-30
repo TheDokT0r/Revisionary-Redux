@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styles from './ProfilePicture.module.scss'
 import { useNavigate } from 'react-router-dom';
 import getUserPfp from '../../api/UserMannagement/getUserPfp';
+import { LoadingWidget } from '../LoadingScreen/LoadingScreen';
 
 interface Props {
     src?: string;
@@ -15,6 +16,7 @@ export default function ProfilePicture({ uid, src, size = 50, clickable = true }
     const navigate = useNavigate();
 
     const [profilePicture, setProfilePicture] = useState(src);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         if (!uid) {
@@ -27,6 +29,14 @@ export default function ProfilePicture({ uid, src, size = 50, clickable = true }
             })
         }
     }, [])
+
+
+    if (isLoading) {
+        return (
+            <LoadingWidget />
+        )
+    }
+
 
     if (!uid && !src) {
         return (
@@ -55,7 +65,7 @@ export default function ProfilePicture({ uid, src, size = 50, clickable = true }
                         navigate(`/u/${uid}/profile`);
                     }
                 }}
-                src={src}
+                src={profilePicture}
                 alt="Profile Picture"
                 style={{
                     width: size,
