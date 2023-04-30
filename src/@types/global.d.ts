@@ -23,7 +23,7 @@ declare global {
     // May only be seen by the user itself
     interface PersonalUserData extends PublicUserData {
         email: string;
-        password: string;
+        password?: string;
         friendRequests: string[];
         friendRequestsSent: string[];
     }

@@ -110,6 +110,8 @@ interface RequestsProps {
 }
 
 function Friends({ list }: RequestsProps) {
+  const navigate = useNavigate();
+
   if (!list.length) {
     return (
       <div>
@@ -119,7 +121,18 @@ function Friends({ list }: RequestsProps) {
 
   return (
     <div>
-      Friends
+      {list.map((uid, index) => (
+        <div
+          key={index}
+          className={styles.friendWidget}
+          onClick={() => navigate(`/u/${uid}/profile`)}
+        >
+          <FriendWidget
+            uid={uid}
+            isPnedingFriendRequest={false}
+          />
+        </div>
+      ))}
     </div>
   );
 }
