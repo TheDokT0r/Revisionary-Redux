@@ -18,6 +18,9 @@ declare global {
         gamesWon: number;
         secondsPlayed: number;
         revitionsPlayed: [];
+        likedRevitions: string[];
+        dislikedRevitions: string[];
+        playlists: string[];
     }
 
     // May only be seen by the user itself

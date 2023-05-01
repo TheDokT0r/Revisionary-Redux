@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import addView from '../../../../api/RevitionsMannagement/addView';
 import styles from './FinishedRevition.module.scss';
+import { likeRevition, dislikeRevition } from '../../../../api/RevitionsMannagement/likeOrDislikeRevition';
 
 interface Props {
     asnwerdCorrectly: number;
@@ -17,10 +18,20 @@ export default function FinishedRevition({asnwerdCorrectly, totalQuestions, poin
     }, [])
 
 
-    const likeHandler = () => {
+    const likeHandler = async () => {
+        const response = await likeRevition(revitionId);
+
+        if(!response) {
+            window.alert('something gone wrong');
+        }
     }
 
-    const dislikeHandler = () => {
+    const dislikeHandler = async () => {
+        const response = await dislikeRevition(revitionId);
+
+        if(!response) {
+            window.alert('something ogne wrong');
+        }
     }
 
     return (
