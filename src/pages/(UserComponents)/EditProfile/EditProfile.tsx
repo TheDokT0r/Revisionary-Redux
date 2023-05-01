@@ -4,6 +4,7 @@ import ProfilePicture from '../../../components/ProfilePicture';
 import getUserProfile from '../../../api/UserMannagement/getUserProfile';
 import updateUserProfile from '../../../api/UserMannagement/updateUserProfile';
 import getPersonalUserProfile from '../../../api/UserMannagement/getPersonalUserProfile/getPersonalUserProfile';
+import ChangePfp from './subComps/ChangePfp';
 
 export default function EditProfile() {
     const { uid } = useParams<{ uid: string }>();
@@ -29,11 +30,25 @@ export default function EditProfile() {
     }, [])
 
 
-    const saveChanges = (e:any) => {
+    const dataUpdated = () => {
+        if (!uid) {
+            return;
+        }
+
+        const fetchData = async () => {
+            const data = await getPersonalUserProfile();
+            setUserData(data);
+        }
+
+        fetchData();
+    }
+
+
+    const saveChanges = (e: any) => {
         e.preventDefault();
         let temp = userData;
 
-        if(bio && temp && profilePicture) {
+        if (bio && temp && profilePicture) {
             temp.bio = bio;
             temp.profilePicture = profilePicture;
             setUserData(temp);
@@ -68,8 +83,7 @@ export default function EditProfile() {
                     src={userData.profilePicture}
                     size={100}
                 />
-                <button>Upload Image</button>
-                <button>Generate</button>
+                <ChangePfp imageUpdated={dataUpdated}/>
             </div>
 
             <div>

@@ -1,51 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
+import { updateProfilePicture } from '../../../../api/UserMannagement/updateProfile';
 
-function ImageUploader() {
-  const [image, setImage] = useState<File | null>(null);
+interface Props {
+  imageUpdated: () => void;
+}
 
-  const handleFileInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setImage(e.target.files?.[0] || null);
-  };
+export default function ChangePfp({ imageUpdated }:Props) {
+  const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
-  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const uploadImage = async (e: any) => {
     e.preventDefault();
 
-    if (!image) {
-      console.error('No image selected');
-      return;
-    }
-
-    // Create a new FormData object
-    const formData = new FormData();
-    formData.append('image', image);
+    if (!selectedImage) return;
 
     try {
-      // Send a POST request to the backend with the image data
-      const response = await axios.post('/api/upload-image', formData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
+      const response = await updateProfilePicture(selectedImage);
 
-      console.log(response.data); // Output the response from the server
-    } catch (error) {
-      console.error(error);
+      if (!response) {
+        window.alert("Error uploading image");
+        return;
+      }
+
+      window.alert("Image uploaded successfully");
+    }
+    catch (e) {
+      console.log(e);
+    }
+  }
+
+  const handleFileSelect = (event: ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files) {
+      setSelectedImage(event.target.files[0]);
+    }
+  };
+
+  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    if (selectedImage) {
+      const formData = new FormData();
+      formData.append('image', selectedImage);
+      // TODO: send formData to server using Axios or Fetch API
     }
   };
 
   return (
-    <form onSubmit={handleFormSubmit}>
-      <label htmlFor="image-upload">Upload an image:</label>
-      <input
-        type="file"
-        id="image-upload"
-        accept=".jpg, .png"
-        onChange={handleFileInputChange}
-      />
-      <button type="submit">Submit</button>
+    <form onSubmit={handleSubmit}>
+      <label>
+        Select an image:
+        <input type="file" accept="image/*" onChange={handleFileSelect} />
+      </label>
+      <button
+        type="submit"
+        disabled={!selectedImage}
+        onClick={uploadImage}
+      >
+        Upload
+      </button>
     </form>
   );
 }
-
-export default ImageUploader;
