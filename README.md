@@ -26,4 +26,4 @@ Revisionary is a combination of the words revise and revolutionary. Not the most
 The reason I've added the world "Redux" is because I've made another version of this app in the past. The previous version was made in less than a week, and was design to assist students in my IB school. It was made in C# and was completely offline, with users having to share the revisions with each other through file sharing. I've decided to remake the app as a website, instead of an offline application.
 
 ### Can I have access to the original version of Revisionaryy?
-Yes! You can find the link for the source code here [Here.](https://github.com/TheDokT0r/Revisionary)
+Yes! You can find the link for the source code [here.](https://github.com/TheDokT0r/Revisionary)
