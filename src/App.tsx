@@ -10,7 +10,7 @@ const UserProfile = lazy(() => import('./pages/(UserComponents)/UserProfile'));
 const Signup = lazy(() => import('./pages/(UserComponents)/Signup'));
 const Login = lazy(() => import('./pages/(UserComponents)/Login'));
 const Browse = lazy(() => import('./pages/(Revitions)/Browse'));
-const Revition = lazy(() => import('./pages/(Revitions)/Revition'));
+const Revision = lazy(() => import('./pages/(Revitions)/Revition'));
 const RevitionData = lazy(() => import('./pages/(Revitions)/RevitionData'));
 const Create = lazy(() => import('./pages/(Revitions)/Create'));
 const Debug = lazy(() => import('./pages/Debug'));
@@ -67,7 +67,7 @@ function App() {
             <Route path='/u/:uid/friends' element={<FriendsList />} />
             <Route path='/rev/browse' element={<Browse />} />
             <Route path='/rev/create' element={<Create />} />
-            <Route path='/rev/:revId/play' element={<Revition />} />
+            <Route path='/rev/:revId/play' element={<Revision />} />
             <Route path='/rev/:revId/info' element={<RevitionData />} />
             <Route path='/rev/:revId/prev' element={<RevitionPreview />} />
             <Route path='/debug/:uid' element={<Debug />} />

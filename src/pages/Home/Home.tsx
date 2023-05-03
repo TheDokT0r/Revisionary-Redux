@@ -40,7 +40,7 @@ export default function Home() {
     return (
         <div className={styles.page}>
             <div className={styles.center}>
-                <h1>Welcome to Revitionary!</h1>
+                <h1>Welcome to Revisionary!</h1>
                 <footer className={styles.version_name}>Version 0.2 - Tibby</footer>
             </div>
             {/* <div>

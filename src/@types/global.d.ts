@@ -33,7 +33,7 @@ declare global {
 
 
     // For faster loading of revitions
-    interface PreviewRevitionData {
+    interface PreviewRevisionData {
         _id: string;
         title: string;
         description: string;
