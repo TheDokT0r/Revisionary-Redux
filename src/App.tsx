@@ -9,13 +9,13 @@ const Home = lazy(() => import('./pages/Home'));
 const UserProfile = lazy(() => import('./pages/(UserComponents)/UserProfile'));
 const Signup = lazy(() => import('./pages/(UserComponents)/Signup'));
 const Login = lazy(() => import('./pages/(UserComponents)/Login'));
-const Browse = lazy(() => import('./pages/(Revitions)/Browse'));
-const Revision = lazy(() => import('./pages/(Revitions)/Revition'));
-const RevitionData = lazy(() => import('./pages/(Revitions)/RevitionData'));
-const Create = lazy(() => import('./pages/(Revitions)/Create'));
+const Browse = lazy(() => import('./pages/(Revisions)/Browse'));
+const Revision = lazy(() => import('./pages/(Revisions)/Revision'));
+const RevisionData = lazy(() => import('./pages/(Revisions)/RevisionData'));
+const Create = lazy(() => import('./pages/(Revisions)/Create'));
 const Debug = lazy(() => import('./pages/Debug'));
 const About = lazy(() => import('./pages/About'));
-const RevitionPreview = lazy(() => import('./pages/(Revitions)/RevitionPreview'));
+const RevisionPreview = lazy(() => import('./pages/(Revisions)/RevisionPreview'));
 const FriendsList = lazy(() => import('./pages/(UserComponents)/FriendsList'));
 const EditProfile = lazy(() => import('./pages/(UserComponents)/EditProfile'));
 
@@ -68,8 +68,8 @@ function App() {
             <Route path='/rev/browse' element={<Browse />} />
             <Route path='/rev/create' element={<Create />} />
             <Route path='/rev/:revId/play' element={<Revision />} />
-            <Route path='/rev/:revId/info' element={<RevitionData />} />
-            <Route path='/rev/:revId/prev' element={<RevitionPreview />} />
+            <Route path='/rev/:revId/info' element={<RevisionData />} />
+            <Route path='/rev/:revId/prev' element={<RevisionPreview />} />
             <Route path='/debug/:uid' element={<Debug />} />
             <Route path='/about' element={<About />} />
           </Routes>

@@ -46,7 +46,7 @@ export default function Home() {
             {/* <div>
                     <Link to={`users/${userID}/profile`}><button>Profile</button></Link>
                     
-                    <Link to='/rev/browse'><button>Browse Revitions</button></Link>
+                    <Link to='/rev/browse'><button>Browse Revisions</button></Link>
                 </div> */}
 
             <div>

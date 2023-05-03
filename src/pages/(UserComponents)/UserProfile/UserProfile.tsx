@@ -130,9 +130,9 @@ export default function UserProfile() {
             </div>
 
             <div>
-                <h2>Revitions Stats:</h2>
-                <p>Revitions Created: {userData.revitionsCreated}</p>
-                <p>Revitions Played: {userData.revitionsPlayed}</p>
+                <h2>Revisions Stats:</h2>
+                <p>Revisions Created: {userData.revisionsCreated}</p>
+                <p>Revisions Played: {userData.revisionsPlayed}</p>
             </div>
 
             <label>Is your pf: {isYourProfile.toString()}</label>

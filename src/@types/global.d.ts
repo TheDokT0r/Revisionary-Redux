@@ -12,14 +12,14 @@ declare global {
         registeredAt: Date;
         lastSeen: Date;
         friends: string[];
-        revitionsCreated: string[];
+        revisionsCreated: string[];
         winStreak: number;
         gamesPlayed: number;
         gamesWon: number;
         secondsPlayed: number;
-        revitionsPlayed: [];
-        likedRevitions: string[];
-        dislikedRevitions: string[];
+        revisionsPlayed: [];
+        likedRevisions: string[];
+        dislikedRevisions: string[];
         playlists: string[];
     }
 
@@ -32,7 +32,7 @@ declare global {
     }
 
 
-    // For faster loading of revitions
+    // For faster loading of Revisions
     interface PreviewRevisionData {
         _id: string;
         title: string;
@@ -47,8 +47,8 @@ declare global {
     }
 
 
-    // Revitions don't really have any personal data, so they are just public
-    interface RevitionData {
+    // Revisions don't really have any personal data, so they are just public
+    interface RevisionData {
         _id: string;
         title: string;
         description: string;
@@ -59,10 +59,10 @@ declare global {
         dislikes: number;
         authorID: string;
         tags: string[];
-        questions: RevitionQuestions[];
+        questions: RevisionQuestions[];
     }
 
-    interface RevitionQuestions {
+    interface RevisionQuestions {
         question: string;
         options: [{
             answer: string;
