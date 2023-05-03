@@ -9,20 +9,20 @@ export default function Navbar() {
     const [profileBtnLink, setProfileBtnLink] = useState(`/users/${uid}/profile`);
     const [friendsBtnLink, setFriendsBtnLink] = useState(`/users/${uid}/friends`);
 
-    useEffect(() => {
-        const fetchUid = async () => {
-            await getUid().then((uid) => {
-                if (uid) {
-                    setUid(uid);
-                    setProfileBtnLink(`/u/${uid}/profile`);
-                    setFriendsBtnLink(`/u/${uid}/friends`);
-                } else {
-                    setProfileBtnLink('/login');
-                }
+    const fetchUid = async () => {
+        await getUid().then((uid) => {
+            if (uid) {
+                setUid(uid);
+                setProfileBtnLink(`/u/${uid}/profile`);
+                setFriendsBtnLink(`/u/${uid}/friends`);
+            } else {
+                setProfileBtnLink('/login');
             }
-            );
         }
+        );
+    }
 
+    useEffect(() => {
         fetchUid();
     }, [])
 
@@ -35,6 +35,7 @@ export default function Navbar() {
                 <li><a href="/about">About</a></li>
                 <li><a href={friendsBtnLink}>Friends</a></li>
 
+                {/* Only triggers if there's a uid in the local storage */}
                 {uid &&
                     <li onClick={
                         () => {

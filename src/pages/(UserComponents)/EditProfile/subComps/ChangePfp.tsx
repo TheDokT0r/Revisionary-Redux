@@ -2,11 +2,8 @@ import React, { useState, ChangeEvent, FormEvent } from 'react';
 import axios from 'axios';
 import { updateProfilePicture } from '../../../../api/UserMannagement/updateProfile';
 
-interface Props {
-  imageUpdated: () => void;
-}
 
-export default function ChangePfp({ imageUpdated }:Props) {
+export default function ChangePfp() {
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
 
   const uploadImage = async (e: any) => {

@@ -5,93 +5,89 @@ import getUserProfile from '../../../api/UserMannagement/getUserProfile';
 import updateUserProfile from '../../../api/UserMannagement/updateUserProfile';
 import getPersonalUserProfile from '../../../api/UserMannagement/getPersonalUserProfile/getPersonalUserProfile';
 import ChangePfp from './subComps/ChangePfp';
+import getUid from '../../../api/UserMannagement/getUid';
+import Loading from '../../../components/LoadingScreen';
 
 export default function EditProfile() {
-    const { uid } = useParams<{ uid: string }>();
-
-    const [userData, setUserData] = useState<PersonalUserData>();
-    const [bio, setBio] = useState<string>();
-    const [profilePicture, setProfilePicture] = useState<string>();
-
+    const [userProfile, setUserProfile] = useState<PersonalUserData>();
+    const [username, setUsername] = useState<string>('');
+    const [bio, setBio] = useState<string>('');
+    const [loading, setLoading] = useState<boolean>(true);
 
     useEffect(() => {
-        const fetchData = async () => {
-            if (!uid) {
-                return;
-            }
-
-            const data = await getPersonalUserProfile();
-            setUserData(data);
-            setBio(data.bio);
-            setProfilePicture(data.profilePicture);
+        const fetchUserProfile = async () => {
+            const userProfile = await getPersonalUserProfile();
+            setUserProfile(userProfile);
+            setUsername(userProfile.username);
+            setBio(userProfile.bio);
         }
 
-        fetchData();
+        setLoading(true);
+        fetchUserProfile().then(
+            () => {
+                setLoading(false);
+            }
+        );
     }, [])
 
 
-    const dataUpdated = () => {
-        if (!uid) {
-            return;
-        }
-
-        const fetchData = async () => {
-            const data = await getPersonalUserProfile();
-            setUserData(data);
-        }
-
-        fetchData();
-    }
-
-
-    const saveChanges = (e: any) => {
+    const updateProfile = async (e: any) => {
         e.preventDefault();
-        let temp = userData;
+        if (!userProfile) return;
 
-        if (bio && temp && profilePicture) {
-            temp.bio = bio;
-            temp.profilePicture = profilePicture;
-            setUserData(temp);
-        }
-
-        if (userData) {
-            updateUserProfile(userData);
+        // Checks if the user has made any changes
+        if (userProfile.bio === bio && userProfile.username === username) {
+            alert('No changes made');
             return;
         }
 
-        window.alert('Cannot fetch user profile');
+        setLoading(true);
+        const tempProfile = userProfile;
+
+        tempProfile.username = username;
+        tempProfile.bio = bio;
+
+        const response = await updateUserProfile(tempProfile);
+        setLoading(false);
+
+        if (!response.didUpdate) {
+            alert(`Failed to update profile: ${response.message}`);
+            return;
+        }
+        alert('Profile updated')
     }
 
 
-    if (!userData) {
-        return (
-            <div>
-                <h1>Loading...</h1>
-            </div>
-        )
+    if (!userProfile || loading) {
+        return <Loading text={'fetching/updating profile'} />
     }
 
     return (
         <div>
             <h1>Edit Profile</h1>
-            <button
-                onClick={saveChanges}
-            >Apply</button>
-
             <div>
                 <ProfilePicture
-                    src={userData.profilePicture}
-                    size={100}
-                />
-                <ChangePfp imageUpdated={dataUpdated}/>
+                    src={userProfile?.profilePicture}
+                    uid={userProfile._id}
+                    clickable={false}
+                    size={100} />
+
+                <ChangePfp />
             </div>
 
-            <div>
+            <form>
                 <input
-                    value={bio}
-                    placeholder='Your bio here'
-                    onChange={(e) => setBio(e.target.value)} />
-            </div>
+                    type='text'
+                    placeholder='Username'
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)} />
+                <br />
+                <input
+                    type='text'
+                    placeholder='Bio'
+                    value={bio} onChange={(e) => setBio(e.target.value)} />
+            </form>
+            <button onClick={updateProfile} >Apply</button>
         </div>
-    )
+    );
 }
