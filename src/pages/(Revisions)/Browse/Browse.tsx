@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react'
 import fetchRevisions from '../../../api/RevisionsMannagement/fetchRevisions';
 import RevisionData from '../../../components/RevisionData';
-import LoadingScreen from '../../../components/LoadingScreen';
 import { useNavigate } from 'react-router-dom';
+// import LoadingScreen from '../../../components/LoadingScreen';
+const LoadingScreen = React.lazy(() => import('../../../components/LoadingScreen'));
 
 export default function Browse() {
   const navigate = useNavigate();

@@ -1,9 +1,8 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, lazy } from 'react'
 import styles from './ProfilePicture.module.scss'
 import { useNavigate } from 'react-router-dom';
 import getUserPfp from '../../api/UserMannagement/getUserPfp';
 import { LoadingWidget } from '../LoadingScreen/LoadingScreen';
-
 interface Props {
     src?: string;
     size?: number;

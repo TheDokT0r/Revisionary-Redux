@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { lazy, useState } from 'react';
 import { useNavigate } from 'react-router-dom'
-import LoadingScreen from '../../../components/LoadingScreen';
+// import LoadingScreen from '../../../components/LoadingScreen';
 import { randomUserData } from './randomUserData';
 import styles from './Signup.module.scss'
 
@@ -8,6 +8,8 @@ import createUser from '../../../api/UserMannagement/createUser';
 
 import classNames from 'classnames/bind';
 const cx = classNames.bind(styles);
+
+const LoadingScreen = lazy(() => import('../../../components/LoadingScreen'));
 
 export default function Signup() {
     const navigate = useNavigate();

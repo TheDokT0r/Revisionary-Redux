@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import styles from './Navbar.module.scss'
 import getUid from '../../api/UserMannagement/getUid'
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+const AccountCircleIcon = React.lazy(() => import('@mui/icons-material/AccountCircle'));
 
 export default function Navbar() {
     const [uid, setUid] = useState("");
@@ -47,7 +47,10 @@ export default function Navbar() {
 
                 {/* <li><a href={profileBtnLink}>Profile</a></li> */}
                 <li><a href={profileBtnLink}>
-                    <AccountCircleIcon fontSize='large' /> </a></li>
+                    <React.Suspense fallback={<div>Loading...</div>}>
+                        <AccountCircleIcon fontSize='large' />
+                    </React.Suspense>
+                </a></li>
             </ul>
         </div >
     )

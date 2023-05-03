@@ -1,6 +1,6 @@
 import React, { Suspense, lazy, useEffect } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import LoadingScreen from './components/LoadingScreen';
+// import LoadingScreen from './components/LoadingScreen';
 import Navbar from './components/Navbar';
 import { io } from 'socket.io-client';
 import verifyConnection from './api/UserMannagement/verifyConnection';
@@ -18,6 +18,7 @@ const About = lazy(() => import('./pages/About'));
 const RevisionPreview = lazy(() => import('./pages/(Revisions)/RevisionPreview'));
 const FriendsList = lazy(() => import('./pages/(UserComponents)/FriendsList'));
 const EditProfile = lazy(() => import('./pages/(UserComponents)/EditProfile'));
+const LoadingScreen = lazy(() => import('./components/LoadingScreen'));
 
 
 function App() {

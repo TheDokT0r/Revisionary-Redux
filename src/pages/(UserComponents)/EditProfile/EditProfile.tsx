@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, lazy } from 'react'
 import { useParams } from 'react-router-dom'
 import ProfilePicture from '../../../components/ProfilePicture';
 import getUserProfile from '../../../api/UserMannagement/getUserProfile';
@@ -6,7 +6,9 @@ import updateUserProfile from '../../../api/UserMannagement/updateUserProfile';
 import getPersonalUserProfile from '../../../api/UserMannagement/getPersonalUserProfile/getPersonalUserProfile';
 import ChangePfp from './subComps/ChangePfp';
 import getUid from '../../../api/UserMannagement/getUid';
-import Loading from '../../../components/LoadingScreen';
+// import Loading from '../../../components/LoadingScreen';
+
+const Loading = lazy(() => import('../../../components/LoadingScreen'));
 
 export default function EditProfile() {
     const [userProfile, setUserProfile] = useState<PersonalUserData>();

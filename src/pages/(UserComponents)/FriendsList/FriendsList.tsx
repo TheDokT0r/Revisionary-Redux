@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom'
 
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import LoadingScreen from '../../../components/LoadingScreen';
+// import LoadingScreen from '../../../components/LoadingScreen';
 import getPersonalFriendsList from '../../../api/UserMannagement/getFriendsList';
 import getUid from '../../../api/UserMannagement/getUid';
 import styles from './FriendsList.module.scss';
@@ -11,6 +11,7 @@ import acceptFriendReq from '../../../api/UserMannagement/Friends/acceptFriendRe
 
 const FriendWidget = lazy(() => import('./subComps/FriendWidget'));
 const AddFriendsPage = lazy(() => import('./subComps/AddFriendsPage'));
+const LoadingScreen = lazy(() => import('../../../components/LoadingScreen'));
 
 
 // Pro tip: Don't write your code while you're not focused.

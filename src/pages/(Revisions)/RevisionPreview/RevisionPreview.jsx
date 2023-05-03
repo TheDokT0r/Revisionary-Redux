@@ -8,7 +8,8 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useNavigate } from 'react-router-dom';
-import LoadingScreen from '../../../components/LoadingScreen';
+// import LoadingScreen from '../../../components/LoadingScreen';
+const LoadingScreen = React.lazy(() => import('../../../components/LoadingScreen'));
 
 export default function RevisionPreview() {
   const navigate = useNavigate();
@@ -63,40 +64,40 @@ export default function RevisionPreview() {
   // );
 
   return (
-      <div className={styles.container}>
-        <h1>Revision Preview</h1>
+    <div className={styles.container}>
+      <h1>Revision Preview</h1>
 
-        <div>
-          <h2>{Revision.title}</h2>
-          <p>{Revision.description}</p>
+      <div>
+        <h2>{Revision.title}</h2>
+        <p>{Revision.description}</p>
 
+        <div className={styles.subContainer}>
           <div className={styles.subContainer}>
-            <div className={styles.subContainer}>
-              <p>{<VisibilityIcon />} {Revision.views}</p>
-            </div>
-
-            <div className={styles.subContainer}>
-              <p>{Revision.likes} {<ThumbUpAltIcon />}</p>
-              <p>{<ThumbDownAltIcon />} {Revision.dislikes}</p>
-            </div>
+            <p>{<VisibilityIcon />} {Revision.views}</p>
           </div>
 
           <div className={styles.subContainer}>
-            <p><PersonIcon /> {Revision.authorID}</p>
+            <p>{Revision.likes} {<ThumbUpAltIcon />}</p>
+            <p>{<ThumbDownAltIcon />} {Revision.dislikes}</p>
           </div>
-
-          <div className={styles.subContainer}>
-            <p><CalendarMonthIcon /> {formatDate(Revision.uploadDate)}</p>
-          </div>
-
-
-          <button
-            className={styles.play_button}
-            onClick={() => navigate(`/rev/${revId}/play`)}
-          >
-            Play!
-          </button>
         </div>
+
+        <div className={styles.subContainer}>
+          <p><PersonIcon /> {Revision.authorID}</p>
+        </div>
+
+        <div className={styles.subContainer}>
+          <p><CalendarMonthIcon /> {formatDate(Revision.uploadDate)}</p>
+        </div>
+
+
+        <button
+          className={styles.play_button}
+          onClick={() => navigate(`/rev/${revId}/play`)}
+        >
+          Play!
+        </button>
       </div>
+    </div>
   )
 }

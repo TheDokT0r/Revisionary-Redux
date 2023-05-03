@@ -1,6 +1,6 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, lazy } from 'react';
 import getUserProfile from '../../../api/UserMannagement/getUserProfile';
-import LoadingScreen from '../../../components/LoadingScreen';
+// import LoadingScreen from '../../../components/LoadingScreen';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import styles from './UserProfile.module.scss';
 import getUid from '../../../api/UserMannagement/getUid';
@@ -14,6 +14,8 @@ import ProfilePicture from '../../../components/ProfilePicture';
 import FriendRequestButton from './FriendRequestButton/index.jsx';
 
 import isAdmin from '../../../api/UserMannagement/isAdmin';
+
+const LoadingScreen = lazy(() => import('../../../components/LoadingScreen'));
 
 // TODO: Get some css in here for fuck sake
 export default function UserProfile() {

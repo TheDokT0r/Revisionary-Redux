@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import fetchRevisionData from '../../../api/RevisionsMannagement/fetchRevisionData'
 import Question from './comps/Question';
-import LoadingScreen from '../../../components/LoadingScreen';
+// import LoadingScreen from '../../../components/LoadingScreen';
 import { useParams } from 'react-router-dom';
 import FinishedRevision from './comps/FinishedRevision';
+const LoadingScreen = React.lazy(() => import('../../../components/LoadingScreen'));
 
 export default function Revision() {
   const { revId } = useParams();
