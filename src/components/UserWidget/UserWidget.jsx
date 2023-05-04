@@ -4,8 +4,8 @@ import getUserData from '../../api/UserMannagement/getUserProfile'
 import styles from './UserWidget.module.scss'
 import getUserPfp from '../../api/UserMannagement/getUserPfp';
 
+import LoadingScreen, { LoadingWidget } from '../LoadingScreen/LoadingScreen';
 import ProfilePicture from '../ProfilePicture';
-const { LoadingWidget } = React.lazy(() => import('../LoadingScreen/LoadingScreen'));
 
 export default function UserWidget({ uid, state }) {
     const navigate = useNavigate();
