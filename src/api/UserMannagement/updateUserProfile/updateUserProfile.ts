@@ -1,4 +1,5 @@
 import axios from "axios";
+import apiClient from "../../API_CLIENT";
 
 interface ResponnseData {
     didUpdate: boolean;
@@ -6,19 +7,19 @@ interface ResponnseData {
 }
 
 // ! This api client thing is great! I should start using it more often!
-const apiClient = axios.create({
-    baseURL: process.env.REACT_APP_SERVER_URL,
-});
+// const apiClient = axios.create({
+//     baseURL: process.env.REACT_APP_SERVER_URL,
+// });
 
-apiClient.interceptors.response.use(
-    (response) => {
-        return response;
-    },
-    (error) => {
-        // window.alert("Something went wrong: " + error.response.data);
-        return Promise.reject(error);
-    }
-);
+// apiClient.interceptors.response.use(
+//     (response) => {
+//         return response;
+//     },
+//     (error) => {
+//         // window.alert("Something went wrong: " + error.response.data);
+//         return Promise.reject(error);
+//     }
+// );
 
 const updateUserProfile = async (newUserData: PersonalUserData): Promise<ResponnseData> => {
     const config = {

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, lazy } from 'react';
+import { useEffect, useState, lazy } from 'react';
 import getUserProfile from '../../../api/UserMannagement/getUserProfile';
 // import LoadingScreen from '../../../components/LoadingScreen';
 import { Link, Navigate, useParams } from 'react-router-dom';

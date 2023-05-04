@@ -1,25 +1,24 @@
 import axios from "axios";
+import apiClient from "../../API_CLIENT";
 
 const SERVER_URL = process.env.REACT_APP_SERVER_URL || "http://localhost:4000";
 
-const isAdmin = async () => {
+const isAdmin = async (): Promise<boolean> => {
     const config = {
         headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
         }
     }
 
-    const admin = await axios.get(`${SERVER_URL}/admin`, config).then((res) => {
-        if (res.status !== 200) {
-            return false;
-        }
-
-        return res.data.admin
-    }).catch((err) => {
+    try {
+        const admin = await apiClient.get(`${SERVER_URL}/admin`, config);
+        return admin.data.admin as boolean; // Nice one...
+    }
+    catch (error: any) {
+        // console.log(error);
         return false;
-    })
+    }
 
-    return admin;
 }
 
 export default isAdmin;
