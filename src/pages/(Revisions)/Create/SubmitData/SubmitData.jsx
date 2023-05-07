@@ -2,9 +2,10 @@ import React, { useEffect, useState, lazy } from 'react'
 // import QuestionComp from './QuestionComp';
 import { useNavigate } from 'react-router-dom';
 import getUid from '../../../../api/UserMannagement/getUid';
+import createRevision from '../../../../api/RevisionsMannagement/CreateRevision';
 
 const QuestionComp = lazy(() => import('./QuestionComp'));
-const createRevision = lazy(() => import('../../../../api/RevisionsMannagement/CreateRevision'));
+// const createRevision = lazy(() => import('../../../../api/RevisionsMannagement/CreateRevision'));
 const LoadingScreen = lazy(() => import('../../../../components/LoadingScreen'));
 
 export default function SubmitData({ data }) {

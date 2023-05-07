@@ -13,7 +13,7 @@ import OnlineStatus from './profileComps/OnlineStatus/OnlineStatus';
 import ProfilePicture from '../../../components/ProfilePicture';
 import FriendRequestButton from './FriendRequestButton/index.jsx';
 
-import isAdmin from '../../../api/UserMannagement/isAdmin';
+import isSudo from '../../../api/UserMannagement/isSudo';
 
 const LoadingScreen = lazy(() => import('../../../components/LoadingScreen'));
 
@@ -27,7 +27,7 @@ export default function UserProfile() {
     const [isLoading, setIsLoading] = useState(true);
     const [loadingMsg, setLoadingMsg] = useState('Loading...');
     const [isYourProfile, setIsYourProfile] = useState<boolean>(false);
-    const [admin, setAdmin] = useState<boolean>(false);
+    const [sudo, setSUdo] = useState<boolean>(false);
 
     // Get the user profile by his uid
     useEffect(() => {
@@ -46,8 +46,8 @@ export default function UserProfile() {
         const fetchIsAdmin = async () => {
             setLoadingMsg("Checking admin perms");
 
-            isAdmin().then(res => {
-                setAdmin(res);
+            isSudo().then(res => {
+                setSUdo(res);
             }).catch(err => {
             })
         }
@@ -138,7 +138,7 @@ export default function UserProfile() {
             </div>
 
             <label>Is your pf: {isYourProfile.toString()}</label>
-            <label>Is admin: {admin.toString()}</label>
+            <label>Is sudo: {sudo.toString()}</label>
 
             <Link to='/'><button>Back</button></Link>
         </div>

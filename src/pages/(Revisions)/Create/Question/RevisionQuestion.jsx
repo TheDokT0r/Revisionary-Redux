@@ -110,6 +110,7 @@ export default function RevisionQuestion(props) {
 
 
   const doneHandler = () => {
+    console.log('Triggering done handler');
     const errors = checkQuestionIntegrity(question, options);
     if (errors.length > 0) {
       alert(errors.join(' '));

@@ -51,9 +51,10 @@ export default function CreateRevision() {
       const newQuestion = { question, options };
       deapCopy[index] = newQuestion;
 
-      if (isDone) {
-        setEditingPhase(2);
-      }
+    }
+
+    if (isDone) {
+      setEditingPhase(2);
     }
 
     setQuestions([...questions, { question, options }]);
