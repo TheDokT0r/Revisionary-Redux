@@ -1,6 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styles from './RevisionData.module.scss';
 import ThumbsUpDownIcon from '@mui/icons-material/ThumbsUpDown';
+import getUserProfile from '../../api/UserMannagement/getUserProfile';
 
 interface Props {
     Revision: RevisionData;
@@ -8,6 +9,18 @@ interface Props {
 }
 
 export default function RevisionData({ Revision, onClick }: Props) {
+    const [authorName, setAuthorName] = React.useState<string>('Anonymous');
+
+    // get author name
+    useEffect(() => {
+        // In order to not cause an error when fetching user profile
+        if(!Revision.authorID) return;
+        
+        getUserProfile(Revision.authorID).then(user => {
+            if (user) setAuthorName(user.username);
+        })
+    }, [])
+
     const formatDate = (date: Date) => {
         const dateObject = new Date(date);
         const year = dateObject.getFullYear();
@@ -37,7 +50,7 @@ export default function RevisionData({ Revision, onClick }: Props) {
             </div>
 
             <div className={styles.subContainer}>
-                <p>{`By: ${Revision.authorID}`}</p>
+                <p>{`By: ${authorName}`}</p>
                 <p>{`Views: ${Revision.views}`}</p>
 
                 <div className={styles.likesContainer}>
