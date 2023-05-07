@@ -8,8 +8,11 @@ import ThumbDownAltIcon from '@mui/icons-material/ThumbDownAlt';
 import PersonIcon from '@mui/icons-material/Person';
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import { useNavigate } from 'react-router-dom';
+import getUserProfile from '../../../api/UserMannagement/getUserProfile';
 // import LoadingScreen from '../../../components/LoadingScreen';
+import { Link } from 'react-router-dom';
 const LoadingScreen = React.lazy(() => import('../../../components/LoadingScreen'));
+
 
 export default function RevisionPreview() {
   const navigate = useNavigate();
@@ -17,14 +20,24 @@ export default function RevisionPreview() {
   const [Revision, setRevisionData] = useState();
   const [loading, setLoading] = useState(true);
   const [doesRevisionExist, setDoesRevisionExist] = useState(true);
+  const [author, setAuthor] = useState('Anonymous');
+  const [authorID, setAuthorID] = useState('Anonymous');
 
   const { revId } = useParams();
 
+  // Fetches the revision data + the author's username
   useEffect(() => {
     const fetch = async () => {
       setLoading(true);
-      const data = await fetchRevisionData(revId);
-      setRevisionData(data);
+      const revisionData = await fetchRevisionData(revId);
+
+      const userProfile = await getUserProfile(revisionData.authorID);
+      if (userProfile) {
+        setAuthor(userProfile.username);
+        setAuthorID(userProfile._id);
+      }
+
+      setRevisionData(revisionData);
       setLoading(false);
     }
 
@@ -35,7 +48,7 @@ export default function RevisionPreview() {
       return;
     }
 
-    if (!Revision.author) {
+    if (!Revision.authorID) {
       // Set author to anonymous
       setRevisionData(prev => ({ ...prev, author: 'Anonymous' }))
     }
@@ -53,15 +66,6 @@ export default function RevisionPreview() {
 
   if (loading) return <LoadingScreen text={'Fetching data'} />
 
-  // if (!doesRevisionExist) return (
-  //   <>
-  //     <Navbar />
-  //     <div>
-  //       <h1>Revision does not exist</h1>
-  //       <button onClick={() => navigate('/rev/browse')}>Go back</button>
-  //     </div>
-  //   </>
-  // );
 
   return (
     <div className={styles.container}>
@@ -82,9 +86,11 @@ export default function RevisionPreview() {
           </div>
         </div>
 
-        <div className={styles.subContainer}>
-          <p><PersonIcon /> {Revision.authorID}</p>
-        </div>
+        <Link to={`/u/${authorID}/profile`}>
+          <div className={styles.subContainer}>
+            <p><PersonIcon /> {author}</p>
+          </div>
+        </Link>
 
         <div className={styles.subContainer}>
           <p><CalendarMonthIcon /> {formatDate(Revision.uploadDate)}</p>
