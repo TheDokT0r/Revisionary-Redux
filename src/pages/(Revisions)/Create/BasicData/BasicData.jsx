@@ -65,6 +65,7 @@ export default function BasicData({ setData }) {
 
     return (
         <div className={styles.center}>
+            <h1>Create your own Revision!</h1>
             <div>
                 <input
                     className={styles.title_textfield}

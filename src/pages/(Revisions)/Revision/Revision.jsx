@@ -15,6 +15,7 @@ export default function Revision() {
   const [finished, setFinished] = useState(false);
 
   const [answeredCorrectly, setAnsweredCorrectly] = useState(0);
+  const [correctList, setCorrectList] = useState([]);
   const [totalPoints, setTotalPoints] = useState(0);
 
   useEffect(() => {
@@ -27,12 +28,13 @@ export default function Revision() {
   }, []);
 
 
-  const nextQuestionHandler = (e, isCorrect, points) => {
+  const nextQuestionHandler = (e, isCorrect, points, questionIndex) => { // Triggers in the PostQuestionPage component
     e.preventDefault();
 
     // Updating session data
     if (isCorrect) {
       setAnsweredCorrectly(answeredCorrectly + 1);
+      setCorrectList([...correctList, questionIndex]);
     }
     setTotalPoints(totalPoints + points);
 
@@ -56,6 +58,7 @@ export default function Revision() {
       points={totalPoints}
       totalQuestions={RevisionData.questions.length}
       RevisionId={revId}
+      correctAnswersArray={correctList}
     />
   }
 

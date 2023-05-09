@@ -3,11 +3,13 @@ import Options from './Options';
 import styles from './Question.module.scss';
 import PostQuestionPage from './PostQuestionPage';
 
+// A page of the question itself
 export default function Question({ RevisionData, questionIndex, nextQuestionHandler }) {
     const [question, setQuestion] = useState(RevisionData.questions[questionIndex]);
     const [choseAnOption, setChoseAnOption] = useState(false);
     const [isCorrect, setIsCorrect] = useState(false);
     const [timeLeft, setTimeLeft] = useState(30);
+
 
     // Timer
     useEffect(() => {
@@ -40,6 +42,7 @@ export default function Question({ RevisionData, questionIndex, nextQuestionHand
                 choseCorrect={isCorrect}
                 points={points}
                 nextQuestionHandler={nextQuestionHandler}
+                questionIndex={questionIndex}
             />
         );
     }
@@ -50,6 +53,8 @@ export default function Question({ RevisionData, questionIndex, nextQuestionHand
                 choseCorrect={NaN}
                 points={0}
                 nextQuestionHandler={nextQuestionHandler}
+                questionIndex={questionIndex}
+                RevisionData={RevisionData}
             />
         );
     }
