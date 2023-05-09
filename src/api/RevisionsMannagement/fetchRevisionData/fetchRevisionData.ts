@@ -8,6 +8,7 @@ const fetchRevisionData = async (RevisionID: string): Promise<RevisionData> => {
             return response.data;
         }
     );
+    
     return Revision;
 }
 
