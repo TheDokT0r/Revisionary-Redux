@@ -37,6 +37,8 @@ export default function UserProfile() {
         const fetchUid = async () => {
             getUserProfile(`${uid}`).then((data) => { //Such a rigged way of doing it... But it works!
                 setUserData(data);
+                if (!data) {
+                }
             }).catch((err) => {
                 console.error(err);
             }
@@ -81,7 +83,6 @@ export default function UserProfile() {
             <LoadingScreen text={loadingMsg} />
         )
     }
-
 
     return (
         <div className={styles.center}>

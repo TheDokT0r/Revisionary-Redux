@@ -86,11 +86,29 @@ export default function RevisionPreview() {
           </div>
         </div>
 
-        <Link to={`/u/${authorID}/profile`}>
-          <div className={styles.subContainer}>
-            <p><PersonIcon /> {author}</p>
+        {
+          authorID ? <Link to={`/u/${authorID}/profile`}>
+            <div className={styles.subContainer}>
+              <p><PersonIcon /> {author ?
+                author
+                : 'Anonymous'
+              }</p>
+            </div>
+          </Link> : <div className={styles.subContainer}>
+            <p><PersonIcon /> {author ?
+              author
+              : 'Anonymous'
+            }</p>
           </div>
-        </Link>
+        }
+        {/* <Link to={`/u/${authorID}/profile`}>
+          <div className={styles.subContainer}>
+            <p><PersonIcon /> {author ? {
+              author
+            } : 'Anonymous'
+            }</p>
+          </div>
+        </Link> */}
 
         <div className={styles.subContainer}>
           <p><CalendarMonthIcon /> {formatDate(Revision.uploadDate)}</p>
