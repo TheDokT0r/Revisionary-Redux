@@ -1,0 +1,37 @@
+.search_container {
+    // Put all elements in the same line
+    display: flex;
+
+    margin-bottom: 2rem;
+
+    // Center
+    justify-content: center;
+    // align-items: center;
+}
+
+$inputs_font_size: 1.5rem;
+$input_back_clor: #ffffff;
+$input_border: 2px solid #1a1919;
+$i_height: 2.5rem;
+$i_width: 10rem;
+
+.search_input {
+    font-size: $inputs_font_size;
+    border: $input_border;
+    border-radius: 0.5rem;
+    text-align: center;
+    // box-shadow: 0 0 0.5rem #1a1919;
+    background-color: $input_back_clor;
+    width: $i_width;
+    height: $i_height;
+}
+
+.select_box {
+    font-size: $inputs_font_size;
+    border: $input_border;
+    border-radius: 0.5rem;
+    text-align: center;
+    background-color: $input_back_clor;
+    width: $i_width;
+    height: $i_height;
+}

@@ -2,6 +2,10 @@ import React, { useEffect, useRef, useState } from 'react'
 import fetchRevisions from '../../../api/RevisionsMannagement/fetchRevisions';
 import RevisionData from '../../../components/RevisionData';
 import { useNavigate } from 'react-router-dom';
+import styles from './Browse.module.scss';
+import ManageSearchIcon from '@mui/icons-material/ManageSearch';
+import SearchIcon from '@mui/icons-material/Search';
+import IconButton from '@mui/material/IconButton';
 // import LoadingScreen from '../../../components/LoadingScreen';
 const LoadingScreen = React.lazy(() => import('../../../components/LoadingScreen'));
 
@@ -36,6 +40,12 @@ export default function Browse() {
   }, []);
 
 
+  // Re-render when searchBy changes
+  useEffect(() => {
+    fetchRevisionsFromDatabase();
+  }, [searchBy]);
+
+
   const navigateToRevision = (RevisionId: string) => {
     navigate(`/rev/${RevisionId}/prev`);
   }
@@ -56,30 +66,36 @@ export default function Browse() {
   return (
     <div>
       <h1>Browse</h1>
+      <div className={styles.search_container}>
+        <form>
+          <input
+            className={styles.search_input}
+            type="text"
+            placeholder="Search"
+            onChange={(e) => {
+              searchKeywords.current = e.target.value
+            }} />
+          {/* <button onClick={searchHandeler}>Search</button> */}
 
-      <form>
-        <input
-          type="text"
-          placeholder="Search"
-          onChange={(e) => {
-            searchKeywords.current = e.target.value
-          }} />
-        <button onClick={searchHandeler}>Search</button>
-
-
-        {/* <input type='text' placeholder='Search by' onCanPlay={(e: any) => {
-          setSearchBy(e.target.value)
-        }} value={searchBy} /> */}
-
-
-        <select name="searchBy" id="searchBy" onChange={(e) => {
+          <IconButton
+            onClick={searchHandeler}>
+            <SearchIcon fontSize='large'
+              sx={{
+                color: 'gray',
+                '&:hover': {
+                  color: 'black',
+                }
+              }} />
+          </IconButton>
+        </form>
+        <select className={styles.select_box} name="searchBy" id="searchBy" onChange={(e) => {
           setSearchBy(e.target.value)
         }} value={searchBy}>
           <option value="views">Views</option>
           <option value="likes">Likes</option>
           <option value="date">Date</option>
         </select>
-      </form>
+      </div>
       {loadingSearch ? <LoadingScreen text={'Fetching Revisions'} /> : displayRevisions()}
     </div>
   )
