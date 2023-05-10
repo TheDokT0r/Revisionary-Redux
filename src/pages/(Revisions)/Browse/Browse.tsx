@@ -10,6 +10,7 @@ export default function Browse() {
 
   const [Revisions, setRevisions] = useState<RevisionData[]>([]); // provide a default value
   const [loadingSearch, setLoadingSearch] = useState(false);
+  const [searchBy, setSearchBy] = useState('views'); // provide a default value
 
   const searchKeywords = useRef<string>('');
 
@@ -17,7 +18,7 @@ export default function Browse() {
   const fetchRevisionsFromDatabase = async () => {
     setLoadingSearch(true);
 
-    const Revisions = await fetchRevisions(searchKeywords.current);
+    const Revisions = await fetchRevisions(searchKeywords.current, searchBy, 1);
     setRevisions(Revisions);
 
     setLoadingSearch(false);
@@ -64,6 +65,20 @@ export default function Browse() {
             searchKeywords.current = e.target.value
           }} />
         <button onClick={searchHandeler}>Search</button>
+
+
+        {/* <input type='text' placeholder='Search by' onCanPlay={(e: any) => {
+          setSearchBy(e.target.value)
+        }} value={searchBy} /> */}
+
+
+        <select name="searchBy" id="searchBy" onChange={(e) => {
+          setSearchBy(e.target.value)
+        }} value={searchBy}>
+          <option value="views">Views</option>
+          <option value="likes">Likes</option>
+          <option value="date">Date</option>
+        </select>
       </form>
       {loadingSearch ? <LoadingScreen text={'Fetching Revisions'} /> : displayRevisions()}
     </div>
