@@ -1,8 +1,40 @@
-.user_container {
-    display: flex;
-    flex-direction: row;
-    // justify-content: space-between;
+.UserComponentContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 20px;
+}
 
-    flex-wrap: nowrap;
-    align-items: center;
+.UserComponent {
+  display: flex;
+  flex-direction: column;
+  width: calc(33.33% - 10px);
+  margin-bottom: 20px;
+  margin-right: 10px;
+  padding: 20px;
+//   border: 1px solid #ccc;
+//   border-radius: 5px;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.UserWidget {
+  flex: 1;
+}
+
+.UserComponent button {
+  width: 100%;
+  margin-top: auto;
+}
+
+@media (max-width: 992px) {
+  .UserComponent {
+    width: calc(50% - 10px);
+  }
+}
+
+@media (max-width: 768px) {
+  .UserComponent {
+    width: calc(100% - 10px);
+  }
 }

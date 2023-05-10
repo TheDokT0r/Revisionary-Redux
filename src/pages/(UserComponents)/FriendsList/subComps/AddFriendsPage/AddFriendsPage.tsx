@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import searchProfiles from '../../../../../api/UserMannagement/searchProfiles/searchProfiles';
 import UserComponent from './UserComponent';
+import styles from './AddFriendsPage.module.scss';
 
 interface Props {
   uid: string;
@@ -39,9 +40,13 @@ export default function AddFriendsPage({ uid }: Props) {
         </button>
       </form>
 
-      <div>
+      <div className={styles.UserComponentContainer}>
         {profiles.map((profile, index) => {
-          return <UserComponent userData={profile} key={index} />;
+          return (
+            <div className={styles.UserComponent} key={index}>
+              <UserComponent userData={profile} />
+            </div>
+          );
         })}
       </div>
     </div>
